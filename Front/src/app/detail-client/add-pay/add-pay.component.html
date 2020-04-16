@@ -1,0 +1,68 @@
+<h1 style="text-align: center">{{client.nameClient}}</h1>
+
+<mat-grid-list cols="2" rows="5" rowHeight="4:1">
+    <mat-grid-tile colspan="1">
+        <mat-form-field>
+            <mat-label>Concepto</mat-label>
+            <select matNativeControl required [(ngModel)]="priceSelected">
+                <option *ngFor="let price of prices" [ngValue]="price">{{price.name}}</option>
+            </select>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1">
+        <mat-form-field>
+            <mat-label>Periodicidad</mat-label>
+            <select matNativeControl required [(ngModel)]="pay.periodicity">
+                <option value="1">Mensual</option>
+                <option value="3">Trimestral</option>
+            </select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <div class="example-container">
+            Cantidad: {{getPrice()}}€
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <section class="example-section">
+            <mat-slide-toggle class="example-margin" [(ngModel)]="comb">
+                Combina
+            </mat-slide-toggle>
+
+        </section>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <mat-form-field>
+            <mat-label>Fecha Inicio</mat-label>
+            <input matInput [matDatepicker]="startDate" [(ngModel)]="pay.startDate">
+            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+            <mat-datepicker #startDate></mat-datepicker>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <mat-form-field>
+            <mat-label>Fecha Fin</mat-label>
+            <input matInput [matDatepicker]="expirationDate" [(ngModel)]="pay.expirationDate">
+            <mat-datepicker-toggle matSuffix [for]="expirationDate"></mat-datepicker-toggle>
+            <mat-datepicker #expirationDate></mat-datepicker>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">
+        <mat-form-field>
+            <mat-label>Fecha Facturacion</mat-label>
+            <input matInput [matDatepicker]="invoiceDate" [(ngModel)]="pay.dateInvoice">
+            <mat-datepicker-toggle matSuffix [for]="invoiceDate"></mat-datepicker-toggle>
+            <mat-datepicker #invoiceDate></mat-datepicker>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <button mat-raised-button (click)="savePay()">Añadir Pago</button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <button mat-raised-button>Borrar Pago</button>
+    </mat-grid-tile>
+
+
+
+</mat-grid-list>

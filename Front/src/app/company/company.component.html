@@ -1,0 +1,14 @@
+<p>company works!</p>
+
+
+<div *ngFor="let company of companies|async">
+    <div>
+        {{company.nif}}
+    </div>
+    <div>
+        {{company.name}}
+    </div>
+    <div>
+        {{company.address}}
+    </div>
+</div>

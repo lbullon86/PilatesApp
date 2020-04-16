@@ -1,0 +1,24 @@
+<h1>Facturas</h1>
+
+
+<table mat-table [dataSource]="invoices | async" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="concept">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Concepto </th>
+        <td mat-cell *matCellDef="let element"> {{element.concept}} </td>
+    </ng-container>
+    <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+    </ng-container>
+    <ng-container matColumnDef="dateInvoice">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+        <td mat-cell *matCellDef="let element"> {{parseDate(element.dateInvoice)}} </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+</table>

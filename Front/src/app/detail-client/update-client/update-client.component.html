@@ -1,0 +1,42 @@
+<h1 style="text-align: center">{{client.nameClient}} {{client.surnameClient}}</h1>
+
+<mat-grid-list cols="2" rows="5" rowHeight="4:1">
+
+    <mat-grid-tile colspan="1">
+        <div class="example-container">
+            <mat-form-field>
+                <mat-label>Telefono</mat-label>
+                <input matInput value="client.phoneClient" [(ngModel)]="client.phoneClient">
+            </mat-form-field>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <div class="example-container">
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput value="client.emailClient" [(ngModel)]="client.emailClient">
+            </mat-form-field>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <div class="example-container">
+            <mat-form-field>
+                <mat-label>Direccion</mat-label>
+                <input matInput value="client.addressClient" [(ngModel)]="client.addressClient">
+            </mat-form-field>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1">
+        <section class="example-section">
+            <mat-slide-toggle class="example-margin" value="client.activeClient" [(ngModel)]="client.activeClient">
+                Activo
+            </mat-slide-toggle>
+
+        </section>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">
+        <button mat-button (click)="updateClient()">Modificar</button>
+    </mat-grid-tile>
+
+</mat-grid-list>

@@ -1,0 +1,36 @@
+<app-diario>
+</app-diario>
+<mat-grid-list cols="12" rows="5">
+    <mat-grid-tile [colspan]="9" [rowspan]=1 style="background-color: blue">
+        <h1>{{(client | async)?.nameClient}} {{(client | async)?.surnameClient}}</h1>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="5" style="background-color: yellow">
+        <app-invoices></app-invoices>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="4" [rowspan]="1">Direccion:{{(client | async)?.addressClient}}</mat-grid-tile>
+    <mat-grid-tile [colspan]="4" [rowspan]="1">Fecha Nacimiento:{{(client | async)?.birthDateClient}}</mat-grid-tile>
+    <mat-grid-tile [colspan]="4" [rowspan]="1">Teléfono:{{(client | async)?.phoneClient}}</mat-grid-tile>
+    <mat-grid-tile [colspan]="4" [rowspan]="1">Correo electrónico:{{(client | async)?.emailClient}}</mat-grid-tile>
+    <mat-grid-tile [colspan]="4" [rowspan]="1">Dni:{{(client | async)?.dniClient}}</mat-grid-tile>
+    <mat-grid-tile [colspan]="4" [rowspan]="1">Activo:{{(client | async)?.activeClient}}</mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+        <button mat-raised-button (click)="addPay()">Añadir Pago</button>
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+        <button mat-raised-button (click)="addAttendance()">Añadir Asistencia</button>
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+        <button mat-raised-button (click)="updateClient()">Modificar Datos</button>
+
+    </mat-grid-tile>
+</mat-grid-list>
+
+
+
+
+<mat-grid-list cols="12" rows="1" rowHeight="1:1">
+
+
+</mat-grid-list>
