@@ -2,8 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Client } from 'src/app/clientes/cliente';
 import { ClientesService } from 'src/app/clientes/clientes.service';
 import { Observable } from 'rxjs';
-import { DialogData, DetailClientComponent } from 'src/app/detail-client/detail-client.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { DialogData, DetailClientComponent } from '../detail-client.component';
 
 @Component({
   selector: 'app-update-client',

@@ -6,11 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contabilidad.component.css']
 })
 export class ContabilidadComponent implements OnInit {
-  nombre:string;
+  route:string;
+  incomes:string= "incomes";
+  balance:string ="balance";
+  expenses:string="expenses"
   constructor() { }
 
   ngOnInit() {
-    this.nombre= "monica"
+    this.route= "balance"
   }
 
+  routing(section:string){
+    this.route = section
+
+  }
 }

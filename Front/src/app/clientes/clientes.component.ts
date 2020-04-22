@@ -25,11 +25,10 @@ export class ClientesComponent implements OnInit {
   constructor(private clientService:ClientesService, public dialog :MatDialog){
     this.client= new Client();    
     this.client.activeClient = false; 
-    this.clients = this.clientService.findAll().pipe(map(data => this.clientsData =  new MatTableDataSource(data)));      
+    this.clients = this.clientService.findAll().pipe(map(data => this.clientsData =  new MatTableDataSource(data))); 
    }
 
   ngOnInit() {
-    
 
   }
 

@@ -1,13 +1,15 @@
 import { Invoice } from './invoice.entity';
 import { Repository } from 'typeorm';
-import { Clients } from '../clientes/clientes.entity';
-import { Pass } from '../pass/pass.entity';
+import { Invoicing } from './invoicing-model';
 export declare class InvoiceService {
     private readonly repositoryInvoice;
     constructor(repositoryInvoice: Repository<Invoice>);
     getAll(): Promise<Invoice[]>;
     save(invoice: Invoice): Promise<Invoice>;
     getInvoiceOneClient(id: number): Promise<Invoice>;
-    getFacturacion(): Promise<any>;
-    getPasses(client: Clients): Promise<Pass>;
+    getInvoicing(): Promise<Invoicing>;
+    getInvoicingOneDay(date: Date): Promise<Invoicing>;
+    getPasses(): Promise<Invoice[]>;
+    getInvoicingOnePeriod(dateInvoice1: Date, dateInvoice2: Date): Promise<any>;
+    getInvoicingQuarter(): Promise<Invoicing[]>;
 }

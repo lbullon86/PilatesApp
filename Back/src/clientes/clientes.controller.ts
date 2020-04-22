@@ -23,7 +23,6 @@ export class ClientesController {
 
   @Post()
   save(@Body() client: Clients) {
-    console.log(client);
     return this.clientesService.save(client);
   }
 
@@ -51,6 +50,7 @@ export class ClientesController {
     return this.clientesService.updateClient(client);
   }
 
+  
 
  
 }

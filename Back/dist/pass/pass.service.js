@@ -18,9 +18,11 @@ const pass_entity_1 = require("./pass.entity");
 const typeorm_2 = require("typeorm");
 const invoice_entity_1 = require("../invoice/invoice.entity");
 const invoice_service_1 = require("../invoice/invoice.service");
+const clientes_entity_1 = require("../clientes/clientes.entity");
 let PassService = class PassService {
-    constructor(repositoryPass) {
+    constructor(repositoryPass, repositoryInvoices) {
         this.repositoryPass = repositoryPass;
+        this.repositoryInvoices = repositoryInvoices;
     }
     getAll() {
         return this.repositoryPass.find();
@@ -31,11 +33,25 @@ let PassService = class PassService {
     saveAttendance(pass) {
         return this.repositoryPass.update(pass.idPass, pass);
     }
+    getOnePassActiveOneClient(idClient) {
+        const qb = this.repositoryInvoices;
+        console.log(idClient);
+        return this.repositoryPass
+            .createQueryBuilder('pass')
+            .select('pass')
+            .where('numberClasses > 0 AND idPass IN' +
+            qb
+                .createQueryBuilder('invoice')
+                .subQuery()
+                .select("invoice.passIdPass").from(invoice_entity_1.Invoice, "invoice").where("invoice.clientIdClient = :id").getQuery()).setParameter("id", idClient).getOne();
+    }
 };
 PassService = __decorate([
     common_1.Injectable(),
     __param(0, typeorm_1.InjectRepository(pass_entity_1.Pass)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, typeorm_1.InjectRepository(pass_entity_1.Pass)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], PassService);
 exports.PassService = PassService;
 //# sourceMappingURL=pass.service.js.map

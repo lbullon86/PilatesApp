@@ -1,0 +1,63 @@
+<mat-grid-list cols="6" rowHeight="4:1" class="firstGrid">
+    <mat-grid-tile colspan="2">
+        INGRESOS
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="dateInvoicing">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <button (click)="getInvoicingToday()" mat-raised-button color="primary">Buscar</button>
+
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">
+        CAJAS
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        INGRESOS TOTAL
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        IMPUESTOS TOTAL
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        EFECTIVO TOTAL
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        BANCO TOTAL
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        CAJA EMPRESA
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        CAJA IMPUESTOS
+    </mat-grid-tile>
+    <!-- DATOS -->
+    <mat-grid-tile colspan="1">
+        {{invoicing.sum}}€
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        {{invoicing.sumTax}}€
+
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        {{invoicing.sumCash}}€
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        {{invoicing.sum - invoicing.sumCash}}€
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        {{account.sum}}€
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        {{account.sumTax}}€
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="3">
+
+    </mat-grid-tile>
+
+</mat-grid-list>

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Expense } from './expense.entity';
 import { Repository } from 'typeorm';
+import { numberLiteralTypeAnnotation } from '@babel/types';
 
 @Injectable()
 export class ExpensesService {
@@ -15,6 +16,12 @@ export class ExpensesService {
     save(expense:Expense){
         return this.repositoryExpense.save(expense);
 
+    }
+
+    getSumAllExpenses(){
+        let result:number
+        
+        // = this.repositoryExpense.createQueryBuilder().select("sum(expenses.quantity)","sum").getOne()
     }
 
 

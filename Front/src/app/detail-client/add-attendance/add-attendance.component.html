@@ -1,1 +1,32 @@
-<p>add-attendance works!</p>
+<ng-container *ngIf="passActive; else elseTemplate">
+    <mat-grid-list cols="2" rows="5" rowHeight="4:1">
+        <mat-grid-tile colspan="1">
+            Clases Restantes: {{pass.numberClasses}}
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+            Clases Realizadas:
+
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" *ngFor="let class of pass.dates">
+            {{class}}
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+            <mat-form-field>
+                <mat-label>Fecha Clase</mat-label>
+                <input matInput [matDatepicker]="invoiceDate" [(ngModel)]="newDateClass">
+                <mat-datepicker-toggle matSuffix [for]="invoiceDate"></mat-datepicker-toggle>
+                <mat-datepicker #invoiceDate></mat-datepicker>
+            </mat-form-field>
+        </mat-grid-tile>
+
+
+        <mat-grid-tile colspan="2">
+            <button mat-raised-button (click)="addAttendance()">Añadir Asistencia</button>
+
+        </mat-grid-tile>
+
+    </mat-grid-list>
+</ng-container>
+<ng-template #elseTemplate>
+    No hay actualmente ningún bono activo
+</ng-template>

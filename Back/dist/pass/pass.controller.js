@@ -27,7 +27,9 @@ let PassController = class PassController {
     }
     saveAttendance(id, pass) {
         return this.passService.saveAttendance(pass);
-        ;
+    }
+    getOnePassActiveOneClient(id) {
+        return this.passService.getOnePassActiveOneClient(id);
     }
 };
 __decorate([
@@ -44,12 +46,19 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], PassController.prototype, "save", null);
 __decorate([
-    common_1.Get('id'),
+    common_1.Put(':id/update'),
     __param(0, common_1.Param('id', common_1.ParseIntPipe)), __param(1, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, pass_entity_1.Pass]),
     __metadata("design:returntype", Promise)
 ], PassController.prototype, "saveAttendance", null);
+__decorate([
+    common_1.Get(':id/passActive'),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], PassController.prototype, "getOnePassActiveOneClient", null);
 PassController = __decorate([
     common_1.Controller('pass'),
     __metadata("design:paramtypes", [pass_service_1.PassService])

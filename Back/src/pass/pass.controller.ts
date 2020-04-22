@@ -4,6 +4,7 @@ import {
   Post,
   Body,
   Param,
+  Put,
   ParseIntPipe,
 } from '@nestjs/common';
 import { PassService } from './pass.service';
@@ -23,9 +24,15 @@ export class PassController {
   save(@Body() pass: Pass) {
     return this.passService.save(pass);
   }
-  @Get('id')
+
+  @Put(':id/update')
   saveAttendance(@Param('id', ParseIntPipe) id: number, @Body() pass: Pass) : Promise<any> {
       return this.passService.saveAttendance(pass);
-      ;
   }
+
+  @Get(':id/passActive')
+  getOnePassActiveOneClient(@Param('id', ParseIntPipe) id:number): Promise<Pass>{
+    return this.passService.getOnePassActiveOneClient(id);
+  }
+
 }

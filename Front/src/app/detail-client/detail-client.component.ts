@@ -77,5 +77,7 @@ export class DetailClientComponent implements OnInit {
       data: {id:this.idClient}
 
     });
+    dialogRef.afterClosed().subscribe()    
+
   }
 }

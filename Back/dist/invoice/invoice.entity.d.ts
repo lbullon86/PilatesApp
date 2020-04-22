@@ -9,6 +9,7 @@ export declare class Invoice {
     startDate: Date;
     expirationDate: Date;
     periodicity: number;
+    paymentMethod: number;
     client: Clients;
     pass?: Pass;
 }

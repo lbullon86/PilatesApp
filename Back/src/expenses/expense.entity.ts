@@ -1,7 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from 'typeorm';
 import { Company } from 'src/company/company.entity';
 
-
 @Entity('expenses')
 export class Expense{
 
@@ -17,7 +16,7 @@ export class Expense{
     @Column({nullable:false})
     taxes:number
 
-    @Column({nullable:false})
+    @Column()
     date:Date
 
     @ManyToOne(type=>Company, company=> company.id)

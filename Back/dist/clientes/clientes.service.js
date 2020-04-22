@@ -64,8 +64,8 @@ let ClientesService = class ClientesService {
         }
     }
     getPasses(client) {
-        return this.repositoryClients.createQueryBuilder("client").select("invoice")
-            .from(invoice_entity_1.Invoice, "invoice").where("invoice.concept = B8  AND invoice.client.idClient = client.idClient").getRawOne();
+        return this.repositoryClients.createQueryBuilder("client").select("pass")
+            .from(invoice_entity_1.Invoice, "invoice").where("(invoice.concept = B8  AND invoice.client.idClient = client.idClient").getRawOne();
     }
 };
 ClientesService = __decorate([

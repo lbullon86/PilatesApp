@@ -29,6 +29,9 @@ export class Invoice{
 
     @Column({nullable:false})
     periodicity:number;
+
+    @Column({nullable:false})
+    paymentMethod:number; 
     
     @ManyToOne(type=>Clients, client=> client.invoices)
     client: Clients;

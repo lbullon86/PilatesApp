@@ -64,12 +64,13 @@ getTypePass(invoice:Invoice){
 }
 
 getPasses(client:Clients):Promise<Pass>{
-    return this.repositoryClients.createQueryBuilder("client").select("invoice")
-    .from(Invoice, "invoice").where("invoice.concept = B8  AND invoice.client.idClient = client.idClient").getRawOne();
+    return this.repositoryClients.createQueryBuilder("client").select("pass")
+    .from(Invoice, "invoice").where("(invoice.concept = B8  AND invoice.client.idClient = client.idClient").getRawOne();
+}
+
 }
 
 
-}
 
 
 
@@ -78,20 +79,6 @@ getPasses(client:Clients):Promise<Pass>{
 
 
 
-
-/* async saveInvoice2(id:number, invoice:Invoice): Promise<Invoice>{
-    const client = await this.repositoryClients.findOne(id);
-    invoice.client = client;
-    return this.invoiceService.save(invoice);    
-
-} */
-
-/* async savePass(client:Clients, pass:Pass) : Promise<Pass>{
-    const invoice =  await  this.getLastInvoice(client.idClient);
-    invoice.pass = pass;
-    return this.passService.save(pass);
-    
-} */
 
 
 

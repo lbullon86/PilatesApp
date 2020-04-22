@@ -30,7 +30,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Expense.prototype, "taxes", void 0);
 __decorate([
-    typeorm_1.Column({ nullable: false }),
+    typeorm_1.Column(),
     __metadata("design:type", Date)
 ], Expense.prototype, "date", void 0);
 __decorate([

@@ -1,7 +1,18 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-1-12">
-        </div>
+<app-incomes>
+</app-incomes>
+
+<button (click)="routing('balance')">Balance</button>
+<button (click)="routing('incomes')">Incomes </button>
+<button (click)="routing('expenses')">Expenses</button>
+<span [ngSwitch]="route">
+    <div *ngSwitchCase="balance">
+        <app-balance></app-balance>
     </div>
-</div>
-<app-incomes></app-incomes>
+    <div *ngSwitchCase="incomes">
+        <app-resume-incomes></app-resume-incomes>
+    </div>
+    <div *ngSwitchCase="expenses">
+        <app-expenses></app-expenses>
+    </div>
+
+</span>

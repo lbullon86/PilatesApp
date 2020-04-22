@@ -5,9 +5,13 @@ import {
   Body,
   Param,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { InvoiceService } from './invoice.service';
 import { Invoice } from './invoice.entity';
+import { query } from 'express';
+import { from } from 'rxjs';
+import { Invoicing } from './invoicing-model';
 
 @Controller('invoices')
 export class InvoiceController {
@@ -16,15 +20,31 @@ export class InvoiceController {
   save(@Body() invoice: Invoice) {
     return this.invoiceService.save(invoice);
   }
-  @Get('/facturacion')
+  @Get('/invoicing')
   getFacturacion(){    
-      return this.invoiceService.getFacturacion()
+      return this.invoiceService.getInvoicing()
+  }
+
+  @Get('/invoicingDay/:date')
+  getInvoicingOneDay(@Param ('date') date:Date){
+    return this.invoiceService.getInvoicingOneDay(date);
+  }
+  @Get('/invoicingPeriod')
+  getInvoicingOnePeriod(@Query ('from') from:Date,@Query ('to') to:Date ){
+  const result = this.invoiceService.getInvoicingOnePeriod(from,to);
+  return result;
   }
 
   @Get('/passes')
   getPasses(){
     return this.invoiceService.getPasses();
   }
+
+  @Get('/invoicingQuarter') 
+  getInvoicingQuarte():Promise<Invoicing[]>{
+  return this.invoiceService.getInvoicingQuarter();
+  }
+
 
   @Get()
   getAll() {

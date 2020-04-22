@@ -12,7 +12,8 @@ const routes: Routes = [
   {path:'clientes', component:ClientesComponent},
   {path: 'company', component:CompanyComponent},
   {path: '.', component:AppComponent},
-  {path: 'detailClient/:id', component:DetailClientComponent}
+  {path: 'detailClient/:id', component:DetailClientComponent},
+  
 
 
 ];

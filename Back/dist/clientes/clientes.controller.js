@@ -25,7 +25,6 @@ let ClientesController = class ClientesController {
         return this.clientesService.getAll();
     }
     save(client) {
-        console.log(client);
         return this.clientesService.save(client);
     }
     getOne(id) {

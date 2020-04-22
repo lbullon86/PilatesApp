@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ContabilidadComponent } from './contabilidad/contabilidad.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatMenuModule} from '@angular/material/menu';
 import { CompanyModule} from './company/company.module';
@@ -14,9 +13,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ClientesModule } from './clientes/clientes.module';
 import { DetailClientModule } from './detail-client/detail-client.module';
 import { DatePipe } from '@angular/common';
-import { IncomesComponent } from './contabilidad/incomes/incomes.component';
-import { IncomesModule } from './incomes/incomes/incomes.module';
+
 import { ContabilidadModule } from './contabilidad/contabilidad.module';
+import { InsertExpenseComponent } from './contabilidad/expenses/insert-expense/insert-expense.component';
+import { ExpensesModule } from './contabilidad/expenses/expenses.module';
 
 
 
@@ -41,8 +41,9 @@ import { ContabilidadModule } from './contabilidad/contabilidad.module';
     MatSelectModule,
     MatNativeDateModule,
     ClientesModule,
-    DetailClientModule, 
-    ContabilidadModule
+    ContabilidadModule,
+    DetailClientModule,
+    
     
     
     

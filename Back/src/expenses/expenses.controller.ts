@@ -12,7 +12,10 @@ export class ExpensesController {
     getAll():Promise <any[]>{
         return this.expensesService.getAll()
     }
-
+    @Get('/sumAll')
+    getSumAlll(){
+        return this.expensesService.getSumAllExpenses()
+    }
     @Post()
     save(@Body() expense:Expense){
         return this.expensesService.save(expense)

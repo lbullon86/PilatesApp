@@ -47,6 +47,10 @@ __decorate([
     __metadata("design:type", Number)
 ], Invoice.prototype, "periodicity", void 0);
 __decorate([
+    typeorm_1.Column({ nullable: false }),
+    __metadata("design:type", Number)
+], Invoice.prototype, "paymentMethod", void 0);
+__decorate([
     typeorm_1.ManyToOne(type => clientes_entity_1.Clients, client => client.invoices),
     __metadata("design:type", clientes_entity_1.Clients)
 ], Invoice.prototype, "client", void 0);

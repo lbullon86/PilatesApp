@@ -5,4 +5,5 @@ export declare class ExpensesService {
     constructor(repositoryExpense: Repository<Expense>);
     getAll(): Promise<Expense[]>;
     save(expense: Expense): Promise<Expense>;
+    getSumAllExpenses(): void;
 }

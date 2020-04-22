@@ -21,8 +21,6 @@ export class InvoicesComponent implements OnInit {
   idClient: number;
   client: Observable<Client>;
   
-
-
   constructor(
     private serviceClient: ClientesService,
     private route: ActivatedRoute,

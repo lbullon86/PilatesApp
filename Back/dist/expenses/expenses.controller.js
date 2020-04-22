@@ -22,6 +22,9 @@ let ExpensesController = class ExpensesController {
     getAll() {
         return this.expensesService.getAll();
     }
+    getSumAlll() {
+        return this.expensesService.getSumAllExpenses();
+    }
     save(expense) {
         return this.expensesService.save(expense);
     }
@@ -32,6 +35,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], ExpensesController.prototype, "getAll", null);
+__decorate([
+    common_1.Get('/sumAll'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ExpensesController.prototype, "getSumAlll", null);
 __decorate([
     common_1.Post(),
     __param(0, common_1.Body()),

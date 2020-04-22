@@ -26,6 +26,9 @@ let ExpensesService = class ExpensesService {
     save(expense) {
         return this.repositoryExpense.save(expense);
     }
+    getSumAllExpenses() {
+        let result;
+    }
 };
 ExpensesService = __decorate([
     common_1.Injectable(),

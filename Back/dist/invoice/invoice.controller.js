@@ -23,7 +23,20 @@ let InvoiceController = class InvoiceController {
         return this.invoiceService.save(invoice);
     }
     getFacturacion() {
-        return this.invoiceService.getFacturacion();
+        return this.invoiceService.getInvoicing();
+    }
+    getInvoicingOneDay(date) {
+        return this.invoiceService.getInvoicingOneDay(date);
+    }
+    getInvoicingOnePeriod(from, to) {
+        const result = this.invoiceService.getInvoicingOnePeriod(from, to);
+        return result;
+    }
+    getPasses() {
+        return this.invoiceService.getPasses();
+    }
+    getInvoicingQuarte() {
+        return this.invoiceService.getInvoicingQuarter();
     }
     getAll() {
         return this.invoiceService.getAll();
@@ -40,11 +53,37 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], InvoiceController.prototype, "save", null);
 __decorate([
-    common_1.Get('/facturacion'),
+    common_1.Get('/invoicing'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], InvoiceController.prototype, "getFacturacion", null);
+__decorate([
+    common_1.Get('/invoicingDay/:date'),
+    __param(0, common_1.Param('date')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Date]),
+    __metadata("design:returntype", void 0)
+], InvoiceController.prototype, "getInvoicingOneDay", null);
+__decorate([
+    common_1.Get('/invoicingPeriod'),
+    __param(0, common_1.Query('from')), __param(1, common_1.Query('to')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Date, Date]),
+    __metadata("design:returntype", void 0)
+], InvoiceController.prototype, "getInvoicingOnePeriod", null);
+__decorate([
+    common_1.Get('/passes'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], InvoiceController.prototype, "getPasses", null);
+__decorate([
+    common_1.Get('/invoicingQuarter'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], InvoiceController.prototype, "getInvoicingQuarte", null);
 __decorate([
     common_1.Get(),
     __metadata("design:type", Function),

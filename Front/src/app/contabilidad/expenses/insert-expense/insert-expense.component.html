@@ -1,0 +1,43 @@
+<h1 style="text-align: center">Nuevo Gasto</h1>
+
+<mat-grid-list cols="2" rows="5" rowHeight="4:1">
+
+    <mat-grid-tile colspan="1">
+        <div class="example-container">
+            <mat-form-field>
+                <mat-label>Concepto</mat-label>
+                <input matInput value="expense.concept" [(ngModel)]="expense.concept">
+            </mat-form-field>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <div class="example-container">
+            <mat-form-field>
+                <mat-label>Cantidad</mat-label>
+                <input matInput value="expense.quantity" [(ngModel)]="expense.quantity">
+            </mat-form-field>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <div class="example-container">
+            <mat-form-field>
+                <mat-label>Iva</mat-label>
+                <input matInput value="expense.taxes" [(ngModel)]="expense.taxes">
+            </mat-form-field>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <mat-form-field>
+            <mat-label>Fecha Gasto</mat-label>
+            <input matInput [matDatepicker]="expenseDate" [(ngModel)]="expense.date">
+            <mat-datepicker-toggle matSuffix [for]="expenseDate"></mat-datepicker-toggle>
+            <mat-datepicker #expenseDate></mat-datepicker>
+        </mat-form-field>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile colspan="2">
+        <button mat-button (click)="saveExpense()">Añadir</button>
+    </mat-grid-tile>
+
+</mat-grid-list>

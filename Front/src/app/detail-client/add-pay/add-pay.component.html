@@ -48,7 +48,19 @@
             <mat-datepicker #expirationDate></mat-datepicker>
         </mat-form-field>
     </mat-grid-tile>
-    <mat-grid-tile colspan="2">
+
+    <mat-grid-tile colspan="1">
+        <mat-form-field>
+            <mat-label>Periodicidad</mat-label>
+            <select matNativeControl required [(ngModel)]="pay.paymentMethod">
+                <option value="1">Efectivo</option>
+                <option value="2">Bizum</option>
+                <option value="3">Tarjeta</option>
+                <option value="4">Transferencia</option>
+            </select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
         <mat-form-field>
             <mat-label>Fecha Facturacion</mat-label>
             <input matInput [matDatepicker]="invoiceDate" [(ngModel)]="pay.dateInvoice">

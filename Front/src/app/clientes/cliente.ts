@@ -8,5 +8,6 @@ export class Client{
         public birthDateClient:Date;    
         public activeClient:boolean;
         public idClient:number;
+        public paymentMethod:number;
    
 }

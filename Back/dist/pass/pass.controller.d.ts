@@ -6,4 +6,5 @@ export declare class PassController {
     getAll(): Promise<Pass[]>;
     save(pass: Pass): Promise<Pass>;
     saveAttendance(id: number, pass: Pass): Promise<any>;
+    getOnePassActiveOneClient(id: number): Promise<Pass>;
 }
