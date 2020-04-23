@@ -13,11 +13,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ClientesModule } from './clientes/clientes.module';
 import { DetailClientModule } from './detail-client/detail-client.module';
 import { DatePipe } from '@angular/common';
-
+import { FlexLayoutModule } from '@angular/flex-layout' ;
 import { ContabilidadModule } from './contabilidad/contabilidad.module';
-import { InsertExpenseComponent } from './contabilidad/expenses/insert-expense/insert-expense.component';
-import { ExpensesModule } from './contabilidad/expenses/expenses.module';
-
 
 
 
@@ -43,6 +40,7 @@ import { ExpensesModule } from './contabilidad/expenses/expenses.module';
     ClientesModule,
     ContabilidadModule,
     DetailClientModule,
+    FlexLayoutModule,
     
     
     
