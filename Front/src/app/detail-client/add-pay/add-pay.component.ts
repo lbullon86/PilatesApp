@@ -10,7 +10,6 @@ import { Client } from "src/app/clientes/cliente";
 import { Observable } from "rxjs";
 import { AddPayService } from "src/app/add-pay.service";
 import { Price } from "./price-model";
-import { emptyScheduled } from "rxjs/internal/observable/empty";
 import { Pass } from "../add-attendance/pass.model";
 import { identifierModuleUrl } from "@angular/compiler";
 import { DatePipe } from '@angular/common';
