@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Client } from 'src/app/clientes/cliente';
 import { ClientesService } from 'src/app/clientes/clientes.service';
 import { Observable } from 'rxjs';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogData, DetailClientComponent } from '../detail-client.component';
 
 @Component({

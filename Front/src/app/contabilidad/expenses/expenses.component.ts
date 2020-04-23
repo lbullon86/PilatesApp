@@ -2,7 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Expense } from './expense';
 import { ExpensesService } from './expenses.service';
 import { Observable } from 'rxjs';
-import { MatTableDataSource, MatTab, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatTab } from '@angular/material/tabs';
 import { map } from 'rxjs/operators';
 import { InsertExpenseComponent } from './insert-expense/insert-expense.component';
 

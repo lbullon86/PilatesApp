@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Observable } from "rxjs";
 import { Client } from "../clientes/cliente";
 import { ClientesService } from "../clientes/clientes.service";
-import { MatDialog } from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
 import { AddPayComponent } from "./add-pay/add-pay.component";
 import { UpdateClientComponent } from "./update-client/update-client.component";
 import { AddAttendanceComponent } from "./add-attendance/add-attendance.component";

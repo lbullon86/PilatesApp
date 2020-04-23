@@ -3,7 +3,7 @@ import { AttendanceService } from './attendance.service';
 import { Pass } from './pass.model';
 import { Observable } from 'rxjs';
 import { DetailClientComponent, DialogData } from '../detail-client.component';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { isNumber } from 'util';
 
 @Component({

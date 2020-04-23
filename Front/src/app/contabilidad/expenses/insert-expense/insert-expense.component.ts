@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Expense } from '../expense';
 import { ExpensesService } from '../expenses.service';
 import { DialogData } from 'src/app/clientes/insert-client/insert-client.component';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExpensesComponent } from '../expenses.component';
 
 @Component({

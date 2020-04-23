@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ClientesService } from './clientes.service';
-import { MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs/operators';
 import {Client} from './cliente';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';

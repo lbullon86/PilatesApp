@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ResumeIncomesService } from './resume-incomes.service';
 import { Observable } from 'rxjs';
 import { Invoicing } from '../invoicing/invoicing-model';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs/operators';
 import { IncomesComponent } from '../invoicing/incomes.component';
 
