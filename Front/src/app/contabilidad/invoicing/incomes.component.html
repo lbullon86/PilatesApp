@@ -1,63 +1,37 @@
-<mat-grid-list cols="6" rowHeight="4:1" class="firstGrid">
-    <mat-grid-tile colspan="2">
-        INGRESOS
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        <mat-form-field>
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="dateInvoicing">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        <button (click)="getInvoicingToday()" mat-raised-button color="primary">Buscar</button>
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="5px">
+    <div fxFlex="75">
+        <ngx-charts-number-card fxFlex="72" [scheme]="colorScheme" [results]="dataInvoicing" [cardColor]="cardColor">
+        </ngx-charts-number-card>
+    </div>
+    <div fxFlex="25">
+        <ngx-charts-number-card [cardColor]="cardColor" [results]="dataTotal">
+        </ngx-charts-number-card>
+    </div>
 
-    </mat-grid-tile>
-    <mat-grid-tile colspan="2">
-        CAJAS
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        INGRESOS TOTAL
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        IMPUESTOS TOTAL
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        EFECTIVO TOTAL
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        BANCO TOTAL
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        CAJA EMPRESA
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        CAJA IMPUESTOS
-    </mat-grid-tile>
-    <!-- DATOS -->
-    <mat-grid-tile colspan="1">
-        {{invoicing.sum}}€
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        {{invoicing.sumTax}}€
-
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        {{invoicing.sumCash}}€
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        {{invoicing.sum - invoicing.sumCash}}€
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        {{account.sum}}€
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-        {{account.sumTax}}€
-    </mat-grid-tile>
-
-    <mat-grid-tile colspan="3">
-
-    </mat-grid-tile>
-
-</mat-grid-list>
+</div>
+<ng-container *ngIf="!checked; else elseTemplate">
+    <mat-form-field>
+        <mat-label>Introduce fecha</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="dateInvoicing">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button (click)="getInvoicingToday()" mat-raised-button color="primary">Buscar</button>
+</ng-container>
+<ng-template #elseTemplate>
+    <mat-form-field>
+        <mat-label>Fecha Inicio</mat-label>
+        <input matInput [matDatepicker]="pickerFirst" [(ngModel)]="dateFirst">
+        <mat-datepicker-toggle matSuffix [for]="pickerFirst"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFirst></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Fecha final</mat-label>
+        <input matInput [matDatepicker]="pickerSecond" [(ngModel)]="dateSecond">
+        <mat-datepicker-toggle matSuffix [for]="pickerSecond"></mat-datepicker-toggle>
+        <mat-datepicker #pickerSecond></mat-datepicker>
+    </mat-form-field>
+    <button (click)="getInvoicingOnePeriod()" mat-raised-button color="primary">Buscar</button>
+</ng-template>
+<mat-slide-toggle class="example-margin" [(ngModel)]="checked">
+</mat-slide-toggle>

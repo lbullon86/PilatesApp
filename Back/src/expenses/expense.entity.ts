@@ -10,14 +10,17 @@ export class Expense{
     @Column({nullable:false})
     concept:string
 
-    @Column({nullable:false})
+    @Column({type:'decimal', precision:10, scale:2})
     quantity:number
 
-    @Column({nullable:false})
+    @Column({type:'decimal', precision:8, scale:2})
     taxes:number
 
     @Column()
     date:Date
+
+    @Column({type:'decimal', precision:8, scale:2})
+    iva:number;
 
     @ManyToOne(type=>Company, company=> company.id)
     company: Company;

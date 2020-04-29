@@ -7,9 +7,11 @@ export declare class InvoiceController {
     save(invoice: Invoice): Promise<Invoice>;
     getFacturacion(): Promise<Invoicing>;
     getInvoicingOneDay(date: Date): Promise<Invoicing>;
-    getInvoicingOnePeriod(from: Date, to: Date): Promise<any>;
+    getInvoicingOnePeriod(from: Date, to: Date): Promise<Invoicing>;
     getPasses(): Promise<Invoice[]>;
     getInvoicingQuarte(): Promise<Invoicing[]>;
+    getBalance(): Promise<import("./balance").Balance>;
+    getInvoicingClass(year: number): Promise<import("./invoicingClass-model").InvoicingClass>;
     getAll(): Promise<Invoice[]>;
     getInvoiceOneClient(id: number): Promise<Invoice>;
 }

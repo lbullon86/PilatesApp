@@ -38,6 +38,12 @@ let InvoiceController = class InvoiceController {
     getInvoicingQuarte() {
         return this.invoiceService.getInvoicingQuarter();
     }
+    getBalance() {
+        return this.invoiceService.getBalance();
+    }
+    getInvoicingClass(year) {
+        return this.invoiceService.getInvoicingOneYearByClass(year);
+    }
     getAll() {
         return this.invoiceService.getAll();
     }
@@ -84,6 +90,19 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], InvoiceController.prototype, "getInvoicingQuarte", null);
+__decorate([
+    common_1.Get('/balance'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], InvoiceController.prototype, "getBalance", null);
+__decorate([
+    common_1.Get('/invoicingClass/:year'),
+    __param(0, common_1.Param('year', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], InvoiceController.prototype, "getInvoicingClass", null);
 __decorate([
     common_1.Get(),
     __metadata("design:type", Function),

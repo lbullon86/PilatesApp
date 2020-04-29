@@ -1,25 +1,33 @@
-<button (click)="addPay()">Añadir gasto</button> {{expenseTotal.sum}}
-<mat-form-field class="filtro">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Filtrar...">
-</mat-form-field>
-<table mat-table [dataSource]="expensesObservable | async" matSort class="mat-elevation-z8">
+<div fxLayout="column" class="fluid">
+    <div fxFlex="100">
+        <button (click)="addPay()">Añadir gasto</button>
+        <mat-form-field class="filtro">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Filtrar...">
+        </mat-form-field>
+    </div>
+    <div>
+        <div fxFlex="75">
+            <table class="table" mat-table [dataSource]="expensesObservable | async" matSort class="mat-elevation-z8" style="border: 10px solid black">
 
-    <ng-container matColumnDef="concept">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Concept </th>
-        <td mat-cell *matCellDef="let element"> {{element.concept}} </td>
-    </ng-container>
-    <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
-        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-    </ng-container>
-    <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-    </ng-container>
+                <ng-container matColumnDef="concept">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Concept </th>
+                    <td mat-cell *matCellDef="let element"> {{element.concept}} </td>
+                </ng-container>
+                <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+                    <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                </ng-container>
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                    <td mat-cell *matCellDef="let element"> {{parseDate(element.date)}} </td>
+                </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-    </tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </table>
+        </div>
+        <div fxFlex="25">Columna de 25</div>
+    </div>
+</div>

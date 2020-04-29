@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatTab } from '@angular/material/tabs';
 import { map } from 'rxjs/operators';
 import { InsertExpenseComponent } from './insert-expense/insert-expense.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-expenses',
@@ -18,13 +19,14 @@ import { InsertExpenseComponent } from './insert-expense/insert-expense.componen
 export class ExpensesComponent implements OnInit {
   date:Date;
   expenseTotal:Object = new Object();
-  expensesObservable:Observable<MatTableDataSource<any>>;
-  expenses:MatTableDataSource<any>;  
+  expensesObservable:Observable<MatTableDataSource<Expense>>;
+  expenses:MatTableDataSource<Expense>;  
   displayedColumns: string[] = ['concept', 'quantity','date' ];  
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
-  constructor(private expenseService:ExpensesService, public dialog:MatDialog) {
+  constructor(private expenseService:ExpensesService, public dialog:MatDialog,
+    private datePipe:DatePipe) {
   
     this.expenseTotal = this.expenseService.getSumAll()
     
@@ -57,7 +59,11 @@ export class ExpensesComponent implements OnInit {
     }
     
       
-  
+    parseDate(date:Date)
+    {
+      return this.datePipe.transform(date, 'dd-mm-yyyy');
+        
+    }
     
   
 }

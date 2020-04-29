@@ -22,17 +22,21 @@ __decorate([
     __metadata("design:type", String)
 ], Expense.prototype, "concept", void 0);
 __decorate([
-    typeorm_1.Column({ nullable: false }),
+    typeorm_1.Column({ type: 'decimal', precision: 10, scale: 2 }),
     __metadata("design:type", Number)
 ], Expense.prototype, "quantity", void 0);
 __decorate([
-    typeorm_1.Column({ nullable: false }),
+    typeorm_1.Column({ type: 'decimal', precision: 8, scale: 2 }),
     __metadata("design:type", Number)
 ], Expense.prototype, "taxes", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", Date)
 ], Expense.prototype, "date", void 0);
+__decorate([
+    typeorm_1.Column({ type: 'decimal', precision: 8, scale: 2 }),
+    __metadata("design:type", Number)
+], Expense.prototype, "iva", void 0);
 __decorate([
     typeorm_1.ManyToOne(type => company_entity_1.Company, company => company.id),
     __metadata("design:type", company_entity_1.Company)

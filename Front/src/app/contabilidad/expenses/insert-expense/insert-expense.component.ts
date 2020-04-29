@@ -25,4 +25,6 @@ export class InsertExpenseComponent implements OnInit {
     return this.serviceExpense.save(this.expense).subscribe(expenses => this.dialogRef.close(this.dialogRef));
   }
 
+
+  
 }

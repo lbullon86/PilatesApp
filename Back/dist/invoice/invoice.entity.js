@@ -23,11 +23,11 @@ __decorate([
     __metadata("design:type", String)
 ], Invoice.prototype, "concept", void 0);
 __decorate([
-    typeorm_1.Column({ nullable: false }),
+    typeorm_1.Column({ type: 'decimal', precision: 5, scale: 2, nullable: false, default: 0 }),
     __metadata("design:type", Number)
 ], Invoice.prototype, "quantity", void 0);
 __decorate([
-    typeorm_1.Column({ nullable: false }),
+    typeorm_1.Column({ type: 'decimal', nullable: false }),
     __metadata("design:type", Number)
 ], Invoice.prototype, "taxes", void 0);
 __decorate([

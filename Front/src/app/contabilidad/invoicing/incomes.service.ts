@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Invoicing } from './invoicing-model';
 
@@ -23,5 +23,10 @@ export class IncomesService {
    
    getInvoicingQuarter():Observable<Invoicing[]>{
      return this.http.get(`${this.urlIncomes}/invoicingDay`) as Observable <Invoicing[]>
+   }
+
+   getInvoicingOnePeriod(date1:Date,date2:Date):Observable<Invoicing>{
+    const params = new HttpParams().append('from', date1.toISOString()).append('to', date2.toISOString());
+     return this.http.get(`${this.urlIncomes}/invoicingPeriod`,{params}) as Observable <Invoicing>
    }
 }

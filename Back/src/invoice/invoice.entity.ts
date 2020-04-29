@@ -12,10 +12,10 @@ export class Invoice{
     @Column({nullable:false})
     concept:string
 
-    @Column({nullable:false})
+    @Column({type:'decimal', precision:5,scale:2,nullable:false, default:0})
     quantity:number
 
-    @Column({nullable:false})
+    @Column({type:'decimal' ,nullable:false})
     taxes:number
 
     @Column({nullable:false})

@@ -15,12 +15,14 @@ import { DetailClientModule } from './detail-client/detail-client.module';
 import { DatePipe } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout' ;
 import { ContabilidadModule } from './contabilidad/contabilidad.module';
+import { HeaderComponent } from './header/header.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
     
      
        

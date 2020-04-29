@@ -2022,7 +2022,7 @@
         "signature": "de3a2109eea289d2eb1665a6b5083682f24cd946aae52c1445832e1b114d743a"
       },
       "../src/invoice/invoice.entity.ts": {
-        "version": "22f81d385dff2c215807af6f3b8654ce8597fe758c2d01d030af3261d9c0db2f",
+        "version": "adfce39144959bae71efb7d4aa4517236ffed4ed3af09e776e3acc2531a9c0b0",
         "signature": "22b3c5cd7964011ef1ecfccf29c67d826d6477ac22d4ee30d954994a4b7ba6af"
       },
       "../src/clientes/clientes.entity.ts": {
@@ -2034,8 +2034,8 @@
         "signature": "b84f5f0faa52fdad11ce5457b30850303c14c208eafa85e6a81eca93aa0ac4dd"
       },
       "../src/expenses/expense.entity.ts": {
-        "version": "f7f3425c0e306e2ea1a69c6826c8a81b229a7abcfa06fc9b3754626f65381e15",
-        "signature": "c93d63f0dac55495189778ff73e2b9b492687ac18aaaa3c35910ac9a23bb1bf2"
+        "version": "bbce9968fbceaecf9cafbd378b7e934b0e65dc44eaab954006eb6eb3e3d43e98",
+        "signature": "d8de909271d300e42263e0be5c6e53226a3cc5490730e62faab7ca9c4b4354d7"
       },
       "../src/payrolls/payroll.entity.ts": {
         "version": "0e6b361fef6797655335177bfde8d86de82bc7eaf56a3edcebec2bf58df3fd5d",
@@ -2077,20 +2077,32 @@
         "version": "573ea4cfa4be0b96d61f789201d3b92dfeb3694f43ab00892a98bab5c6742e97",
         "signature": "e10b10b986154dd832b106b397ed52bbec7c9ea17c506c6b9924c05e95b22389"
       },
-      "../node_modules/@types/color-name/index.d.ts": {
-        "version": "f0cb4b3ab88193e3e51e9e2622e4c375955003f1f81239d72c5b7a95415dad3e",
-        "signature": "f0cb4b3ab88193e3e51e9e2622e4c375955003f1f81239d72c5b7a95415dad3e"
+      "../src/invoice/balance.ts": {
+        "version": "33add8ea430aae31c3311254c501afe5d25208bdf28cd5672074fdac7b3bd13e",
+        "signature": "424695f42fb7bf080ad678488f6aab58d0d82de1646b81a15f6878f02c354676"
+      },
+      "../src/expenses/resumeExpense.ts": {
+        "version": "293a9e9b36608117d797246d8a98a5bfb0261f1f9ca0dae7c47f680f6926df0f",
+        "signature": "6b4459ba556995141b037bdd285fe1194d16d295281d24b1036d96803d44bc02"
+      },
+      "../src/expenses/expenses.service.ts": {
+        "version": "f9d1993415d232dd4b6006dcf82b56f1e76f7fbe1904bb967a7daf0ead069912",
+        "signature": "6b3c1714cde33b34a1ae6190159a5ad475ad5c6329bb3b6f15a8338546e6edfe"
+      },
+      "../src/invoice/invoicingClass-model.ts": {
+        "version": "d564c0dd8fbee95cc704fb01eab79a1e00adabaab6538ceeece87bb28dba9f17",
+        "signature": "8f9fd8a0ebdd3363b7f5d8a5563966557a8616e36c5fcf8ee7a9bf87e50efb03"
       },
       "../src/invoice/invoice.service.ts": {
-        "version": "0071a727f86d44c401e34a454145cfd67338ffc8a88aef3f926e4161c6511a74",
-        "signature": "811b7d2cfd3fa8b0a0503278636d5f3c59ea019b269a384fb8cf0a672078b08e"
+        "version": "e97a671c418a02f800e3cd166a3f1f2c4ac3c9b3fabc66403c9cf3fa1a5c6db4",
+        "signature": "4ebd702a4780ab3229d1d1fff3acb916d793acb61969654e067898d49fe40bb9"
       },
       "../src/pass/pass.service.ts": {
         "version": "16b4c2f183bcedc5a51bbf10c076cbec9e8e7b1cee57fbee2756ac36e2551176",
         "signature": "2702aeffc105c057ea04ce51af612a7a9cac0b7ec4626f5f619eeda64e62a052"
       },
       "../src/clientes/clientes.service.ts": {
-        "version": "d45f761c676994c58b8b8db997741de09528f1c2b77111e939636280cf2d5a4f",
+        "version": "9e14e38452b4f6b87d24d1d949d477e88ee4f8af1fdca44b697e08b223e739a0",
         "signature": "c5395b20f4d0d1df8d04dba47e3526a0ca41f3a248cf25fbf690dfd8a426f519"
       },
       "../src/clientes/clientes.controller.ts": {
@@ -2310,11 +2322,23 @@
         "signature": "ead1ed9dd4874f4907a506a31e4fe9c4e079b42816f6b7ea5016a6d5ddf2fde3"
       },
       "../src/invoice/invoice.controller.ts": {
-        "version": "d131a3d55fa7655fb1884c53fcf145ed7c82a02dd08aed43bffad50f9766ea74",
-        "signature": "65819c99694ac2bfb558be29c40f39124ad017bdff8c007149a616630ed00b99"
+        "version": "234e6491052d707b08773510c438cec0416b80844a09ac5e2ada1069a9663c2f",
+        "signature": "d9cb15210c053df9eedf3c7b913d49edb6f44683e14791c3e16425b78e35445e"
+      },
+      "../node_modules/@types/color-name/index.d.ts": {
+        "version": "f0cb4b3ab88193e3e51e9e2622e4c375955003f1f81239d72c5b7a95415dad3e",
+        "signature": "f0cb4b3ab88193e3e51e9e2622e4c375955003f1f81239d72c5b7a95415dad3e"
+      },
+      "../src/expenses/expenses.controller.ts": {
+        "version": "ea9a047b54b7a6bc3fa4a170c803a72829098d169991ded889a12ee6da184cc7",
+        "signature": "76463295b8398cb64d56b67b6e4bdccb0ae7f7388ba8d39023d77ad1fed5fba5"
+      },
+      "../src/expenses/expenses.module.ts": {
+        "version": "7c4e2b83e206ebeb04bf35fd35c9a8cc7bafa0c0b7fe7a7bc4bdf06a48da36ad",
+        "signature": "a42c03767cbbc69d0446a966f908129574072257eab389cc5dcaa6c29a56dc75"
       },
       "../src/invoice/invoice.module.ts": {
-        "version": "4ee93e6f2c32b56bb0a6785800bc712e42c239c3862825ca03fa64e508db7898",
+        "version": "42ceefec2c5a8c6342b624b1f9267546bb3152215f8937d3417d516242cc0e6d",
         "signature": "550231b5bd8d3e4dcd53ede741e65e775615cad13508342cd59ce7766741746f"
       },
       "../src/pass/pass.controller.ts": {
@@ -2328,22 +2352,6 @@
       "../src/clientes/clientes.module.ts": {
         "version": "fadddf5c1452f48ae01ae08b09b17e10b8053f772ec34c5c4fb09de43cceebf6",
         "signature": "ebbb193859ee64d1b42aa32b50186854620a82a1f7894f0e136f60643f84c51e"
-      },
-      "../node_modules/@babel/types/lib/index.d.ts": {
-        "version": "9566baf39af3e8e8525367b91f8313d0f3dee7dd21aa76bb9ecbc5c3c66df739",
-        "signature": "9566baf39af3e8e8525367b91f8313d0f3dee7dd21aa76bb9ecbc5c3c66df739"
-      },
-      "../src/expenses/expenses.service.ts": {
-        "version": "aa4298777f4530df25fc9530f89d8638264c777f6decc78e766eef23f554c50c",
-        "signature": "19267a453f672e4e64883c26f9452f8a2b80f3608d4e7b02cb629ad9e090d132"
-      },
-      "../src/expenses/expenses.controller.ts": {
-        "version": "310a14d81506208ae41c4cd798eb1fdfdefe9b245df4b284ec7936fd1941a5ce",
-        "signature": "d4541488e318fedfd09e2ca69ab2c3726df5c2daaeacb74ec8ecde1732e02c61"
-      },
-      "../src/expenses/expenses.module.ts": {
-        "version": "6f6348505c50b407df2008a6cb76ed64428c9b3df7228176a71603a7c49a8d36",
-        "signature": "a42c03767cbbc69d0446a966f908129574072257eab389cc5dcaa6c29a56dc75"
       },
       "../src/payrolls/payrolls.service.ts": {
         "version": "9f356e19c5a221a2383b29cad6d05852fc34d506d20c7f275597c310b8745c10",
@@ -2524,6 +2532,10 @@
       "../node_modules/@types/anymatch/index.d.ts": {
         "version": "48b52264fa193879a074197839dbb4796fa07e86350ff888e5361e06aa46df76",
         "signature": "48b52264fa193879a074197839dbb4796fa07e86350ff888e5361e06aa46df76"
+      },
+      "../node_modules/@babel/types/lib/index.d.ts": {
+        "version": "9566baf39af3e8e8525367b91f8313d0f3dee7dd21aa76bb9ecbc5c3c66df739",
+        "signature": "9566baf39af3e8e8525367b91f8313d0f3dee7dd21aa76bb9ecbc5c3c66df739"
       },
       "../node_modules/@types/babel__generator/index.d.ts": {
         "version": "b25c5f2970d06c729f464c0aeaa64b1a5b5f1355aa93554bb5f9c199b8624b1e",
@@ -7062,7 +7074,30 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/@types/color-name/index.d.ts": [
+      "../src/invoice/balance.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/expenses/resumeExpense.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/expenses/expenses.service.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../src/expenses/expense.entity.ts",
+        "../node_modules/typeorm/index.d.ts",
+        "../src/expenses/resumeExpense.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/invoice/invoicingClass-model.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -7073,13 +7108,14 @@
         "../node_modules/@nestjs/typeorm/index.d.ts",
         "../src/invoice/invoice.entity.ts",
         "../node_modules/typeorm/index.d.ts",
-        "../src/clientes/clientes.entity.ts",
-        "../src/pass/pass.entity.ts",
         "../src/invoice/invoicing-model.ts",
-        "../node_modules/@types/color-name/index.d.ts",
+        "../src/invoice/balance.ts",
+        "../src/expenses/resumeExpense.ts",
+        "../src/expenses/expenses.service.ts",
+        "../src/invoice/invoicingClass-model.ts",
+        "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../src/pass/pass.service.ts": [
@@ -7551,6 +7587,37 @@
         "../node_modules/@types/express/index.d.ts",
         "../node_modules/rxjs/index.d.ts",
         "../src/invoice/invoicing-model.ts",
+        "../node_modules/@types/node/http.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@types/color-name/index.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/expenses/expenses.controller.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../src/expenses/expenses.service.ts",
+        "../node_modules/@types/color-name/index.d.ts",
+        "../src/expenses/expense.entity.ts",
+        "../node_modules/@types/node/https.d.ts",
+        "../node_modules/typeorm/index.d.ts",
+        "../node_modules/rxjs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/expenses/expenses.module.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../src/expenses/expenses.service.ts",
+        "../src/expenses/expenses.controller.ts",
+        "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../src/expenses/expense.entity.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -7562,6 +7629,7 @@
         "../src/invoice/invoice.controller.ts",
         "../src/invoice/invoice.entity.ts",
         "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../src/expenses/expenses.module.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -7596,44 +7664,6 @@
         "../src/invoice/invoice.service.ts",
         "../src/invoice/invoice.module.ts",
         "../src/pass/pass.module.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/@babel/types/lib/index.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/expenses/expenses.service.ts": [
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/@nestjs/typeorm/index.d.ts",
-        "../src/expenses/expense.entity.ts",
-        "../node_modules/typeorm/index.d.ts",
-        "../node_modules/@babel/types/lib/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/expenses/expenses.controller.ts": [
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../src/expenses/expenses.service.ts",
-        "../node_modules/@types/color-name/index.d.ts",
-        "../src/expenses/expense.entity.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/expenses/expenses.module.ts": [
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../src/expenses/expenses.service.ts",
-        "../src/expenses/expenses.controller.ts",
-        "../node_modules/@nestjs/typeorm/index.d.ts",
-        "../src/expenses/expense.entity.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -8041,6 +8071,12 @@
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../node_modules/@types/anymatch/index.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@babel/types/lib/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -12561,16 +12597,18 @@
         "../src/users/users.service.ts",
         "../src/users/users.entity.ts"
       ],
-      "../node_modules/@types/color-name/index.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
+      "../src/expenses/expenses.service.ts": [
+        "../node_modules/typeorm/index.d.ts",
+        "../src/expenses/expense.entity.ts",
+        "../src/expenses/resumeExpense.ts"
       ],
       "../src/invoice/invoice.service.ts": [
         "../node_modules/typeorm/index.d.ts",
         "../src/invoice/invoice.entity.ts",
-        "../src/invoice/invoicing-model.ts"
+        "../src/expenses/expenses.service.ts",
+        "../src/invoice/invoicing-model.ts",
+        "../src/invoice/balance.ts",
+        "../src/invoice/invoicingClass-model.ts"
       ],
       "../src/pass/pass.service.ts": [
         "../node_modules/typeorm/index.d.ts",
@@ -13014,27 +13052,27 @@
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../src/invoice/invoice.controller.ts": [
+        "../src/invoice/balance.ts",
+        "../src/invoice/invoicingClass-model.ts",
         "../src/invoice/invoice.service.ts",
         "../src/invoice/invoice.entity.ts",
         "../src/invoice/invoicing-model.ts"
       ],
-      "../src/pass/pass.controller.ts": [
-        "../src/pass/pass.service.ts",
-        "../src/pass/pass.entity.ts"
-      ],
-      "../node_modules/@babel/types/lib/index.d.ts": [
+      "../node_modules/@types/color-name/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/expenses/expenses.service.ts": [
-        "../node_modules/typeorm/index.d.ts",
-        "../src/expenses/expense.entity.ts"
-      ],
       "../src/expenses/expenses.controller.ts": [
+        "../src/expenses/resumeExpense.ts",
+        "../node_modules/typeorm/index.d.ts",
         "../src/expenses/expenses.service.ts",
         "../src/expenses/expense.entity.ts"
+      ],
+      "../src/pass/pass.controller.ts": [
+        "../src/pass/pass.service.ts",
+        "../src/pass/pass.entity.ts"
       ],
       "../src/payrolls/payrolls.service.ts": [
         "../node_modules/typeorm/index.d.ts",
@@ -13369,6 +13407,12 @@
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../node_modules/@types/anymatch/index.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@babel/types/lib/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -14146,8 +14190,11 @@
       "../src/users/users.controller.ts",
       "../src/users/users.module.ts",
       "../src/invoice/invoicing-model.ts",
-      "../node_modules/@types/color-name/index.d.ts",
-      "../src/invoice/invoice.service.ts",
+      "../src/invoice/balance.ts",
+      "../src/expenses/resumeExpense.ts",
+      "../src/expenses/expenses.service.ts",
+      "../src/invoice/invoicingClass-model.ts",
+      "../src/pass/pass.service.ts",
       "../src/clientes/clientes.service.ts",
       "../src/clientes/clientes.controller.ts",
       "../node_modules/@types/node/globals.d.ts",
@@ -14204,14 +14251,13 @@
       "../node_modules/@types/qs/index.d.ts",
       "../node_modules/@types/express/index.d.ts",
       "../src/invoice/invoice.controller.ts",
+      "../node_modules/@types/color-name/index.d.ts",
+      "../src/expenses/expenses.controller.ts",
+      "../src/expenses/expenses.module.ts",
       "../src/invoice/invoice.module.ts",
       "../src/pass/pass.controller.ts",
       "../src/pass/pass.module.ts",
       "../src/clientes/clientes.module.ts",
-      "../node_modules/@babel/types/lib/index.d.ts",
-      "../src/expenses/expenses.service.ts",
-      "../src/expenses/expenses.controller.ts",
-      "../src/expenses/expenses.module.ts",
       "../src/payrolls/payrolls.service.ts",
       "../src/payrolls/payrolls.controller.ts",
       "../src/payrolls/payrolls.module.ts",
@@ -14257,6 +14303,7 @@
       "../node_modules/@nestjs/core/index.d.ts",
       "../src/main.ts",
       "../node_modules/@types/anymatch/index.d.ts",
+      "../node_modules/@babel/types/lib/index.d.ts",
       "../node_modules/@types/babel__generator/index.d.ts",
       "../node_modules/@types/babel__traverse/index.d.ts",
       "../node_modules/@babel/parser/typings/babel-parser.d.ts",
@@ -14292,7 +14339,7 @@
       "../node_modules/@types/webpack/index.d.ts",
       "../node_modules/@types/yargs-parser/index.d.ts",
       "../node_modules/@types/yargs/index.d.ts",
-      "../src/pass/pass.service.ts"
+      "../src/invoice/invoice.service.ts"
     ]
   },
   "version": "3.8.3"

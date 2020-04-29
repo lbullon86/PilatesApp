@@ -12,6 +12,7 @@ import { Invoice } from './invoice.entity';
 import { query } from 'express';
 import { from } from 'rxjs';
 import { Invoicing } from './invoicing-model';
+import { get } from 'http';
 
 @Controller('invoices')
 export class InvoiceController {
@@ -44,7 +45,14 @@ export class InvoiceController {
   getInvoicingQuarte():Promise<Invoicing[]>{
   return this.invoiceService.getInvoicingQuarter();
   }
-
+  @Get('/balance')
+  getBalance(){
+    return this.invoiceService.getBalance();
+  }
+  @Get('/invoicingClass/:year')
+  getInvoicingClass(@Param('year' , ParseIntPipe) year:number){
+    return this.invoiceService.getInvoicingOneYearByClass(year);
+  }
 
   @Get()
   getAll() {
@@ -56,5 +64,5 @@ export class InvoiceController {
     return this.invoiceService.getInvoiceOneClient(id);
   }
 
-  
+ 
 }

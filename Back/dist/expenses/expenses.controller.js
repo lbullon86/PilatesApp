@@ -25,8 +25,38 @@ let ExpensesController = class ExpensesController {
     getSumAlll() {
         return this.expensesService.getSumAllExpenses();
     }
+    getSumExpensesMonth(id) {
+        return this.expensesService.getSumAllExpensesMonth(id);
+    }
+    getSumExpensesYear(id) {
+        return this.expensesService.getSumAllExpensesYear(id);
+    }
+    getSumExpensesDay(date) {
+        return this.expensesService.getSumAllExpensesDay(date);
+    }
+    getSumExpensesPeriod(date, date2) {
+        return this.expensesService.getSumAllExpensesPeriod(date, date2);
+    }
+    getSumExpensesOneQuarter(id, year) {
+        return this.expensesService.getSumAllExpensesOneQuarter(id, year);
+    }
+    getSumExpensesQuarter(year) {
+        return this.expensesService.getSumAllQuartersOneYear(year);
+    }
+    getSumAllMonthsOneYear(year) {
+        return this.expensesService.getSumAllMonthsOneYear(year);
+    }
     save(expense) {
         return this.expensesService.save(expense);
+    }
+    getOneExpense(id) {
+        return this.expensesService.getOne(id);
+    }
+    update(id, expense) {
+        return this.expensesService.updateExpense(expense);
+    }
+    delete(id) {
+        return this.expensesService.deleteExpense(id);
     }
 };
 __decorate([
@@ -42,12 +72,83 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ExpensesController.prototype, "getSumAlll", null);
 __decorate([
+    common_1.Get(':id/month'),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], ExpensesController.prototype, "getSumExpensesMonth", null);
+__decorate([
+    common_1.Get(':id/year'),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], ExpensesController.prototype, "getSumExpensesYear", null);
+__decorate([
+    common_1.Get(':date/day'),
+    __param(0, common_1.Param('date')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Date]),
+    __metadata("design:returntype", void 0)
+], ExpensesController.prototype, "getSumExpensesDay", null);
+__decorate([
+    common_1.Get('/period'),
+    __param(0, common_1.Query('from')), __param(1, common_1.Query('to')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Date, Date]),
+    __metadata("design:returntype", void 0)
+], ExpensesController.prototype, "getSumExpensesPeriod", null);
+__decorate([
+    common_1.Get(':id/Onequarter/:year'),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)), __param(1, common_1.Param('year', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", void 0)
+], ExpensesController.prototype, "getSumExpensesOneQuarter", null);
+__decorate([
+    common_1.Get('/quarter/:year'),
+    __param(0, common_1.Param('year', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], ExpensesController.prototype, "getSumExpensesQuarter", null);
+__decorate([
+    common_1.Get('/months/:year'),
+    __param(0, common_1.Param('year', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], ExpensesController.prototype, "getSumAllMonthsOneYear", null);
+__decorate([
     common_1.Post(),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [expense_entity_1.Expense]),
     __metadata("design:returntype", void 0)
 ], ExpensesController.prototype, "save", null);
+__decorate([
+    common_1.Get(':id'),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ExpensesController.prototype, "getOneExpense", null);
+__decorate([
+    common_1.Put(':id/update'),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)),
+    __param(1, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, expense_entity_1.Expense]),
+    __metadata("design:returntype", Promise)
+], ExpensesController.prototype, "update", null);
+__decorate([
+    common_1.Delete(':id/delete'),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], ExpensesController.prototype, "delete", null);
 ExpensesController = __decorate([
     common_1.Controller('expenses'),
     __metadata("design:paramtypes", [expenses_service_1.ExpensesService])

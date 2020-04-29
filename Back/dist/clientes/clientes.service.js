@@ -43,20 +43,22 @@ let ClientesService = class ClientesService {
         return this.repositoryClients.update(client.idClient, client);
     }
     async saveInvoice(id, invoice) {
+        console.log(invoice);
         invoice.pass = this.getTypePass(invoice);
         const client = await this.repositoryClients.findOne(id, { relations: ["invoices"] });
         client.invoices.push(invoice);
         await this.repositoryClients.save(client);
+        console.log(invoice);
         return invoice;
     }
     getTypePass(invoice) {
-        if (invoice.concept = "B8") {
+        if (invoice.concept == "B8") {
             const pass = new pass_entity_1.Pass();
             pass.numberClasses = 8;
             pass.dates = [];
             return pass;
         }
-        else if (invoice.concept = "B16") {
+        else if (invoice.concept == "B16") {
             const pass = new pass_entity_1.Pass();
             pass.numberClasses = 16;
             pass.dates = [];

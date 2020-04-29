@@ -16,7 +16,7 @@ export interface DialogData{
   templateUrl: './insert-client.component.html',
   styleUrls: ['./insert-client.component.css']
 })
-export class InsertClientComponent implements OnInit {
+export class InsertClientComponent {
   public client:Client;
 
   constructor(private clientService:ClientesService,
@@ -28,11 +28,8 @@ export class InsertClientComponent implements OnInit {
 
     }
 
-
-    ngOnInit() {
-    }
     addUser(){
-      
+      console.log(this.client)
       return this.clientService.save(this.client).subscribe(clients => this.dialogRef.close(this.dialogRef) )
     }
 

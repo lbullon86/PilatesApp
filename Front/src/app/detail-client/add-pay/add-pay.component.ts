@@ -44,6 +44,7 @@ export class AddPayComponent implements OnInit {
     this.idClient = data.id;
     this.priceSelected = new Price();
     this.pay.taxes = 21;
+    this.pay.concept;
     this.comb = false;
     this.dateInvoice = new Date();
   }

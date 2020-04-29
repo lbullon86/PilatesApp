@@ -15,9 +15,10 @@ let ExpensesModule = class ExpensesModule {
 };
 ExpensesModule = __decorate([
     common_1.Module({
-        providers: [expenses_service_1.ExpensesService],
         controllers: [expenses_controller_1.ExpensesController],
-        imports: [typeorm_1.TypeOrmModule.forFeature([expense_entity_1.Expense])]
+        imports: [typeorm_1.TypeOrmModule.forFeature([expense_entity_1.Expense])],
+        providers: [expenses_service_1.ExpensesService],
+        exports: [expenses_service_1.ExpensesService]
     })
 ], ExpensesModule);
 exports.ExpensesModule = ExpensesModule;

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Invoicing } from '../invoicing/invoicing-model';
+import { InvoicingClass } from '../invoicing/invoicingClass-model';
+
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -15,4 +17,8 @@ export class ResumeIncomesService {
    getQuarterInvoicing(){
      return this.http.get(`${this.urlInvoicing}/invoicingQuarter`) as Observable<Invoicing[]> ;
    }
-}
+   
+   getInvoicingClass(year:number){
+     return this.http.get(`${this.urlInvoicing}/invoicingClass/${year}`) as Observable <InvoicingClass>
+   }
+  }

@@ -5,5 +5,6 @@ export declare class Expense {
     quantity: number;
     taxes: number;
     date: Date;
+    iva: number;
     company: Company;
 }

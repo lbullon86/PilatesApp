@@ -3,5 +3,6 @@ export class Expense {
     concept: string;
     quantity: number;
     taxes: number;
+    iva:number;
     date: Date;
 }

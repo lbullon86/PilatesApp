@@ -13,15 +13,24 @@ import { FormsModule } from '@angular/forms';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { BalanceComponent } from './balance/balance.component';
 import { ResumeIncomesComponent } from './resume-incomes/resume-incomes.component';
-import { InsertClientComponent } from '../clientes/insert-client/insert-client.component';
 import { InsertExpenseComponent } from './expenses/insert-expense/insert-expense.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCardModule } from '@angular/material/card';
+import { MatTab, MatTabsModule } from '@angular/material/tabs';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {MatIconModule} from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 
 
 
 @NgModule({
   declarations: [ContabilidadComponent,IncomesComponent, ExpensesComponent, BalanceComponent, ResumeIncomesComponent,InsertExpenseComponent],
   imports: [
-    CommonModule,MatTableModule,MatButtonModule,MatFormFieldModule, MatDatepickerModule, FormsModule, MatGridListModule,MatInputModule, MatPaginatorModule
+    CommonModule,MatTableModule,MatButtonModule,MatFormFieldModule, MatDatepickerModule, FormsModule, MatGridListModule,MatInputModule, MatPaginatorModule, FlexLayoutModule, MatCardModule, MatTabsModule,
+    NgxChartsModule,MatIconModule, MatSlideToggleModule
+
+
   ],
   entryComponents:[IncomesComponent, ExpensesComponent,InsertExpenseComponent]
 })

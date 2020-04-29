@@ -11,5 +11,6 @@ export class Pay{
     public expirationDate:Date;
     public client:Client;
     public periodicity:number;
+    public paymentMethod:number;
     
 }
