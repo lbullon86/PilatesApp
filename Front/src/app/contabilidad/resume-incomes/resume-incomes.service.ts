@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Invoicing } from '../invoicing/invoicing-model';
 import { InvoicingClass } from '../invoicing/invoicingClass-model';
 
@@ -21,4 +21,14 @@ export class ResumeIncomesService {
    getInvoicingClass(year:number){
      return this.http.get(`${this.urlInvoicing}/invoicingClass/${year}`) as Observable <InvoicingClass>
    }
+
+   getInvoicingClassQuarter(year:number,month1:number, month2:number){
+    const params = new HttpParams().append('from', month1.toString()).append('to', month2.toString());
+
+     return this.http.get(`${this.urlInvoicing}/quarterClass/${year}`, {params}) as Observable <InvoicingClass>
+   }
+
+   getInvoicingOneMonthByClass(year:number,month:number){
+    return this.http.get(`${this.urlInvoicing}/monthsClass/${year}/${month}`) as Observable <InvoicingClass>
+  }
   }

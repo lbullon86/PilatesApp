@@ -18,9 +18,9 @@ const invoice_entity_1 = require("./invoice.entity");
 const typeorm_2 = require("typeorm");
 const invoicing_model_1 = require("./invoicing-model");
 const balance_1 = require("./balance");
-const resumeExpense_1 = require("../expenses/resumeExpense");
 const expenses_service_1 = require("../expenses/expenses.service");
 const invoicingClass_model_1 = require("./invoicingClass-model");
+const util_1 = require("util");
 let InvoiceService = class InvoiceService {
     constructor(repositoryInvoice, serviceExpense) {
         this.repositoryInvoice = repositoryInvoice;
@@ -143,8 +143,6 @@ let InvoiceService = class InvoiceService {
             })
                 .getRawOne();
             invoicing.sum = queryResult.sum;
-            console.log(element);
-            console.log(invoicing.sum);
             invoicingQuarter.push(invoicing);
         });
         await Promise.all(promises);
@@ -160,72 +158,413 @@ let InvoiceService = class InvoiceService {
             sum.sum - sumExpense.sum - (sumIva - sumExpense.sumIva) - sumIrpf;
         return balance;
     }
+    getInvoicingMonthByOneClass(year, month, typeClass) {
+        return this.repositoryInvoice
+            .createQueryBuilder('invoice')
+            .select('SUM(invoice.quantity)', 'sum')
+            .where('year(invoice.dateInvoice)=:date1 AND month(invoice.dateInvoice)=:month AND invoice.concept =:concept', {
+            date1: year,
+            month: month,
+            concept: typeClass,
+        }).getRawOne();
+    }
+    async getInvoicingMonthByAllClass(year, month) {
+        const invoicing = new invoicingClass_model_1.InvoicingClass();
+        const queryResultB8 = await this.getInvoicingMonthByOneClass(year, month, "B8");
+        const queryResultB16 = await this.getInvoicingMonthByOneClass(year, month, "B16");
+        const queryResultMT1 = await this.getInvoicingMonthByOneClass(year, month, "MT1");
+        const queryResultMT2 = await this.getInvoicingMonthByOneClass(year, month, "MT2");
+        const queryResultR1 = await this.getInvoicingMonthByOneClass(year, month, "R1");
+        const queryResultR2 = await this.getInvoicingMonthByOneClass(year, month, "R2");
+        const queryResultTB1 = await this.getInvoicingMonthByOneClass(year, month, "TB1");
+        const queryResultTB2 = await this.getInvoicingMonthByOneClass(year, month, "TB2");
+        if (util_1.isNull(queryResultB16.sum)) {
+            invoicing.B16 = 0;
+        }
+        else {
+            invoicing.B16 = queryResultB16.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultB8.sum)) {
+            invoicing.B8 = 0;
+        }
+        else {
+            invoicing.B8 = queryResultB8.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultR1.sum)) {
+            invoicing.reformer1 = 0;
+        }
+        else {
+            invoicing.reformer1 = queryResultR1.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultR2.sum)) {
+            invoicing.reformer2 = 0;
+        }
+        else {
+            invoicing.reformer2 = queryResultR2.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultMT1.sum)) {
+            invoicing.mat1 = 0;
+        }
+        else {
+            invoicing.mat1 = queryResultMT1.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultMT2.sum)) {
+            invoicing.mat2 = 0;
+        }
+        else {
+            invoicing.mat2 = queryResultMT2.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultTB1.sum)) {
+            invoicing.totalBarre1 = 0;
+        }
+        else {
+            invoicing.totalBarre1 = queryResultTB1.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultTB2.sum)) {
+            invoicing.totalBarre2 = 0;
+        }
+        else {
+            invoicing.totalBarre2 = queryResultTB2.sum;
+        }
+        ;
+        return invoicing;
+    }
+    async getInvoicingMonthsByClass(year) {
+        const invoicingMonths = [];
+        const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        const promises = months.map(async (month) => {
+            invoicingMonths.push(await this.getInvoicingMonthByAllClass(year, month));
+        });
+        await Promise.all(promises);
+        return invoicingMonths;
+    }
+    getInvoicingMonthByOnePaymentMethod(year, month, method) {
+        return this.repositoryInvoice
+            .createQueryBuilder('invoice')
+            .select('SUM(invoice.quantity)', 'sum')
+            .where('year(invoice.dateInvoice)=:date1 AND month(invoice.dateInvoice)=:month AND invoice.paymentMethod =:payment', {
+            date1: year,
+            month: month,
+            payment: method,
+        }).getRawOne();
+    }
+    async getInvoicingOneMonthAllPaymentMethod(year, month) {
+        const invoicing = new invoicing_model_1.Invoicing();
+        const queryResultsumCash = await this.getInvoicingMonthByOnePaymentMethod(year, month, 1);
+        const queryResultsumBizum = await this.getInvoicingMonthByOnePaymentMethod(year, month, 2);
+        const queryResultsumTPV = await this.getInvoicingMonthByOnePaymentMethod(year, month, 3);
+        const queryResultsumTransfer = await this.getInvoicingMonthByOnePaymentMethod(year, month, 4);
+        if (util_1.isNull(queryResultsumCash.sum)) {
+            invoicing.sumCash = 0;
+        }
+        else {
+            invoicing.sumCash = queryResultsumCash.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultsumTPV.sum)) {
+            invoicing.sumTpv = 0;
+        }
+        else {
+            invoicing.sumTpv = queryResultsumTPV.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultsumBizum.sum)) {
+            invoicing.sumBizum = 0;
+        }
+        else {
+            invoicing.sumBizum = queryResultsumBizum.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultsumTransfer.sum)) {
+            invoicing.sumTransfer = 0;
+        }
+        else {
+            invoicing.sumTransfer = queryResultsumTransfer.sum;
+        }
+        ;
+        return invoicing;
+    }
+    async getInvoicingMonthsByPaymentMethod(year) {
+        const invoicingMonths = [];
+        const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        const promises = months.map(async (month) => {
+            invoicingMonths.push(await this.getInvoicingOneMonthAllPaymentMethod(year, month));
+        });
+        await Promise.all(promises);
+        console.log(invoicingMonths);
+        return invoicingMonths;
+    }
+    getInvoicingOneQuarterByOneClass(year, month1, month2, concept) {
+        return this.repositoryInvoice
+            .createQueryBuilder('invoice')
+            .select('SUM(invoice.quantity)', 'sum')
+            .where('year(invoice.dateInvoice)=:date1 AND month(invoice.dateInvoice) between :month1 AND :month2  AND invoice.concept =:concept', {
+            month1: month1,
+            month2: month2,
+            date1: year,
+            concept: concept,
+        }).getRawOne();
+    }
+    async getInvoicingOneQuarterByAllClass(year, month1, month2) {
+        const invoicing = new invoicingClass_model_1.InvoicingClass();
+        const queryResultB8 = await this.getInvoicingOneQuarterByOneClass(year, month1, month2, "B8");
+        const queryResultB16 = await this.getInvoicingOneQuarterByOneClass(year, month1, month2, "B16");
+        const queryResultMT1 = await this.getInvoicingOneQuarterByOneClass(year, month1, month2, "MT1");
+        const queryResultMT2 = await this.getInvoicingOneQuarterByOneClass(year, month1, month2, "MT2");
+        const queryResultR1 = await this.getInvoicingOneQuarterByOneClass(year, month1, month2, "R1");
+        const queryResultR2 = await this.getInvoicingOneQuarterByOneClass(year, month1, month2, "R2");
+        const queryResultTb1 = await this.getInvoicingOneQuarterByOneClass(year, month1, month2, "TB1");
+        const queryResultTb2 = await this.getInvoicingOneQuarterByOneClass(year, month1, month2, "TB2");
+        if (util_1.isNull(queryResultB16.sum)) {
+            invoicing.B16 = 0;
+        }
+        else {
+            invoicing.B16 = queryResultB16.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultB8.sum)) {
+            invoicing.B8 = 0;
+        }
+        else {
+            invoicing.B8 = queryResultB8.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultR1.sum)) {
+            invoicing.reformer1 = 0;
+        }
+        else {
+            invoicing.reformer1 = queryResultR1.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultR2.sum)) {
+            invoicing.reformer2 = 0;
+        }
+        else {
+            invoicing.reformer2 = queryResultR2.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultMT1.sum)) {
+            invoicing.mat1 = 0;
+        }
+        else {
+            invoicing.mat1 = queryResultMT1.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultMT2.sum)) {
+            invoicing.mat2 = 0;
+        }
+        else {
+            invoicing.mat2 = queryResultMT2.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultTb1.sum)) {
+            invoicing.totalBarre1 = 0;
+        }
+        else {
+            invoicing.totalBarre1 = queryResultTb1.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultTb2.sum)) {
+            invoicing.totalBarre2 = 0;
+        }
+        else {
+            invoicing.totalBarre2 = queryResultTb2.sum;
+        }
+        ;
+        return invoicing;
+    }
+    async getInvoicingOneYearByClassQuarter(year) {
+        const invoicingQuarter = [];
+        const quarterDate = [[1, 3], [4, 6], [7, 9], [10, 12]];
+        const promises = quarterDate.map(async (date) => {
+            invoicingQuarter.push(await this.getInvoicingOneQuarterByAllClass(year, date[0], date[1]));
+        });
+        await Promise.all(promises);
+        return invoicingQuarter;
+    }
+    getInvoicingOneQuarterByOnePaymentMethod(year, month1, month2, method) {
+        return this.repositoryInvoice
+            .createQueryBuilder('invoice')
+            .select('SUM(invoice.quantity)', 'sum')
+            .where('year(invoice.dateInvoice)=:date1 AND month(invoice.dateInvoice) between :month1 AND :month2  AND invoice.paymentMethod =:payment', {
+            month1: month1,
+            month2: month2,
+            date1: year,
+            payment: method,
+        }).getRawOne();
+    }
+    async getInvoicingOneQuarterByAllPaymentMethod(year, month1, month2) {
+        const invoicing = new invoicing_model_1.Invoicing();
+        const queryResultsumCash = await this.getInvoicingOneQuarterByOnePaymentMethod(year, month1, month2, 1);
+        const queryResultsumBizum = await this.getInvoicingOneQuarterByOnePaymentMethod(year, month1, month2, 2);
+        const queryResultsumTPV = await this.getInvoicingOneQuarterByOnePaymentMethod(year, month1, month2, 3);
+        const queryResultsumTransfer = await this.getInvoicingOneQuarterByOnePaymentMethod(year, month1, month2, 4);
+        if (util_1.isNull(queryResultsumCash.sumCash)) {
+            invoicing.sumCash = 0;
+        }
+        else {
+            invoicing.sumCash = queryResultsumCash.sumCash;
+        }
+        ;
+        if (util_1.isNull(queryResultsumTPV.sumTpv)) {
+            invoicing.sumTpv = 0;
+        }
+        else {
+            invoicing.sumTpv = queryResultsumTPV.sumTpv;
+        }
+        ;
+        if (util_1.isNull(queryResultsumBizum.sumBizum)) {
+            invoicing.sumBizum = 0;
+        }
+        else {
+            invoicing.sumBizum = queryResultsumBizum.sumBizum;
+        }
+        ;
+        if (util_1.isNull(queryResultsumTransfer.sumTransfer)) {
+            invoicing.sumTransfer = 0;
+        }
+        else {
+            invoicing.sumTransfer = queryResultsumTransfer.sumTransfer;
+        }
+        ;
+        return invoicing;
+    }
+    async getInvoicingOneYearByPaymentMethodQuarter(year) {
+        const invoicingQuarter = [];
+        const quarterDate = [[1, 3], [4, 6], [7, 9], [10, 12]];
+        const promises = quarterDate.map(async (date) => {
+            invoicingQuarter.push(await this.getInvoicingOneQuarterByAllPaymentMethod(year, date[0], date[1]));
+        });
+        await Promise.all(promises);
+        return invoicingQuarter;
+    }
+    getInvoicingOneYearByOneClass(year, concept) {
+        return this.repositoryInvoice
+            .createQueryBuilder('invoice')
+            .select('SUM(invoice.quantity)', 'sum')
+            .where('year(invoice.dateInvoice)=:date1 AND invoice.concept =:concept', {
+            date1: year,
+            concept: concept,
+        }).getRawOne();
+    }
     async getInvoicingOneYearByClass(year) {
         const invoicing = new invoicingClass_model_1.InvoicingClass();
-        const queryResultB8 = await this.repositoryInvoice
+        const queryResultB8 = await this.getInvoicingOneYearByOneClass(year, "B8");
+        const queryResultB16 = await this.getInvoicingOneYearByOneClass(year, "B16");
+        const queryResultMT1 = await this.getInvoicingOneYearByOneClass(year, "MT1");
+        const queryResultMT2 = await this.getInvoicingOneYearByOneClass(year, "MT2");
+        const queryResultR1 = await this.getInvoicingOneYearByOneClass(year, "R1");
+        const queryResultR2 = await this.getInvoicingOneYearByOneClass(year, "R2");
+        const queryResultTb1 = await this.getInvoicingOneYearByOneClass(year, "TB1");
+        const queryResultTb2 = await this.getInvoicingOneYearByOneClass(year, "TB2");
+        if (util_1.isNull(queryResultB16.sum)) {
+            invoicing.B16 = 0;
+        }
+        else {
+            invoicing.B16 = queryResultB16.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultB8.sum)) {
+            invoicing.B8 = 0;
+        }
+        else {
+            invoicing.B8 = queryResultB8.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultR1.sum)) {
+            invoicing.reformer1 = 0;
+        }
+        else {
+            invoicing.reformer1 = queryResultR1.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultR2.sum)) {
+            invoicing.reformer2 = 0;
+        }
+        else {
+            invoicing.reformer2 = queryResultR2.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultMT1.sum)) {
+            invoicing.mat1 = 0;
+        }
+        else {
+            invoicing.mat1 = queryResultMT1.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultMT2.sum)) {
+            invoicing.mat2 = 0;
+        }
+        else {
+            invoicing.mat2 = queryResultMT2.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultTb1.sum)) {
+            invoicing.totalBarre1 = 0;
+        }
+        else {
+            invoicing.totalBarre1 = queryResultTb1.sum;
+        }
+        ;
+        if (util_1.isNull(queryResultTb2.sum)) {
+            invoicing.totalBarre2 = 0;
+        }
+        else {
+            invoicing.totalBarre2 = queryResultTb2.sum;
+        }
+        ;
+        return invoicing;
+    }
+    getInvoicingOneYearByOneMethodPayment(year, method) {
+        return this.repositoryInvoice
             .createQueryBuilder('invoice')
-            .select('SUM(invoice.quantity)', 'sumB8')
-            .where('year(invoice.dateInvoice)=:date1 AND invoice.concept =:concept', {
+            .select('SUM(invoice.quantity)', 'sum')
+            .where('year(invoice.dateInvoice)=:date1 AND invoice.paymentMethod =:payment', {
             date1: year,
-            concept: "B8",
+            payment: method,
         }).getRawOne();
-        const queryResultB16 = await this.repositoryInvoice
-            .createQueryBuilder('invoice')
-            .select('SUM(invoice.quantity)', 'sumB16')
-            .where('year(invoice.dateInvoice)=:date1 AND invoice.concept =:concept', {
-            date1: year,
-            concept: "B16",
-        }).getRawOne();
-        const queryResultMT1 = await this.repositoryInvoice
-            .createQueryBuilder('invoice')
-            .select('SUM(invoice.quantity)', 'sumMT1')
-            .where('year(invoice.dateInvoice)=:date1 AND invoice.concept =:concept', {
-            date1: year,
-            concept: "MT1",
-        }).getRawOne();
-        const queryResultMT2 = await this.repositoryInvoice
-            .createQueryBuilder('invoice')
-            .select('SUM(invoice.quantity)', 'sumMT2')
-            .where('year(invoice.dateInvoice)=:date1 AND invoice.concept =:concept', {
-            date1: year,
-            concept: "MT2",
-        }).getRawOne();
-        const queryResultR1 = await this.repositoryInvoice
-            .createQueryBuilder('invoice')
-            .select('SUM(invoice.quantity)', 'sumR1')
-            .where('year(invoice.dateInvoice)=:date1 AND invoice.concept =:concept', {
-            date1: year,
-            concept: "R1",
-        }).getRawOne();
-        const queryResultR2 = await this.repositoryInvoice
-            .createQueryBuilder('invoice')
-            .select('SUM(invoice.quantity)', 'sumR2')
-            .where('year(invoice.dateInvoice)=:date1 AND invoice.concept =:concept', {
-            date1: year,
-            concept: "R2",
-        }).getRawOne();
-        const queryResultTb1 = await this.repositoryInvoice
-            .createQueryBuilder('invoice')
-            .select('SUM(invoice.quantity)', 'sumTB1')
-            .where('year(invoice.dateInvoice)=:date1 AND invoice.concept =:concept', {
-            date1: year,
-            concept: "TB1",
-        }).getRawOne();
-        const queryResultTb2 = await this.repositoryInvoice
-            .createQueryBuilder('invoice')
-            .select('SUM(invoice.quantity)', 'sumTB2')
-            .where('year(invoice.dateInvoice)=:date1 AND invoice.concept =:concept', {
-            date1: year,
-            concept: "TB2",
-        }).getRawOne();
-        invoicing.B16 = queryResultB16.sumB16;
-        invoicing.B8 = queryResultB8.sumB8;
-        invoicing.reformer1 = queryResultR1.sumR1;
-        invoicing.reformer2 = queryResultR2.sumR2;
-        invoicing.totalBarre1 = queryResultTb1.sumTB1;
-        invoicing.totalBarre2 = queryResultTb2.sumTB2;
-        invoicing.mat1 = queryResultMT1.sumMT1;
-        invoicing.mat2 = queryResultMT2.sumMT2;
+    }
+    async getInvoicingOneYearByMethodPayment(year) {
+        const invoicing = new invoicing_model_1.Invoicing();
+        const queryResultsumCash = await this.getInvoicingOneYearByOneMethodPayment(year, 1);
+        const queryResultsumBizum = await this.getInvoicingOneYearByOneMethodPayment(year, 2);
+        const queryResultsumTPV = await this.getInvoicingOneYearByOneMethodPayment(year, 3);
+        const queryResultsumTransfer = await this.getInvoicingOneYearByOneMethodPayment(year, 4);
+        if (util_1.isNull(queryResultsumCash.sumCash)) {
+            invoicing.sumCash = 0;
+        }
+        else {
+            invoicing.sumCash = queryResultsumCash.sumCash;
+        }
+        ;
+        if (util_1.isNull(queryResultsumTPV.sumTpv)) {
+            invoicing.sumTpv = 0;
+        }
+        else {
+            invoicing.sumTpv = queryResultsumTPV.sumTpv;
+        }
+        ;
+        if (util_1.isNull(queryResultsumBizum.sumBizum)) {
+            invoicing.sumBizum = 0;
+        }
+        else {
+            invoicing.sumBizum = queryResultsumBizum.sumBizum;
+        }
+        ;
+        if (util_1.isNull(queryResultsumTransfer.sumTransfer)) {
+            invoicing.sumTransfer = 0;
+        }
+        else {
+            invoicing.sumTransfer = queryResultsumTransfer.sumTransfer;
+        }
+        ;
         return invoicing;
     }
 };

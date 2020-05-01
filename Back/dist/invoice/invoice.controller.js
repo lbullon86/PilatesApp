@@ -50,6 +50,27 @@ let InvoiceController = class InvoiceController {
     getInvoiceOneClient(id) {
         return this.invoiceService.getInvoiceOneClient(id);
     }
+    getInvoicingOneYearByClassQuarter(year) {
+        return this.invoiceService.getInvoicingOneYearByClassQuarter(year);
+    }
+    getInvoicingOneQuarterAllClass(year, from, to) {
+        return this.invoiceService.getInvoicingOneQuarterByAllClass(year, from, to);
+    }
+    getInvoicingOneQuarterAllMethodPayment(year, from, to) {
+        return this.invoiceService.getInvoicingOneQuarterByAllPaymentMethod(year, from, to);
+    }
+    getInvoicingMonthsrByClassQuarter(year, month) {
+        return this.invoiceService.getInvoicingMonthByAllClass(year, month);
+    }
+    getInvoicingOneMonthByOnePaymentMethod(year, month, method) {
+        return this.invoiceService.getInvoicingMonthByOnePaymentMethod(year, month, method);
+    }
+    getInvoicingOneMonthByPaymentMethod(year, month) {
+        return this.invoiceService.getInvoicingOneMonthAllPaymentMethod(year, month);
+    }
+    getInvoicingMonthsByPaymentMethod(year) {
+        return this.invoiceService.getInvoicingMonthsByPaymentMethod(year);
+    }
 };
 __decorate([
     common_1.Post(),
@@ -116,6 +137,57 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], InvoiceController.prototype, "getInvoiceOneClient", null);
+__decorate([
+    common_1.Get("quarterClass/:year"),
+    __param(0, common_1.Param('year', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], InvoiceController.prototype, "getInvoicingOneYearByClassQuarter", null);
+__decorate([
+    common_1.Get("oneQuarterAllClass/:year"),
+    __param(0, common_1.Param("year", common_1.ParseIntPipe)), __param(1, common_1.Query('from')), __param(2, common_1.Query('to')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number, Number]),
+    __metadata("design:returntype", void 0)
+], InvoiceController.prototype, "getInvoicingOneQuarterAllClass", null);
+__decorate([
+    common_1.Get("oneQuarterAllMethodPayment/:year"),
+    __param(0, common_1.Param("year", common_1.ParseIntPipe)), __param(1, common_1.Query('from')), __param(2, common_1.Query('to')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number, Number]),
+    __metadata("design:returntype", void 0)
+], InvoiceController.prototype, "getInvoicingOneQuarterAllMethodPayment", null);
+__decorate([
+    common_1.Get("monthsClass/:year/:month"),
+    __param(0, common_1.Param('year', common_1.ParseIntPipe)), __param(1, common_1.Param('month', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", void 0)
+], InvoiceController.prototype, "getInvoicingMonthsrByClassQuarter", null);
+__decorate([
+    common_1.Get("oneMonthOneMethod/:year/:month/:method"),
+    __param(0, common_1.Param('year', common_1.ParseIntPipe)),
+    __param(1, common_1.Param("month", common_1.ParseIntPipe)), __param(2, common_1.Param("method", common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number, Number]),
+    __metadata("design:returntype", Promise)
+], InvoiceController.prototype, "getInvoicingOneMonthByOnePaymentMethod", null);
+__decorate([
+    common_1.Get("oneMonthAllMethods/:year/:month"),
+    __param(0, common_1.Param('year', common_1.ParseIntPipe)),
+    __param(1, common_1.Param("month", common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", void 0)
+], InvoiceController.prototype, "getInvoicingOneMonthByPaymentMethod", null);
+__decorate([
+    common_1.Get("monthsMethod/:year"),
+    __param(0, common_1.Param('year', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], InvoiceController.prototype, "getInvoicingMonthsByPaymentMethod", null);
 InvoiceController = __decorate([
     common_1.Controller('invoices'),
     __metadata("design:paramtypes", [invoice_service_1.InvoiceService])

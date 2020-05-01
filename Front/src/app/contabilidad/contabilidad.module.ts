@@ -20,6 +20,9 @@ import { MatTab, MatTabsModule } from '@angular/material/tabs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {MatIconModule} from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 
 
@@ -28,7 +31,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   declarations: [ContabilidadComponent,IncomesComponent, ExpensesComponent, BalanceComponent, ResumeIncomesComponent,InsertExpenseComponent],
   imports: [
     CommonModule,MatTableModule,MatButtonModule,MatFormFieldModule, MatDatepickerModule, FormsModule, MatGridListModule,MatInputModule, MatPaginatorModule, FlexLayoutModule, MatCardModule, MatTabsModule,
-    NgxChartsModule,MatIconModule, MatSlideToggleModule
+    NgxChartsModule,MatIconModule, MatSlideToggleModule,MatSelectModule,MatExpansionModule
 
 
   ],
