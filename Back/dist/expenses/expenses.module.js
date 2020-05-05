@@ -11,6 +11,8 @@ const expenses_service_1 = require("./expenses.service");
 const expenses_controller_1 = require("./expenses.controller");
 const typeorm_1 = require("@nestjs/typeorm");
 const expense_entity_1 = require("./expense.entity");
+const invoice_service_1 = require("../invoice/invoice.service");
+const invoice_module_1 = require("../invoice/invoice.module");
 let ExpensesModule = class ExpensesModule {
 };
 ExpensesModule = __decorate([

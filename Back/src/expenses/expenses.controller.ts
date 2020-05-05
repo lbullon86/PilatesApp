@@ -1,10 +1,6 @@
 import { Controller, Get, Post, Body, Param, ParseIntPipe, Put, Delete, Query } from '@nestjs/common';
 import { ExpensesService } from './expenses.service';
-import { saddlebrown } from 'color-name';
 import { Expense } from './expense.entity';
-import { get } from 'https';
-import { UpdateResult } from 'typeorm';
-import { from } from 'rxjs';
 
 @Controller('expenses')
 export class ExpensesController {
@@ -20,10 +16,16 @@ export class ExpensesController {
         return this.expensesService.getSumAllExpenses()
     }
 
-    @Get(':id/month')
-    getSumExpensesMonth(@Param('id', ParseIntPipe) id:number){
-        return this.expensesService.getSumAllExpensesMonth(id)
+    @Get('/month/:year/:month')
+    getSumExpensesMonth(@Param('month', ParseIntPipe) month:number, @Param('year', ParseIntPipe) year:number){
+        return this.expensesService.getSumAllExpensesOneMonth(year,month)
     }
+
+    @Get('/oneMonth/:year/:month')
+    getOneMonthByConcept(@Param('month', ParseIntPipe) month:number, @Param('year', ParseIntPipe) year:number){
+        return this.expensesService.getOneMonthsByConcept(year,month)
+    }
+    
     @Get(':id/year')
     getSumExpensesYear(@Param('id', ParseIntPipe) id:number){
         return this.expensesService.getSumAllExpensesYear(id)
@@ -54,17 +56,17 @@ export class ExpensesController {
         return this.expensesService.save(expense)
     }
 
-    @Get(':id')
+/*     @Get(':id')
     getOneExpense(@Param('id', ParseIntPipe) id:number): Promise<Expense>{
         return this.expensesService.getOne(id);
 
     }
-
-    @Put(':id/update')
+ */
+    /* @Put(':id/update')
     update(@Param('id', ParseIntPipe) id:number,
     @Body() expense:Expense): Promise<UpdateResult>{
         return this.expensesService.updateExpense(expense);
-    }
+    } */
 
     @Delete(':id/delete')
     delete(@Param('id', ParseIntPipe) id:number){

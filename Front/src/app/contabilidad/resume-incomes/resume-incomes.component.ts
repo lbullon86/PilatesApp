@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ResumeIncomesService } from "./resume-incomes.service";
 import { InvoicingClass } from "../invoicing/invoicingClass-model";
+import { Invoicing } from '../invoicing/invoicing-model';
 
 @Component({
   selector: "app-resume-incomes",
@@ -10,7 +11,9 @@ import { InvoicingClass } from "../invoicing/invoicingClass-model";
 export class ResumeIncomesComponent implements OnInit {
   displayedColumns: string[] = ["sum"];
   invoicingClass: InvoicingClass;
+  invoicinPayment: Invoicing;
   dataClass = [];
+  dataPayment =[]
   colorScheme = {
     domain: ["#5AA454", "#A10A28", "#C7B42C", "#AAAAAA"]
   };
@@ -23,6 +26,7 @@ export class ResumeIncomesComponent implements OnInit {
 
   constructor(private serviceInvoicing: ResumeIncomesService) {
     this.invoicingClass = new InvoicingClass();
+    this.invoicinPayment = new Invoicing();
     this.date = new Date();
     this.year = this.date.getFullYear();
     this.months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -31,6 +35,7 @@ export class ResumeIncomesComponent implements OnInit {
 
   ngOnInit() {
     this.getIncomingYearByClass();
+    this.getIncomingYearByPayment();
   }
 
   getMonthsOfQuarter(quarter: number) {
@@ -61,6 +66,24 @@ export class ResumeIncomesComponent implements OnInit {
       .subscribe(
         invoicing => ((this.invoicingClass = invoicing), this.getDataByClass())
       );
+  }
+
+  getIncomingYearByPayment(){
+    this.serviceInvoicing.getInvoicingPayment(this.year)
+    .subscribe(invoicing=> ((this.invoicinPayment = invoicing), this.getDataByMethodPayment())
+     ); 
+  }
+
+  getIncomingMonthByPayment(){
+    this.serviceInvoicing.getInvoicingOneMonthByPayment(this.year,this.monthSelected)
+    .subscribe(invoicing=> ((this.invoicinPayment = invoicing), this.getDataByMethodPayment()))
+  }
+
+  getIncomingQuarterByPayment(){
+    this.serviceInvoicing
+    .getInvoicingQuarterPayment(this.year, this.getMonthsOfQuarter(this.quarter)[0],this.getMonthsOfQuarter(this.quarter)[1])
+    .subscribe(invoicing=> 
+      ((this.invoicinPayment = invoicing), this.getDataByMethodPayment()))
   }
 
   getIncomingQuarterByClass() {
@@ -101,5 +124,28 @@ export class ResumeIncomesComponent implements OnInit {
         value: this.invoicingClass.totalBarre1 + this.invoicingClass.totalBarre2
       }
     ];
+  }
+
+  getDataByMethodPayment(){
+    this.dataPayment = [
+      {
+        name:"Efectivo",
+        value:this.invoicinPayment.sumCash
+      },
+      {
+        name:"Bizum",
+        value:this.invoicinPayment.sumBizum
+      },
+      {
+        name:"Tpv",
+        value:this.invoicinPayment.sumTpv
+      },
+      {
+        name:"Transferencia",
+        value:this.invoicinPayment.sumTransfer
+      }
+
+    ]
+
   }
 }

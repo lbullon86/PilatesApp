@@ -17,4 +17,5 @@ export declare class ClientesService {
     saveInvoice(id: number, invoice: Invoice): Promise<Invoice>;
     getTypePass(invoice: Invoice): Pass;
     getPasses(client: Clients): Promise<Pass>;
+    getDefaulters(): Promise<Clients>;
 }

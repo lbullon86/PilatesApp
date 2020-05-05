@@ -7,4 +7,5 @@ export declare class Invoicing {
     sumIva: number;
     sumIrpf: number;
     sumTax: number;
+    month: number;
 }

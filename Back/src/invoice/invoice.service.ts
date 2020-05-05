@@ -3,8 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Invoice } from './invoice.entity';
 import { Repository } from 'typeorm';
 import { Invoicing } from './invoicing-model';
-import { Balance } from './balance';
-import { ExpensesService } from 'src/expenses/expenses.service';
 import { InvoicingClass } from './invoicingClass-model';
 import { isNull } from 'util';
 
@@ -13,7 +11,6 @@ export class InvoiceService {
   constructor(
     @InjectRepository(Invoice)
     private readonly repositoryInvoice: Repository<Invoice>,
-    private readonly serviceExpense: ExpensesService,
   ) {}
 
   getAll() {
@@ -28,6 +25,14 @@ export class InvoiceService {
   getInvoiceOneClient(id: number) {
     return this.repositoryInvoice.findOne(id);
   }
+
+  async getInvoicesOneClient(id:number):Promise<Invoice[]>{
+    var invoice:Invoice[];
+     invoice = await this.repositoryInvoice.createQueryBuilder("invoices")
+    .select().where("invoices.clientIdClient =:idClient",{ idClient:id})
+    .orderBy("invoices.dateInvoice" ,"DESC").limit(5).getRawMany()
+    return invoice;
+}
 
   async getInvoicing(): Promise<Invoicing> {
     let invoicing: Invoicing = new Invoicing();
@@ -47,9 +52,70 @@ export class InvoiceService {
     invoicing.sumIva = (await invoicing.sum) - invoicing.sum / 1.21;
     invoicing.sumIrpf = (await (invoicing.sum / 1.21)) * 0.2;
     invoicing.sumTax = await Math.round(invoicing.sumIva + invoicing.sumIrpf);
-
     return invoicing;
   }
+
+  async getInvoicingYear(year:number){
+    let invoicing:Invoicing = new Invoicing();
+    const queryResultSum = await this.repositoryInvoice
+    .createQueryBuilder('invoice')
+    .select('SUM(invoice.quantity)', 'sum')
+    .where('year(invoice.dateInvoice)=:yearSelected',
+    {yearSelected:year})
+    .getRawOne();
+    invoicing.sum = queryResultSum.sum;
+    invoicing.sumIva = (await invoicing.sum) - invoicing.sum / 1.21;
+    invoicing.sumIrpf = (await (invoicing.sum / 1.21)) * 0.2;
+    invoicing.sumTax = await Math.round(invoicing.sumIva + invoicing.sumIrpf);
+
+    return invoicing
+      
+  }
+
+  async getInvoicingOneMonth(year:number,month:number){
+    let invoicing:Invoicing = new Invoicing();
+    const queryResultSum = await this.repositoryInvoice
+    .createQueryBuilder('invoice')
+    .select('SUM(invoice.quantity)', 'sum')
+    .where('year(invoice.dateInvoice)=:yearSelected and month(invoice.dateInvoice) =:monthSelected',
+    {yearSelected:year,
+    monthSelected:month
+  })
+    .getRawOne();
+    invoicing.sum = queryResultSum.sum;
+    invoicing.sumIva = (await invoicing.sum) - invoicing.sum / 1.21;
+    invoicing.sumIrpf = (await (invoicing.sum / 1.21)) * 0.2;
+    invoicing.sumTax = await Math.round(invoicing.sumIva + invoicing.sumIrpf);
+
+    return invoicing
+      
+  }
+
+  async getInvoicingOneYearAllMonths(year:number){
+    const invoicingMonths:Invoicing[] =[];
+    const months = [1,2,3,4,5,6,7,8,9,10,11,12];
+    
+    const promises = months.map(async month => {
+    const invoice = await this.getInvoicingOneMonth(year,month)
+    invoice.month = month;
+    invoicingMonths.push(invoice)
+
+  })
+  await Promise.all(promises);
+  return this.sortingInvoicingClass(invoicingMonths);
+    
+  }
+  
+
+  getDefaulters(){
+    const today= new Date();
+    const invoices = this.repositoryInvoice.createQueryBuilder("invoice").select("invoice.clientIdClient").where("date(invoice.startDate) <=:date AND date(invoice.expirationDate) >=:date",
+    {date:today})
+    return invoices
+  }
+
+
+
 
   async getInvoicingOneDay(date: Date) {
     let dateInvoice: Date = new Date(date);
@@ -107,6 +173,7 @@ export class InvoiceService {
     invoicing.sumTax = await Math.round(
       invoicing.sum - (invoicing.sum / 1.21) * 0.8,
     );
+    invoicing = this.getIsNull(invoicing);
     return invoicing;
   }
 
@@ -178,17 +245,7 @@ export class InvoiceService {
     return invoicingQuarter;
   }
 
-  async getBalance() {
-    const balance: Balance = new Balance();
-    const sum = await this.getInvoicing();
-    const sumIva = sum.sum - sum.sum / 1.21;
-    const sumIrpf = (sum.sum / 1.21) * 0.2;
-    const sumExpense = await this.serviceExpense.getSumAllExpenses();
-    balance.sum =
-      sum.sum - sumExpense.sum - (sumIva - sumExpense.sumIva) - sumIrpf;
 
-    return balance;
-  }
 
 
   //INVOICING BY MONTHS
@@ -206,7 +263,7 @@ export class InvoiceService {
   }
 
   async getInvoicingMonthByAllClass(year:number,month:number){
-    const invoicing:InvoicingClass = new InvoicingClass();
+    var invoicing:InvoicingClass = new InvoicingClass();
     const queryResultB8 = await this.getInvoicingMonthByOneClass(year,month,"B8");
     const queryResultB16 = await this.getInvoicingMonthByOneClass(year,month,"B16");
     const queryResultMT1 = await this.getInvoicingMonthByOneClass(year,month,"MT1");
@@ -216,31 +273,57 @@ export class InvoiceService {
     const queryResultTB1 = await this.getInvoicingMonthByOneClass(year,month,"TB1");
     const queryResultTB2 = await this.getInvoicingMonthByOneClass(year,month,"TB2");
 
-    if (isNull(queryResultB16.sum)){invoicing.B16 =0}else{invoicing.B16 = queryResultB16.sum};
-    if (isNull(queryResultB8.sum)){invoicing.B8 =0}else{invoicing.B8 = queryResultB8.sum};
-    if (isNull(queryResultR1.sum)){invoicing.reformer1 =0}else{invoicing.reformer1 = queryResultR1.sum};
-    if (isNull(queryResultR2.sum)){invoicing.reformer2 =0}else{invoicing.reformer2 = queryResultR2.sum};
-    if (isNull(queryResultMT1.sum)){invoicing.mat1 =0}else{invoicing.mat1 = queryResultMT1.sum};
-    if (isNull(queryResultMT2.sum)){invoicing.mat2 =0}else{invoicing.mat2 = queryResultMT2.sum};
-    if (isNull(queryResultTB1.sum)){invoicing.totalBarre1 =0}else{invoicing.totalBarre1 = queryResultTB1.sum};
-    if (isNull(queryResultTB2.sum)){invoicing.totalBarre2 =0}else{invoicing.totalBarre2 = queryResultTB2.sum};
+    invoicing.B16 = queryResultB16.sum
+    invoicing.B8 = queryResultB8.sum
+    invoicing.reformer1 = queryResultR1.sum;
+    invoicing.reformer2 = queryResultR2.sum;
+    invoicing.mat1 = queryResultMT1.sum;
+    invoicing.mat2 = queryResultMT2.sum;
+    invoicing.totalBarre1 = queryResultTB1.sum;
+    invoicing.totalBarre2 = queryResultTB2.sum;
+    invoicing = this.getIsNull(invoicing);
 
     return invoicing
   }
 
-  
+  getIsNull(number:any){
+    for (const key in number) {
+      if (isNull(number[key])) {
+        number[key] = 0;
+        }   
+     }
+    return number
+  }
 
   async getInvoicingMonthsByClass(year:number){
     const invoicingMonths:InvoicingClass[] =[];
     const months = [1,2,3,4,5,6,7,8,9,10,11,12];
     const promises = months.map(async month => {      
-    invoicingMonths.push(await this.getInvoicingMonthByAllClass(year,month));
+      const invoice = await this.getInvoicingMonthByAllClass(year,month)
+      invoice.month =month;
+    invoicingMonths.push(invoice);
       
     });
     await Promise.all(promises);
-    return invoicingMonths;
+    
+    return this.sortingInvoicingClass(invoicingMonths);
   }
 
+    sortingInvoicingClass(invoicingMonths: any[]){
+      invoicingMonths.sort(compare)
+
+      function compare(a:any, b:any) {
+        if (a.month > b.month) return 1;
+        if (b.month > a.month) return -1;
+      
+        return 0;
+      }
+
+      return invoicingMonths
+    }
+
+
+  
 
   //BY PAYMENTMETHOD
 
@@ -278,13 +361,14 @@ export class InvoiceService {
     const invoicingMonths:Invoicing[] =[];
     const months = [1,2,3,4,5,6,7,8,9,10,11,12];
     
-    const promises = months.map(async month => {   
-    invoicingMonths.push(await this.getInvoicingOneMonthAllPaymentMethod(year,month))
+    const promises = months.map(async month => {
+    const invoice = await this.getInvoicingOneMonthAllPaymentMethod(year,month)
+    invoice.month = month;
+    invoicingMonths.push(invoice)
 
   })
   await Promise.all(promises);
-  console.log(invoicingMonths)
-  return invoicingMonths;
+  return this.sortingInvoicingClass(invoicingMonths);
 
     
   }
@@ -307,7 +391,7 @@ export class InvoiceService {
 
 
   async getInvoicingOneQuarterByAllClass(year:number,month1:number, month2:number){
-    const invoicing:InvoicingClass = new InvoicingClass();
+    var invoicing:InvoicingClass = new InvoicingClass();
 
     const queryResultB8 =  await this.getInvoicingOneQuarterByOneClass(year,month1,month2,"B8")
     const queryResultB16 =  await this.getInvoicingOneQuarterByOneClass(year,month1,month2,"B16")     
@@ -315,17 +399,18 @@ export class InvoiceService {
     const queryResultMT2 = await this.getInvoicingOneQuarterByOneClass(year,month1,month2,"MT2")
     const queryResultR1 = await this.getInvoicingOneQuarterByOneClass(year,month1,month2,"R1")
     const queryResultR2 = await this.getInvoicingOneQuarterByOneClass(year,month1,month2,"R2")
-    const queryResultTb1 = await this.getInvoicingOneQuarterByOneClass(year,month1,month2,"TB1")
-    const queryResultTb2 = await this.getInvoicingOneQuarterByOneClass(year,month1,month2,"TB2")
+    const queryResultTB1 = await this.getInvoicingOneQuarterByOneClass(year,month1,month2,"TB1")
+    const queryResultTB2 = await this.getInvoicingOneQuarterByOneClass(year,month1,month2,"TB2")
 
-    if (isNull(queryResultB16.sum)){invoicing.B16 =0}else{invoicing.B16 = queryResultB16.sum};
-    if (isNull(queryResultB8.sum)){invoicing.B8 =0}else{invoicing.B8 = queryResultB8.sum};
-    if (isNull(queryResultR1.sum)){invoicing.reformer1 =0}else{invoicing.reformer1 = queryResultR1.sum};
-    if (isNull(queryResultR2.sum)){invoicing.reformer2 =0}else{invoicing.reformer2 = queryResultR2.sum};
-    if (isNull(queryResultMT1.sum)){invoicing.mat1 =0}else{invoicing.mat1 = queryResultMT1.sum};
-    if (isNull(queryResultMT2.sum)){invoicing.mat2 =0}else{invoicing.mat2 = queryResultMT2.sum};
-    if (isNull(queryResultTb1.sum)){invoicing.totalBarre1 =0}else{invoicing.totalBarre1 = queryResultTb1.sum};
-    if (isNull(queryResultTb2.sum)){invoicing.totalBarre2 =0}else{invoicing.totalBarre2 = queryResultTb2.sum};
+    invoicing.B16 = queryResultB16.sum
+    invoicing.B8 = queryResultB8.sum
+    invoicing.reformer1 = queryResultR1.sum;
+    invoicing.reformer2 = queryResultR2.sum;
+    invoicing.mat1 = queryResultMT1.sum;
+    invoicing.mat2 = queryResultMT2.sum;
+    invoicing.totalBarre1 = queryResultTB1.sum;
+    invoicing.totalBarre2 = queryResultTB2.sum;
+    invoicing = this.getIsNull(invoicing);
 
     return invoicing
 
@@ -369,10 +454,10 @@ async getInvoicingOneQuarterByAllPaymentMethod(year:number, month1:number, month
   const queryResultsumTPV = await this.getInvoicingOneQuarterByOnePaymentMethod(year,month1,month2,3)
   const queryResultsumTransfer = await this.getInvoicingOneQuarterByOnePaymentMethod(year,month1,month2,4)
 
-  if (isNull(queryResultsumCash.sumCash)){invoicing.sumCash =0}else{invoicing.sumCash = queryResultsumCash.sumCash};
-  if (isNull(queryResultsumTPV.sumTpv)){invoicing.sumTpv =0}else{invoicing.sumTpv = queryResultsumTPV.sumTpv};
-  if (isNull(queryResultsumBizum.sumBizum)){invoicing.sumBizum =0}else{invoicing.sumBizum = queryResultsumBizum.sumBizum};
-  if (isNull(queryResultsumTransfer.sumTransfer)){invoicing.sumTransfer =0}else{invoicing.sumTransfer = queryResultsumTransfer.sumTransfer};
+  if (isNull(queryResultsumCash.sum)){invoicing.sumCash =0}else{invoicing.sumCash = queryResultsumCash.sum};
+  if (isNull(queryResultsumTPV.sum)){invoicing.sumTpv =0}else{invoicing.sumTpv = queryResultsumTPV.sum};
+  if (isNull(queryResultsumBizum.sum)){invoicing.sumBizum =0}else{invoicing.sumBizum = queryResultsumBizum.sum};
+  if (isNull(queryResultsumTransfer.sum)){invoicing.sumTransfer =0}else{invoicing.sumTransfer = queryResultsumTransfer.sum};
 
   return invoicing
 
@@ -412,7 +497,7 @@ getInvoicingOneYearByOneClass(year:number,concept:string)
 
 
 async getInvoicingOneYearByClass(year:number){
-  const invoicing:InvoicingClass = new InvoicingClass();
+  var invoicing:InvoicingClass = new InvoicingClass();
 
   const queryResultB8 = await    this.getInvoicingOneYearByOneClass(year,"B8")
   const queryResultB16 = await this.getInvoicingOneYearByOneClass(year,"B16")
@@ -420,18 +505,18 @@ async getInvoicingOneYearByClass(year:number){
   const queryResultMT2 = await this.getInvoicingOneYearByOneClass(year,"MT2")
   const queryResultR1 = await this.getInvoicingOneYearByOneClass(year,"R1")
   const queryResultR2 = await  this.getInvoicingOneYearByOneClass(year,"R2")
-  const queryResultTb1 = await  this.getInvoicingOneYearByOneClass(year,"TB1")
-  const queryResultTb2 = await  this.getInvoicingOneYearByOneClass(year,"TB2")
+  const queryResultTB1 = await  this.getInvoicingOneYearByOneClass(year,"TB1")
+  const queryResultTB2 = await  this.getInvoicingOneYearByOneClass(year,"TB2")
 
-  if (isNull(queryResultB16.sum)){invoicing.B16 =0}else{invoicing.B16 = queryResultB16.sum};
-  if (isNull(queryResultB8.sum)){invoicing.B8 =0}else{invoicing.B8 = queryResultB8.sum};
-  if (isNull(queryResultR1.sum)){invoicing.reformer1 =0}else{invoicing.reformer1 = queryResultR1.sum};
-  if (isNull(queryResultR2.sum)){invoicing.reformer2 =0}else{invoicing.reformer2 = queryResultR2.sum};
-  if (isNull(queryResultMT1.sum)){invoicing.mat1 =0}else{invoicing.mat1 = queryResultMT1.sum};
-  if (isNull(queryResultMT2.sum)){invoicing.mat2 =0}else{invoicing.mat2 = queryResultMT2.sum};
-  if (isNull(queryResultTb1.sum)){invoicing.totalBarre1 =0}else{invoicing.totalBarre1 = queryResultTb1.sum};
-  if (isNull(queryResultTb2.sum)){invoicing.totalBarre2 =0}else{invoicing.totalBarre2 = queryResultTb2.sum};
-
+  invoicing.B16 = queryResultB16.sum
+  invoicing.B8 = queryResultB8.sum
+  invoicing.reformer1 = queryResultR1.sum;
+  invoicing.reformer2 = queryResultR2.sum;
+  invoicing.mat1 = queryResultMT1.sum;
+  invoicing.mat2 = queryResultMT2.sum;
+  invoicing.totalBarre1 = queryResultTB1.sum;
+  invoicing.totalBarre2 = queryResultTB2.sum;
+  invoicing = this.getIsNull(invoicing);
   return invoicing;
 }
 
@@ -452,7 +537,7 @@ getInvoicingOneYearByOneMethodPayment(year:number,method:number)
 
 
 async getInvoicingOneYearByMethodPayment(year:number){
-  const invoicing:Invoicing = new Invoicing();
+  var invoicing:Invoicing = new Invoicing();
 
   const queryResultsumCash = await    this.getInvoicingOneYearByOneMethodPayment(year,1)
   const queryResultsumBizum = await this.getInvoicingOneYearByOneMethodPayment(year,2)
@@ -460,15 +545,15 @@ async getInvoicingOneYearByMethodPayment(year:number){
   const queryResultsumTransfer = await this.getInvoicingOneYearByOneMethodPayment(year,4)
 
 
-  if (isNull(queryResultsumCash.sumCash)){invoicing.sumCash =0}else{invoicing.sumCash = queryResultsumCash.sumCash};
-  if (isNull(queryResultsumTPV.sumTpv)){invoicing.sumTpv =0}else{invoicing.sumTpv = queryResultsumTPV.sumTpv};
-  if (isNull(queryResultsumBizum.sumBizum)){invoicing.sumBizum =0}else{invoicing.sumBizum = queryResultsumBizum.sumBizum};
-  if (isNull(queryResultsumTransfer.sumTransfer)){invoicing.sumTransfer =0}else{invoicing.sumTransfer = queryResultsumTransfer.sumTransfer};
-
+  if (isNull(queryResultsumCash.sum)){invoicing.sumCash =0}else{invoicing.sumCash = queryResultsumCash.sum};
+  if (isNull(queryResultsumTPV.sum)){invoicing.sumTpv =0}else{invoicing.sumTpv = queryResultsumTPV.sum};
+  if (isNull(queryResultsumBizum.sum)){invoicing.sumBizum =0}else{invoicing.sumBizum = queryResultsumBizum.sum};
+  if (isNull(queryResultsumTransfer.sum)){invoicing.sumTransfer =0}else{invoicing.sumTransfer = queryResultsumTransfer.sum};
 
   return invoicing;
 }
    
+
   
 
  

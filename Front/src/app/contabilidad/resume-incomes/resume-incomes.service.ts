@@ -22,13 +22,29 @@ export class ResumeIncomesService {
      return this.http.get(`${this.urlInvoicing}/invoicingClass/${year}`) as Observable <InvoicingClass>
    }
 
+   getInvoicingPayment(year:number){
+     return this.http.get(`${this.urlInvoicing}/invoicingYearByMethodPayment/${year}`) as Observable <Invoicing>
+   }
+
    getInvoicingClassQuarter(year:number,month1:number, month2:number){
     const params = new HttpParams().append('from', month1.toString()).append('to', month2.toString());
 
      return this.http.get(`${this.urlInvoicing}/quarterClass/${year}`, {params}) as Observable <InvoicingClass>
    }
 
+   getInvoicingQuarterPayment(year:number,month1:number, month2:number){
+    const params = new HttpParams().append('from', month1.toString()).append('to', month2.toString());
+    return this.http.get(`${this.urlInvoicing}/oneQuarterAllMethodPayment/${year}`, {params}) as Observable <Invoicing>
+
+   }
+
+   getInvoicingOneMonthByPayment(year:number,month:number){
+    return this.http.get(`${this.urlInvoicing}/oneMonthAllMethods/${year}/${month}`) as Observable <Invoicing>
+  }
+
    getInvoicingOneMonthByClass(year:number,month:number){
     return this.http.get(`${this.urlInvoicing}/monthsClass/${year}/${month}`) as Observable <InvoicingClass>
   }
+
+
   }

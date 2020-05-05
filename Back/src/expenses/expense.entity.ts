@@ -25,4 +25,6 @@ export class Expense{
     @ManyToOne(type=>Company, company=> company.id)
     company: Company;
 
+    month:number;
+
 }

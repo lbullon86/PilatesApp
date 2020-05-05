@@ -27,6 +27,9 @@ let ClientesController = class ClientesController {
     save(client) {
         return this.clientesService.save(client);
     }
+    getDefaulters() {
+        return this.clientesService.getDefaulters();
+    }
     getOne(id) {
         return this.clientesService.getOne(id);
     }
@@ -54,6 +57,12 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ClientesController.prototype, "save", null);
 __decorate([
+    common_1.Get('defaulters'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ClientesController.prototype, "getDefaulters", null);
+__decorate([
     common_1.Get(':id'),
     __param(0, common_1.Param('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
@@ -77,7 +86,8 @@ __decorate([
 ], ClientesController.prototype, "saveInvoice", null);
 __decorate([
     common_1.Put(':id'),
-    __param(0, common_1.Param('id', common_1.ParseIntPipe)), __param(1, common_1.Body()),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)),
+    __param(1, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, clientes_entity_1.Clients]),
     __metadata("design:returntype", Promise)

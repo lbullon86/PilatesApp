@@ -12,7 +12,6 @@ export class ClientesService {
     
 
 constructor(@InjectRepository(Clients) private readonly repositoryClients:Repository<Clients>,
-
 private readonly invoiceService:InvoiceService,
 private readonly passService:PassService){
 }
@@ -68,6 +67,12 @@ getTypePass(invoice:Invoice){
 getPasses(client:Clients):Promise<Pass>{
     return this.repositoryClients.createQueryBuilder("client").select("pass")
     .from(Invoice, "invoice").where("(invoice.concept = B8  AND invoice.client.idClient = client.idClient").getRawOne();
+}
+
+getDefaulters(){
+
+    const qb = this.invoiceService.getDefaulters();
+    return this.repositoryClients.createQueryBuilder("client").select("client").where("activeClient = 1 AND idClient in("+ qb.getQuery() +")").getOne();  
 }
 
 }

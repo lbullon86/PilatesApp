@@ -45,10 +45,7 @@ export class InvoiceController {
   getInvoicingQuarte():Promise<Invoicing[]>{
   return this.invoiceService.getInvoicingQuarter();
   }
-  @Get('/balance')
-  getBalance(){
-    return this.invoiceService.getBalance();
-  }
+
   @Get('/invoicingClass/:year')
   getInvoicingClass(@Param('year' , ParseIntPipe) year:number){
     return this.invoiceService.getInvoicingOneYearByClass(year);
@@ -58,6 +55,11 @@ export class InvoiceController {
   getAll() {
     return this.invoiceService.getAll();
   }
+  @Get(':id/invoices')
+  getInvoicesOneClient(@Param('id', ParseIntPipe) id: number){
+    return this.invoiceService.getInvoicesOneClient(id);
+  }
+
 
   @Get(':id')
   getInvoiceOneClient(@Param('id', ParseIntPipe) id: number) {
@@ -84,6 +86,14 @@ export class InvoiceController {
     return this.invoiceService.getInvoicingMonthByAllClass(year,month)
   }
 
+
+  @Get("allMonths/:year")
+  getInvoicingMonthsByClass(@Param('year', ParseIntPipe) year:number){
+    return this.invoiceService.getInvoicingMonthsByClass(year)
+  };
+
+
+
   @Get("oneMonthOneMethod/:year/:month/:method")
   getInvoicingOneMonthByOnePaymentMethod(@Param('year' , ParseIntPipe) year:number, 
   @Param("month", ParseIntPipe) month:number,@Param("method", ParseIntPipe) method:number) :Promise<Invoicing>{
@@ -100,5 +110,12 @@ export class InvoiceController {
   getInvoicingMonthsByPaymentMethod(@Param('year' , ParseIntPipe) year:number){
     return this.invoiceService.getInvoicingMonthsByPaymentMethod(year)
   }
+
+
+  @Get('invoicingYearByMethodPayment/:year')
+  getInvoicingYearByPaymentMethod(@Param('year' , ParseIntPipe) year:number){
+    return this.invoiceService.getInvoicingOneYearByMethodPayment(year);
+  }
+
 
 }

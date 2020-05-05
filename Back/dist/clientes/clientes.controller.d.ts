@@ -6,6 +6,7 @@ export declare class ClientesController {
     constructor(clientesService: ClientesService);
     getAll(): Promise<Clients[]>;
     save(client: Clients): Promise<Clients>;
+    getDefaulters(): Promise<Clients>;
     getOne(id: number): Promise<Clients>;
     getInvoices(id: number): Promise<Invoice[]>;
     saveInvoice(id: number, invoice: Invoice): Promise<Invoice>;

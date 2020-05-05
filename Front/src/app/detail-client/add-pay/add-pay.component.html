@@ -1,5 +1,4 @@
 <h1 style="text-align: center">{{client.nameClient}}</h1>
-
 <mat-grid-list cols="2" rows="5" rowHeight="4:1">
     <mat-grid-tile colspan="1">
         <mat-form-field>
@@ -51,7 +50,7 @@
 
     <mat-grid-tile colspan="1">
         <mat-form-field>
-            <mat-label>Periodicidad</mat-label>
+            <mat-label>Método de pago</mat-label>
             <select matNativeControl required [(ngModel)]="pay.paymentMethod">
                 <option value="1">Efectivo</option>
                 <option value="2">Bizum</option>
@@ -72,9 +71,6 @@
         <button mat-raised-button (click)="savePay()">Añadir Pago</button>
     </mat-grid-tile>
     <mat-grid-tile colspan="1">
-        <button mat-raised-button>Borrar Pago</button>
+        <button mat-raised-button (click)="closeWindow()">Borrar Pago</button>
     </mat-grid-tile>
-
-
-
 </mat-grid-list>

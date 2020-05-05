@@ -6,7 +6,9 @@
         </ngx-charts-advanced-pie-chart>
     </ng-container>
     <ng-template #elseChart>
-        Otro diagrama
+
+        <ngx-charts-advanced-pie-chart [scheme]="colorScheme" [results]="dataPayment">
+        </ngx-charts-advanced-pie-chart>
     </ng-template>
 
 </div>
@@ -99,7 +101,7 @@
                         <mat-label>Año</mat-label>
                         <input matInput type="number" min="2019" [(ngModel)]="year">
                     </mat-form-field>
-                    <button mat-button (click)="getIncomingQuarterByClass()"><mat-icon>search</mat-icon></button>
+                    <button mat-button (click)="getIncomingQuarterByPayment()"><mat-icon>search</mat-icon></button>
 
                 </mat-expansion-panel>
                 <mat-expansion-panel hideToggle>
@@ -117,7 +119,7 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <button mat-button (click)="getInvoicingMonthsByClass()"><mat-icon>search</mat-icon></button>
+                    <button mat-button (click)="getIncomingMonthByPayment()"><mat-icon>search</mat-icon></button>
 
                 </mat-expansion-panel>
 
@@ -132,7 +134,7 @@
                         <mat-label>Año</mat-label>
                         <input matInput type="number" min="2019" [(ngModel)]="year">
                     </mat-form-field>
-                    <button mat-button (click)="getIncomingYearByClass()"><mat-icon>search</mat-icon></button>
+                    <button mat-button (click)="getIncomingYearByPayment()"><mat-icon>search</mat-icon></button>
                 </mat-expansion-panel>
 
             </mat-accordion>

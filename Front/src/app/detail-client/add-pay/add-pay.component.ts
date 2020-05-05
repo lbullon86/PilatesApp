@@ -70,8 +70,7 @@ export class AddPayComponent implements OnInit {
         );    
   }
 
-
-
+ 
 
 
   getPrice() {

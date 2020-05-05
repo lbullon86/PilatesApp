@@ -7,4 +7,5 @@ export declare class Expense {
     date: Date;
     iva: number;
     company: Company;
+    month: number;
 }

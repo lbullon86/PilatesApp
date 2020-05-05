@@ -69,6 +69,10 @@ let ClientesService = class ClientesService {
         return this.repositoryClients.createQueryBuilder("client").select("pass")
             .from(invoice_entity_1.Invoice, "invoice").where("(invoice.concept = B8  AND invoice.client.idClient = client.idClient").getRawOne();
     }
+    getDefaulters() {
+        const qb = this.invoiceService.getDefaulters();
+        return this.repositoryClients.createQueryBuilder("client").select("client").where("activeClient = 1 AND idClient in(" + qb.getQuery() + ")").getOne();
+    }
 };
 ClientesService = __decorate([
     common_1.Injectable(),

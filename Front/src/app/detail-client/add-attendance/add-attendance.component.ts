@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { DetailClientComponent, DialogData } from '../detail-client.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { isNumber } from 'util';
+import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-add-attendance',
@@ -26,18 +27,23 @@ export class AddAttendanceComponent implements OnInit {
     ) {
 
       this.pass = new Pass()
-      this.newDateClass = new Date()
-      
-      this.passService.getPassActiveOneClient(this.data.id).subscribe(pass => this.pass = pass);
+      this.newDateClass = new Date()      
      
 
    }
 
   ngOnInit() {
-    alert(this.pass.idPass)
+     this.passService.getPassActiveOneClient(this.data.id).subscribe(pass => (this.pass = pass, this.getPass()));
+  }
 
-   
-     
+   getPass(){
+
+    if(this.pass.idPass != null){
+      this.passActive = true;
+    }
+    else{this.passActive =false;
+      alert(this.pass.idPass)}
+
   }
 
   addAttendance(){

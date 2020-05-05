@@ -8,9 +8,11 @@ import { PayrollsModule } from './payrolls/payrolls.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { PassModule } from './pass/pass.module';
 import { PricesModule } from './prices/prices.module';
+import { BalanceModule } from './balance/balance.module';
 
 @Module({
-  imports: [CoreModule, CompanyModule, UsersModule, ClientesModule, ExpensesModule, PayrollsModule, InvoiceModule, PassModule, PricesModule],
+  imports: [CoreModule, CompanyModule, UsersModule, ClientesModule, ExpensesModule, PayrollsModule, InvoiceModule, PassModule, PricesModule, BalanceModule],
+  providers: [],
   
 })
 export class AppModule {}

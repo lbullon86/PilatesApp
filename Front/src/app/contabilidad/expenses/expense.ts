@@ -5,4 +5,10 @@ export class Expense {
     taxes: number;
     iva:number;
     date: Date;
+    sum:number;
+    sumIva:number;
+    month:number;
+    
+    
+    
 }

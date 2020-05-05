@@ -16,11 +16,13 @@ const payrolls_module_1 = require("./payrolls/payrolls.module");
 const invoice_module_1 = require("./invoice/invoice.module");
 const pass_module_1 = require("./pass/pass.module");
 const prices_module_1 = require("./prices/prices.module");
+const balance_module_1 = require("./balance/balance.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [core_module_1.CoreModule, company_module_1.CompanyModule, users_module_1.UsersModule, clientes_module_1.ClientesModule, expenses_module_1.ExpensesModule, payrolls_module_1.PayrollsModule, invoice_module_1.InvoiceModule, pass_module_1.PassModule, prices_module_1.PricesModule],
+        imports: [core_module_1.CoreModule, company_module_1.CompanyModule, users_module_1.UsersModule, clientes_module_1.ClientesModule, expenses_module_1.ExpensesModule, payrolls_module_1.PayrollsModule, invoice_module_1.InvoiceModule, pass_module_1.PassModule, prices_module_1.PricesModule, balance_module_1.BalanceModule],
+        providers: [],
     })
 ], AppModule);
 exports.AppModule = AppModule;

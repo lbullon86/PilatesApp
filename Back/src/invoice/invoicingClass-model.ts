@@ -7,6 +7,7 @@ export class InvoicingClass{
     reformer2:number;
     B8:number;
     B16:number;
+    month:number;
 
     
 }

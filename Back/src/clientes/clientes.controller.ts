@@ -12,6 +12,7 @@ import { Clients } from './clientes.entity';
 import { Invoice } from 'src/invoice/invoice.entity';
 import { Observable } from 'rxjs';
 import { Pass } from 'src/pass/pass.entity';
+import { getDefaultWatermarks } from 'istanbul-lib-report';
 
 @Controller('clientes')
 export class ClientesController {
@@ -25,6 +26,10 @@ export class ClientesController {
   save(@Body() client: Clients) {
     return this.clientesService.save(client);
   }
+  @Get('defaulters')
+  getDefaulters() {
+    return this.clientesService.getDefaulters()
+  }
 
   @Get(':id')
   getOne(@Param('id', ParseIntPipe) id: number): Promise<Clients> {
@@ -37,6 +42,7 @@ export class ClientesController {
   }
 
 
+
   @Post(':id/invoices')
   saveInvoice(
     @Param('id', ParseIntPipe) id: number,
@@ -46,11 +52,10 @@ export class ClientesController {
   }
 
   @Put(':id')
-  async update(@Param('id', ParseIntPipe) id: number, @Body() client: Clients):Promise<any> {
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() client: Clients,
+  ): Promise<any> {
     return this.clientesService.updateClient(client);
   }
-
-  
-
- 
 }

@@ -3,6 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Expense } from './expense.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import { ResumeExpense } from './resumeExpense';
+import { InvoiceService } from 'src/invoice/invoice.service';
+import { isNull } from 'util';
+
 
 @Injectable()
 export class ExpensesService {
@@ -20,90 +23,26 @@ export class ExpensesService {
     return this.repositoryExpense.save(expense);
   }
 
-  async getSumAllExpenses() {
-    let expense = new ResumeExpense();
-    const QueryeResult = await this.repositoryExpense
-      .createQueryBuilder('expenses')
-      .select('sum(expenses.quantity)', 'sum')
-      .getRawOne();
-    expense.sum = QueryeResult.sum;
-    const QueryeResultIva = await this.repositoryExpense
-      .createQueryBuilder('expenses')
-      .select('sum(expenses.iva)', 'sumIva')
-      .getRawOne();
-    expense.sumIva = QueryeResultIva.sumIva;
-    console.log(expense.sum);
-    return expense;
-  }
-
-  async getSumAllExpensesMonth(monthSelect: number) {
-    let expense = new ResumeExpense();
-    const QueryeResult = await this.repositoryExpense
-      .createQueryBuilder('expenses')
-      .select('sum(expenses.quantity)', 'sum')
-      .where('month(expenses.date)=:monthSelected', {
-        monthSelected: monthSelect,
-      })
-      .getRawOne();
-    const QueryeResultIva = await this.repositoryExpense
-      .createQueryBuilder('expenses')
-      .select('sum(expenses.iva)', 'sum')
-      .where('month(expenses.date)=:monthSelected', {
-        monthSelected: monthSelect,
-      })
-      .getRawOne();
-    expense.sum = QueryeResult.sum;
-    expense.sumIva = QueryeResultIva.sumIva;
-    return expense;
-  }
-
-  async getSumAllExpensesYear(yearSelect: number) {
-    let expense = new ResumeExpense();
-    const QueryeResult = await this.repositoryExpense
-      .createQueryBuilder('expenses')
-      .select('sum(expenses.quantity)', 'sum')
-      .where('year(expenses.date)=:monthSelected', {
-        monthSelected: yearSelect,
-      })
-      .getRawOne();
-    const QueryeResultIva = await this.repositoryExpense
-      .createQueryBuilder('expenses')
-      .select('sum(expenses.iva)', 'sumIva')
-      .where('year(expenses.date)=:monthSelected', {
-        monthSelected: yearSelect,
-      })
-      .getRawOne();
-    expense.sum = QueryeResult.sum;
-    expense.sumIva = QueryeResultIva.sumIva;
-    return expense;
-  }
-
+  //DAY
   async getSumAllExpensesDay(dateExpense: Date) {
-    let expense = new ResumeExpense();
     const QueryeResult = await this.repositoryExpense
       .createQueryBuilder('expenses')
       .select('sum(expenses.quantity)', 'sum')
+      .addSelect('sum(expenses.iva)', 'sumIva')
       .where('expenses.date=:dateExpenseSelected', {
         dateExpenseSelected: dateExpense,
       })
       .getRawOne();
-    const QueryeResultIva = await this.repositoryExpense
-      .createQueryBuilder('expenses')
-      .select('sum(expenses.iva)', 'sumIva')
-      .where('expenses.date=:dateExpenseSelected', {
-        dateExpenseSelected: dateExpense,
-      })
-      .getRawOne();
-    expense.sum = QueryeResult.sum;
-    expense.sumIva = QueryeResultIva.sumIva;
-    return expense;
+
+    return QueryeResult;
   }
 
+  //PERIOD
   async getSumAllExpensesPeriod(dateExpense: Date, dateExpense2: Date) {
-    let expense = new ResumeExpense();
     const QueryeResult = await this.repositoryExpense
       .createQueryBuilder('expenses')
       .select('sum(expenses.quantity)', 'sum')
+      .addSelect('sum(expenses.iva)', 'sumIva')
       .where(
         'expenses.date BETWEEN :dateExpenseSelected AND  :dateExpenseSelected2',
         {
@@ -112,212 +51,201 @@ export class ExpensesService {
         },
       )
       .getRawOne();
-    const QueryeResultIva = await this.repositoryExpense
-      .createQueryBuilder('expenses')
-      .select('sum(expenses.iva)', 'sumIva')
-      .where(
-        'expenses.date BETWEEN :dateExpenseSelected AND :dateExpenseSelected2',
-        {
-          dateExpenseSelected: dateExpense,
-          dateExpenseSelected2: dateExpense2,
-        },
-      )
-      .getRawOne();
-    expense.sum = QueryeResult.sum;
-    expense.sumIva = QueryeResultIva.sumIva;
-    return expense;
+
+    return QueryeResult;
   }
 
-  async getSumAllExpensesOneQuarter(quarter: number,yearSelected:number) {
+  //MONTH
+
+  async getSumAllExpensesOneMonth(yearSelected: number, monthSelect: number) {
     let expense = new ResumeExpense();
-    var QueryeResult, QueryeResultIva;
+    const QueryeResult = await this.repositoryExpense
+      .createQueryBuilder('expenses')
+      .select('sum(expenses.quantity)', 'sum')
+      .addSelect('sum(expenses.iva)', 'sumIva')
+      .where('month(expenses.date)=:month and year(expenses.date)=:year', {
+        month: monthSelect,
+        year: yearSelected,
+      })
+      .getRawOne();
+
+    return QueryeResult;
+  }
+
+  async getOneMonthsByConcept(yearSelected: number, month: number) {
+    const queryResult = await this.repositoryExpense
+      .createQueryBuilder('expenses')
+      .select('sum(expenses.quantity)', 'quantity')
+      .addSelect('expenses.concept', 'concept')
+      .addSelect('sum(expenses.iva)', 'iva')
+      .where('month(expenses.date)=:month and year(expenses.date)=:year', {
+        month: month,
+        year: yearSelected,
+      })
+      .groupBy('expenses.concept')
+      .orderBy('quantity', 'DESC')
+      .getRawMany();
+
+    return queryResult;
+  }
+
+  async getSumAllMonthsOneYear(yearSelected: number): Promise<ResumeExpense[]> {
+    var count: number = 1;
+    var allMonths: ResumeExpense[];
+    allMonths = [];
+    while (count < 13) {
+      var expense = await this.getSumAllExpensesOneMonth(yearSelected,count);
+      expense.month = count;
+      expense = this.getIsNull(expense);
+      allMonths.push(expense);
+      count++;
+      console.log(expense)
+    }
+    return allMonths;
+  }
+
+  //QUARTER
+
+  async getSumAllExpensesOneQuarter(quarter: number, yearSelected: number) {
+    var QueryeResult;
     switch (quarter) {
       case 1:
-         QueryeResult = await this.repositoryExpense
+        QueryeResult = await this.repositoryExpense
           .createQueryBuilder('expenses')
           .select('sum(expenses.quantity)', 'sum')
-          .where('month(expenses.date) BETWEEN :monthBegin AND :monthEnd and year(expenses.date) =:year', {
-            monthBegin: 1,
-            monthEnd: 3,
-            year:yearSelected,
-          })
+          .addSelect('sum(expenses.iva)', 'sumIva')
+          .where(
+            'month(expenses.date) BETWEEN :monthBegin AND :monthEnd and year(expenses.date) =:year',
+            {
+              monthBegin: 1,
+              monthEnd: 3,
+              year: yearSelected,
+            },
+          )
           .getRawOne();
-         QueryeResultIva = await this.repositoryExpense
-          .createQueryBuilder('expenses')
-          .select('sum(expenses.iva)', 'sumIva')
-          .where('month(expenses.date) BETWEEN :monthBegin AND :monthEnd and year(expenses.date) =:year', {
-            monthBegin: 1,
-            monthEnd: 3,
-            year:yearSelected,
 
-          })
-          .getRawOne();
-        expense.sum = QueryeResult.sum;
-        expense.sumIva = QueryeResultIva.sumIva;
-        return expense;
+        return QueryeResult;
 
       case 2:
-         QueryeResult = await this.repositoryExpense
+        QueryeResult = await this.repositoryExpense
           .createQueryBuilder('expenses')
           .select('sum(expenses.quantity)', 'sum')
-          .where('month(expenses.date) BETWEEN :monthBegin AND :monthEnd and year(expenses.date) =:year', {
-            monthBegin: 4,
-            monthEnd: 6,
-            year:yearSelected,
-
-          })
+          .addSelect('sum(expenses.iva)', 'sumIva')
+          .where(
+            'month(expenses.date) BETWEEN :monthBegin AND :monthEnd and year(expenses.date) =:year',
+            {
+              monthBegin: 4,
+              monthEnd: 6,
+              year: yearSelected,
+            },
+          )
           .getRawOne();
-         QueryeResultIva = await this.repositoryExpense
+        return QueryeResult;
+
+      case 3:
+        QueryeResult = await this.repositoryExpense
           .createQueryBuilder('expenses')
-          .select('sum(expenses.iva)', 'sumIva')
-          .where('month(expenses.date) BETWEEN :monthBegin AND :monthEnd and year(expenses.date) =:year', {
-            monthBegin: 4,
-            monthEnd: 6,
-            year:yearSelected,
-
-          })
+          .select('sum(expenses.quantity)', 'sum')
+          .addSelect('sum(expenses.iva)', 'sumIva')
+          .where(
+            'month(expenses.date) BETWEEN :monthBegin  AND :monthEnd and year(expenses.date) =:year',
+            {
+              monthBegin: 7,
+              monthEnd: 9,
+              year: yearSelected,
+            },
+          )
           .getRawOne();
-        expense.sum = QueryeResult.sum;
-        expense.sumIva = QueryeResultIva.sumIva;
-        return expense;
 
-        case 3:
+        return QueryeResult;
+
+      case 4:
         QueryeResult = await this.repositoryExpense
-         .createQueryBuilder('expenses')
-         .select('sum(expenses.quantity)', 'sum')
-         .where('month(expenses.date) BETWEEN :monthBegin  AND :monthEnd and year(expenses.date) =:year', {
-           monthBegin: 7,
-           monthEnd: 9,
-           year:yearSelected,
+          .createQueryBuilder('expenses')
+          .select('sum(expenses.quantity)', 'sum')
+          .addSelect('sum(expenses.iva)', 'sumIva')
+          .where(
+            'month(expenses.date) BETWEEN :monthBegin AND :monthEnd and year(expenses.date) =:year',
+            {
+              monthBegin: 10,
+              monthEnd: 12,
+              year: yearSelected,
+            },
+          )
+          .getRawOne();
 
-         })
-         .getRawOne();
-        QueryeResultIva = await this.repositoryExpense
-         .createQueryBuilder('expenses')
-         .select('sum(expenses.iva)', 'sumIva')
-         .where('month(expenses.date) BETWEEN :monthBegin  AND :monthEnd and year(expenses.date) =:year' , {
-           monthBegin: 7,
-           monthEnd: 9,
-           year:yearSelected,
-
-         })
-         .getRawOne();
-       expense.sum = QueryeResult.sum;
-       expense.sumIva = QueryeResultIva.sumIva;
-       return expense;
-
-     case 4:
-        QueryeResult = await this.repositoryExpense
-         .createQueryBuilder('expenses')
-         .select('sum(expenses.quantity)', 'sum')
-         .where('month(expenses.date) BETWEEN :monthBegin AND :monthEnd and year(expenses.date) =:year', {
-           monthBegin: 10,
-           monthEnd: 12,
-           year:yearSelected,
-
-         })
-         .getRawOne();
-        QueryeResultIva = await this.repositoryExpense
-         .createQueryBuilder('expenses')
-         .select('sum(expenses.iva)', 'sumIva')
-         .where('month(expenses.date) BETWEEN :monthBegin  AND :monthEnd and year(expenses.date) =:year', {
-           monthBegin: 10,
-           monthEnd: 12,
-           year:yearSelected,
-
-         })
-         .getRawOne();
-       expense.sum = QueryeResult.sum;
-       expense.sumIva = QueryeResultIva.sumIva;
-       return expense;  
+        return QueryeResult;
       default:
         break;
     }
-
-  
   }
 
- async getSumAllMonthsOneYear(yearSelected:number):Promise<ResumeExpense[]> {
-    var count:number=1;
-    var allMonths:ResumeExpense[];
-    allMonths = []
+  //YEAR
 
-    while (count <13) {
-        let expense = new ResumeExpense();
-         
-        const QueryeResult = await this.repositoryExpense
-        .createQueryBuilder('expenses')
-        .select('sum(expenses.quantity)', 'sum')
-        .where('month(expenses.date) =:month and year(expenses.date) =:year', {
-          month: count,
-          year:yearSelected,
-
-        })
-        .getRawOne();
-        const QueryeResultIva = await this.repositoryExpense
-        .createQueryBuilder('expenses')
-        .select('sum(expenses.iva)', 'sumIva')
-        .where('month(expenses.date) =:month AND year(expenses.date) =:year', {
-            month: count,
-            year:yearSelected,
-  
-          })
-        .getRawOne();
-      expense.sum = QueryeResult.sum;
-      expense.sumIva = QueryeResultIva.sumIva;
-      allMonths.push(expense)
-
-      count++;
-        
-        
-    }
-    return allMonths;
- 
- }
-
- async getSumAllQuartersOneYear(yearSelected:number):Promise<ResumeExpense[]> {
-    var count:number=1;
-    var allMonths:ResumeExpense[];
-    allMonths = []
- 
-    while (count <13) {
-        let expense = new ResumeExpense();
-         
-        const QueryeResult = await this.repositoryExpense
-        .createQueryBuilder('expenses')
-        .select('sum(expenses.quantity)', 'sum')
-        .where('month(expenses.date) between :monthBegin AND :monthEnd and year(expenses.date) =:year', {
-            monthBegin: count,
-            monthEnd: count +2,
-            year:yearSelected,
-
-        })
-        .getRawOne();
-
-        const QueryeResultIva = await this.repositoryExpense
-        .createQueryBuilder('expenses')
-        .select('sum(expenses.iva)', 'sumIva')
-        .where('month(expenses.date) between :monthBegin AND :monthEnd AND year(expenses.date) =:year', {
-            monthBegin: count,
-            monthEnd: count +2,
-            year:yearSelected,
-  
-          })
-        .getRawOne();
-      expense.sum = QueryeResult.sum;
-      expense.sumIva = QueryeResultIva.sumIva;
-      count = count +3;
-      allMonths.push(expense)  
+  async getSumAllExpensesYear(yearSelect: number) {
+    var QueryeResult = await this.repositoryExpense
+      .createQueryBuilder('expenses')
+      .select('sum(expenses.quantity)', 'sum')
+      .addSelect('sum(expenses.iva)', 'sumIva')
+      .where('year(expenses.date)=:monthSelected', {
+        monthSelected: yearSelect,
+      })
+      .getRawOne();
       
-        
-        
+    return QueryeResult;
+  }
+  
+
+  getIsNull(number:any){
+    for (const key in number) {
+      if (isNull(number[key])) {
+        number[key] = 0;
+        }   
+     }
+    return number
+  }
+
+
+
+  //GLOBAL
+
+  async getSumAllExpenses() {
+        const QueryeResult = await this.repositoryExpense
+      .createQueryBuilder('expenses')
+      .select('sum(expenses.quantity)', 'sum')
+      .addSelect('sum(expenses.iva)', 'sumIva')
+      .getRawOne();
+
+    return QueryeResult;
+  }
+
+  async getSumAllQuartersOneYear(
+    yearSelected: number,
+  ): Promise<ResumeExpense[]> {
+    var count: number = 1;
+    var allMonths: ResumeExpense[];
+    allMonths = [];
+
+    while (count < 13) {
+      const QueryeResult = await this.repositoryExpense
+        .createQueryBuilder('expenses')
+        .select('sum(expenses.quantity)', 'sum')
+        .addSelect('sum(expenses.iva)', 'sumIva')     
+        .where(
+          'month(expenses.date) between :monthBegin AND :monthEnd and year(expenses.date) =:year',
+          {
+            monthBegin: count,
+            monthEnd: count + 2,
+            year: yearSelected,
+          },
+        )
+        .getRawOne();
+
+      count = count + 3;
+      allMonths.push(QueryeResult);
     }
     return allMonths;
- 
- }
-
-
-
+  }
 
   getOne(id: number): Promise<Expense> {
     return this.repositoryExpense.findOne(id);

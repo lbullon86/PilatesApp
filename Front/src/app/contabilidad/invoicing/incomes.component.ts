@@ -92,7 +92,6 @@ export class IncomesComponent implements OnInit {
       .subscribe(invoicing => {
         (this.invoicing = invoicing), this.getData();
       });
-      alert(this.dateInvoicing)
   }
 
   getInvoicingOnePeriod() {

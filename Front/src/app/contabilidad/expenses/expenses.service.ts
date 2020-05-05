@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Expense } from './expense';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -10,9 +9,7 @@ export class ExpensesService {
   urlExpenses:string= "http://localhost:3000/expenses"
   constructor(
     private http:HttpClient
-  ) { 
-
-  }
+  ) {   }
 
   getAll():Observable<Expense[]>{
     return this.http.get(this.urlExpenses) as Observable<Expense[]>;
@@ -23,5 +20,17 @@ export class ExpensesService {
   getSumAll(){
     return this.http.get(`${this.urlExpenses}/sumAll`);
   }
+
+  getOneMonthByConcept(year:number,month:number){
+    return this.http.get(`${this.urlExpenses}/oneMonth/${year}/${month}`) as Observable<Expense[]>;
+  }
+
+  getYear(year:number){
+    return this.http.get(`${this.urlExpenses}/months/${year}`) as Observable <Expense[]>;
+  }
+
+
+
+
 
 }
