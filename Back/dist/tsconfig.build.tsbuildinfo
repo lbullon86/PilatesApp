@@ -1934,7 +1934,7 @@
         "signature": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f"
       },
       "../src/database.config.ts": {
-        "version": "936cd0f3596e4124d3211b845e11959bc0ef0ed0619cc86a5e8cb94545925aee",
+        "version": "3c3dbe9de542a4376eb563030a7313985e7e2c5d07a933fe6dbc14858cb87da2",
         "signature": "8f96f6f6136ef08eef623ff9c80c506016e99f9a67c285f5fb693996901a2496"
       },
       "../src/core/database/database.module.ts": {
@@ -14248,7 +14248,6 @@
       "../node_modules/@nestjs/typeorm/dist/typeorm.module.d.ts",
       "../node_modules/@nestjs/typeorm/dist/index.d.ts",
       "../node_modules/@nestjs/typeorm/index.d.ts",
-      "../src/database.config.ts",
       "../src/core/database/database.module.ts",
       "../src/core/core.module.ts",
       "../node_modules/class-validator/validation/ValidationError.d.ts",
@@ -14346,6 +14345,7 @@
       "../node_modules/@types/express/index.d.ts",
       "../src/invoice/invoice.controller.ts",
       "../src/expenses/resumeExpense.ts",
+      "../src/expenses/expenses.service.ts",
       "../src/expenses/expenses.controller.ts",
       "../src/expenses/expenses.module.ts",
       "../src/invoice/invoice.module.ts",
@@ -14440,7 +14440,7 @@
       "../node_modules/@types/webpack/index.d.ts",
       "../node_modules/@types/yargs-parser/index.d.ts",
       "../node_modules/@types/yargs/index.d.ts",
-      "../src/expenses/expenses.service.ts"
+      "../src/database.config.ts"
     ]
   },
   "version": "3.8.3"
