@@ -17,7 +17,6 @@ export class CompanyComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.companies = this.compnanyService.findAll();
     this.name="prueba"
   }
 
