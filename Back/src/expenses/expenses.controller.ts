@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param, ParseIntPipe, Put, Delete, Query } 
 import { ExpensesService } from './expenses.service';
 import { Expense } from './expense.entity';
 
-@Controller('expenses')
+@Controller('api/expenses')
 export class ExpensesController {
     constructor (private readonly expensesService:ExpensesService){
 
@@ -42,10 +42,31 @@ export class ExpensesController {
     getSumExpensesOneQuarter(@Param('id', ParseIntPipe) id:number, @Param('year',ParseIntPipe) year:number) {
         return this.expensesService.getSumAllExpensesOneQuarter(id, year)
     }
+
+    @Get(':id/OnequarterByConcept/:year')
+    getSumExpensesOneQuarterByConcept(@Param('id', ParseIntPipe) id:number, @Param('year',ParseIntPipe) year:number) {
+        return this.expensesService.getQuartersByConcept(id, year)
+    }
+
+
     @Get('/quarter/:year')
     getSumExpensesQuarter(@Param('year',ParseIntPipe) year:number) {
-        return this.expensesService.getSumAllQuartersOneYear( year)
+        return this.expensesService.getSumAllQuartersOneYear(year)
     }
+
+    @Get('/quartersByMonth/:id/:year')
+    getQuartersByMonths(@Param('id', ParseIntPipe) id:number, @Param('year',ParseIntPipe) year:number){
+        return this.expensesService.getQuartersByMonths(year,id)
+
+    }
+
+
+    @Get('yearConcept/:year')
+    getSumAllExpensesByConcept(@Param('year',ParseIntPipe) year:number){
+        return this.expensesService.getSumAllExpensesByConcept(year)
+    }
+
+
     @Get('/months/:year')
     getSumAllMonthsOneYear(@Param('year', ParseIntPipe) year:number){
         return this.expensesService.getSumAllMonthsOneYear(year)

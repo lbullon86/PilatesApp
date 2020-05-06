@@ -40,7 +40,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "save", null);
 UsersController = __decorate([
-    common_1.Controller('users'),
+    common_1.Controller('api/users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);
 exports.UsersController = UsersController;

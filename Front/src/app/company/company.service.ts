@@ -10,8 +10,6 @@ export class CompanyService {
 
   constructor(private http: HttpClient) {
    }
-   findAll():Observable <any[]>{
-     return this.http.get("http://localhost:3000/company") as Observable<any[]>;
-   }
+
 
 }

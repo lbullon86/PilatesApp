@@ -60,7 +60,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PassController.prototype, "getOnePassActiveOneClient", null);
 PassController = __decorate([
-    common_1.Controller('pass'),
+    common_1.Controller('api/pass'),
     __metadata("design:paramtypes", [pass_service_1.PassService])
 ], PassController);
 exports.PassController = PassController;

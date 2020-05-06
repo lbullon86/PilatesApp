@@ -11,7 +11,7 @@ import { PassService } from './pass.service';
 import { Pass } from './pass.entity';
 
 
-@Controller('pass')
+@Controller('api/pass')
 export class PassController {
   constructor(private readonly passService: PassService) {}
 

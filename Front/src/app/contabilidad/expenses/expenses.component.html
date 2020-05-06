@@ -1,6 +1,6 @@
 <div fxLayout="row" class="fluid">
     <div fxFlex="65">
-        <ng-container *ngIf="controller; else elseTemplate">
+        <ng-container *ngIf="controller; else elseTemplateController">
             <button (click)="addPay()">Añadir gasto</button>
             <mat-form-field class="filtro">
                 <mat-label>Filter</mat-label>
@@ -25,62 +25,138 @@
                 </tr>
             </table>
         </ng-container>
-        <ng-template #elseTemplate>
+        <ng-template #elseTemplateController>
             <ngx-charts-bar-horizontal [scheme]="colorScheme" [results]="data" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [yAxisLabel]="yAxisLabel">
             </ngx-charts-bar-horizontal>
         </ng-template>
 
     </div>
     <div fxFlex="35">
-        <mat-accordion fxFlex="100" class="example-headers-align">
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Trimestral
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <mat-form-field>
-                    <mat-label>Trimestre</mat-label>
-                    <input matInput type="number" min="1" max="4">
-                </mat-form-field>
+        <div fxLayout="column">
+            <section fxFlex="100" class="example-section">
+                <mat-slide-toggle class="example-margin" [(ngModel)]="controllerConcept">
+                    <ng-container *ngIf="controllerConcept; else elseTemplate">
+                        Total
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        Concepto
+                    </ng-template>
 
-                <mat-form-field>
-                    <mat-label>Año</mat-label>
-                    <input matInput type="number" min="2019">
-                </mat-form-field>
-                <button mat-button><mat-icon>search</mat-icon></button>
+                </mat-slide-toggle>
 
-            </mat-expansion-panel>
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Mensual
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+            </section>
+            <ng-container *ngIf="controllerConcept; else panelClass">
 
-                <mat-form-field>
-                    <mat-label>Mes</mat-label>
-                    <mat-select [(ngModel)]="monthSelected">
-                        <mat-option *ngFor="let month of months" [value]="month">
-                            {{month}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <button mat-button (click)="getMonth()"><mat-icon>search</mat-icon></button>
-            </mat-expansion-panel>
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Anual
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+                <mat-accordion fxFlex="100" class="example-headers-align">
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Trimestral
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-form-field>
+                            <mat-label>Trimestre</mat-label>
+                            <input matInput type="number" min="1" max="4" [(ngModel)]="quarter">
+                        </mat-form-field>
 
-                <mat-form-field>
-                    <mat-label>Año</mat-label>
-                    <input matInput type="number" min="2019" [(ngModel)]="yearSelected">
-                </mat-form-field>
-                <button mat-button (click)="getYear()"><mat-icon>search</mat-icon></button>
-            </mat-expansion-panel>
-        </mat-accordion>
-    </div>
-</div>
+                        <mat-form-field>
+                            <mat-label>Año</mat-label>
+                            <input matInput type="number" min="2019" [(ngModel)]="yearSelected">
+                        </mat-form-field>
+                        <button mat-button (click)="getQuarterByMonth()"><mat-icon>search</mat-icon></button>
+
+                    </mat-expansion-panel>
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Mensual
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <mat-form-field>
+                            <mat-label>Mes</mat-label>
+                            <mat-select [(ngModel)]="monthSelected">
+                                <mat-option *ngFor="let month of months" [value]="monthSelected">
+                                    {{month}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button (click)="getMonth()"><mat-icon>search</mat-icon></button>
+
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Anual
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <mat-form-field>
+                            <mat-label>Año</mat-label>
+                            <input matInput type="number" min="2019" [(ngModel)]="yearSelected">
+                        </mat-form-field>
+                        <button mat-button (click)="getYear()"><mat-icon>search</mat-icon></button>
+                    </mat-expansion-panel>
+
+                </mat-accordion>
+
+            </ng-container>
+            <ng-template #panelClass>
+                <mat-accordion fxFlex="100" class="example-headers-align">
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Trimestral
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-form-field>
+                            <mat-label>Trimestre</mat-label>
+                            <input matInput type="number" min="1" max="4" [(ngModel)]="quarter">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Año</mat-label>
+                            <input matInput type="number" min="2019" [(ngModel)]="yearSelected">
+                        </mat-form-field>
+                        <button mat-button (click)="getQuarter()"><mat-icon>search</mat-icon></button>
+
+                    </mat-expansion-panel>
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Mensual
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <mat-form-field>
+                            <mat-label>Mes</mat-label>
+                            <mat-select [(ngModel)]="monthSelected">
+                                <mat-option *ngFor="let month of months" [value]="monthSelected">
+                                    {{month}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button (click)="getMonth()"><mat-icon>search</mat-icon></button>
+
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Anual
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <mat-form-field>
+                            <mat-label>Año</mat-label>
+                            <input matInput type="number" min="2019" [(ngModel)]="yearSelected">
+                        </mat-form-field>
+                        <button mat-button (click)="getYearByConcept()"><mat-icon>search</mat-icon></button>
+                    </mat-expansion-panel>
+
+                </mat-accordion>
+
+            </ng-template>
+
+        </div>

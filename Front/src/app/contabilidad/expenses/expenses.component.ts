@@ -23,10 +23,12 @@ export class ExpensesComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   numero: number = null;
   controller: boolean = true;
+  controllerConcept:boolean = true;
   months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   monthSelected: number;
   data = []
   yearSelected:number;
+  quarter:number;
   view: any[] = [700, 400];
   // options
   showXAxis: boolean = true;
@@ -63,12 +65,36 @@ export class ExpensesComponent implements OnInit {
  
   }
 
+  getQuarter(){
+    this.expenseService.getQuarter(this.yearSelected, this.quarter)
+    .subscribe(expense => (this.data = expense.map(e => ({name: e.concept, value: e.quantity}))));
+    this.changeController();
+  }
+
+
+  getQuarterByMonth(){
+    this.expenseService.getQuarterByMonths(this.quarter,this.yearSelected)
+    .subscribe(expense => (this.data = expense.map(e => ({name: e.month, value: e.sum}))));
+    this.changeController();
+
+  }
+
   getYear(){
       this.expenseService.getYear(this.yearSelected)
       .subscribe(expense => (this.data = expense.map(e => ({name: e.month, value: e.sum}))));
       this.changeController();
 
     }
+
+
+
+  
+    getYearByConcept(){
+      this.expenseService.getYearByConcept(this.yearSelected)
+      .subscribe(expense => (this.data = expense.map(e => ({name: e.concept, value: e.sum}))));
+      this.changeController();
+    }
+
   changeController() {
     this.controller = false;
   }

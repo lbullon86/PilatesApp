@@ -2054,7 +2054,7 @@
         "signature": "2e09bb089be18debdc41ac048722d4d5d810b71ec0640f5440db1758a0de0690"
       },
       "../src/company/company.controller.ts": {
-        "version": "890b800a1e6511d9629ac1f1783d3b72cede6a7d9d9b71eb3c71b51414731922",
+        "version": "72679531d7e8af3886e1dac012c2c34469c132c83055126f6bc949ca604534ad",
         "signature": "9b287ad4e99c9eaf80356ec8e540848726e90d0065cb41f22e07475bdedbc835"
       },
       "../src/company/company.module.ts": {
@@ -2066,7 +2066,7 @@
         "signature": "8d8247a0369cb7f478ab59df885b727420c3c682ea1d4b02874e713f118ea6e2"
       },
       "../src/users/users.controller.ts": {
-        "version": "cc8f9f80235f65c770cf4f77293ca7312fe06e99f4a781c875cf9ce243b12738",
+        "version": "2e528069ff3bb2bfcc9208ff36812e8540e12286e1945b1c0763842a2b5424db",
         "signature": "8057ddb64c749c4bfadb7da3b7c06f86d7ada7dc541f5e99e313f20c0eb81904"
       },
       "../src/users/users.module.ts": {
@@ -2102,7 +2102,7 @@
         "signature": "7eb06594824ada538b1d8b48c3925a83e7db792f47a081a62cf3e5c4e23cf0ee"
       },
       "../src/clientes/clientes.controller.ts": {
-        "version": "dd53438bf173385c442303ecfe7cd979bd5fb6b512ac133238d37100ad45e964",
+        "version": "f4d1ae29d163c1f8e49f91a4c5b0dba0ad3723a0e73a61be557018648755e94e",
         "signature": "ad216dfae61ac573e7c4d1787de47b4392d67252d4f230d5203b7c2594f388ba"
       },
       "../node_modules/@types/node/globals.d.ts": {
@@ -2318,7 +2318,7 @@
         "signature": "ead1ed9dd4874f4907a506a31e4fe9c4e079b42816f6b7ea5016a6d5ddf2fde3"
       },
       "../src/invoice/invoice.controller.ts": {
-        "version": "bb59048666588e3b1cc6149a11fdd2d3a8b0a1dbdc1f0674e7807ceb6e53558a",
+        "version": "29c20ace45815703fab4a1c7e7c5e3e94ea4a241696ba2500c5803f2253b23fb",
         "signature": "657acc5e529bca60e6f43708e7818bf1d527a1be45a22d112217197d4d872868"
       },
       "../src/expenses/resumeExpense.ts": {
@@ -2326,12 +2326,12 @@
         "signature": "3d5ebaf1567c6901f287f52f98499ea712fe608e7b6eb82c8cb91f4b0e1b1f58"
       },
       "../src/expenses/expenses.service.ts": {
-        "version": "eeac12cb93a727eed31687722faaef4248ba3108aa52d88951cb92a50db7173c",
-        "signature": "18e210536b6c3f3ffaf98f11fe3d5cfdaaf558b7478adcb2e4ad659cf979ea8e"
+        "version": "e2a6dd5dcf0cfabee569fb47ebfc6200a1ef91362f43910c98e84396aa1509ba",
+        "signature": "91c7f7c77a90b9e893243e2bdebe5f2c646700e713a8ade29f256c53786c16c5"
       },
       "../src/expenses/expenses.controller.ts": {
-        "version": "e625924ddc1d31175ff033fa68eb2e5c3fe725f236f7314903935351bdb2552f",
-        "signature": "20ca7c000b0c149c8b387995089b52808ef64f911dc72938f3909b5cd2400ee7"
+        "version": "d3297f004b93c86477d77c362c9f3619430de83ae26610196539d822a366e78e",
+        "signature": "13c5a972f7daebb235f7f7f3cb5a76b580262383f79d6a253383a97181203250"
       },
       "../src/expenses/expenses.module.ts": {
         "version": "6cddd27c35cbfad1504270eeea23034d938f9dae22cf117df03ab775ec8caf35",
@@ -2342,7 +2342,7 @@
         "signature": "550231b5bd8d3e4dcd53ede741e65e775615cad13508342cd59ce7766741746f"
       },
       "../src/pass/pass.controller.ts": {
-        "version": "2616f811c765b099c5dfb5ab6c7c9cf5a368a155cbc8481599c2cb4b69634958",
+        "version": "59cf08852096836c16e16b9c2083f3cb136cc49060cb429c6b6b81fb9b86ae30",
         "signature": "27314e31146eb0e3f7f35821a4566cfe01390ba450fcdc7852f3b282ce17e402"
       },
       "../src/pass/pass.module.ts": {
@@ -2370,7 +2370,7 @@
         "signature": "4900a897091dec2c6f492352c5bf7d1dd032558363b557bd228a4adda9c0058d"
       },
       "../src/prices/prices.controller.ts": {
-        "version": "b3ff2dac58f9830e5bb490c709713fb75d08b5d58847c3b783ae718a8851baac",
+        "version": "aa9e618a87ac8e13494a917b9e2e0172dd6edfea573eb9ee82d163084264f8e3",
         "signature": "f0046f0bd96c3460027c397567e2695f2f9e07004c811e26ab06bc76f01cedc4"
       },
       "../src/prices/prices.module.ts": {
@@ -2386,16 +2386,36 @@
         "signature": "43019b7fb192d0e157cc2fe72805e9c015c79ca2b79ce02d0e617b0d4accfc1a"
       },
       "../src/balance/balance.controller.ts": {
-        "version": "0f156fba0899b2579a9238f98b3d5e10e8fabaad059af35436ac60d91209a3c5",
+        "version": "8d4a3ffef03e8c40f8c08448571dee384299e709210b94349888158de4df6d09",
         "signature": "496e3ae06a7f4ef8fe1cdf830215d74aa8fc68a84bc5e1cfd2210107c1b40aea"
       },
       "../src/balance/balance.module.ts": {
         "version": "39427473f09ab8fc2cafe96afa77773c3e4a7f4bfae9ae99cd630e4462232e18",
         "signature": "1b2762d25a51b6799b0d9754cd420a4bf9b7ce7770dedd9473a3f5cab19d26cd"
       },
+      "../src/schedule/schedule.entity.ts": {
+        "version": "bd4b4b08702805eaa0483091dafe046a022e97b910da55a3a3aa4fe5d1011235",
+        "signature": "45769176a1de7c2fede1c39fb06e529c545252c9aea3deb8204370b6f024d459"
+      },
+      "../src/schedule/schedule.service.ts": {
+        "version": "1ad8755072b68c9d6aa98f1cc1c2ab9377cb85ea4e7cf012aac0dcb1edb62f5f",
+        "signature": "f072f30caee60745d727e4530f3977b64e9b1fd8cc8e50bf5f9907a4462d4a57"
+      },
+      "../src/schedule/schedule.controller.ts": {
+        "version": "6e20e1d2e727106eadd1e09cb065031bab39feb3cbe488655df606f1b17164eb",
+        "signature": "09d9e8d4da7f69cd4695fa38fbbef5bae3981754fe0f4adca423879168b904c1"
+      },
+      "../src/schedule/schedule.module.ts": {
+        "version": "0d9972f0c4164e0233b55bbe1284cc8f9df96cfe204180f5ef4e41037e7c4bea",
+        "signature": "a5d4200c28b3c02471abbf5cf29153aef7e4d401edfd4d7c8c4fe5fc7aba04cd"
+      },
+      "../src/core/middleware/frontend.middleware.ts": {
+        "version": "867389658c371f1c232d0f37716a7ff52f3313dab99ca56efee75eb69e25ffed",
+        "signature": "7e024fb9f97ec8d9cae1aa0270a60589e38dc94ac0a05eced20b60b0ad8af0bd"
+      },
       "../src/app.module.ts": {
-        "version": "6d39b24d2befb1dee28369e790c83cc6a0fcdbc799dec1b9696838dcad9e642e",
-        "signature": "b82491e2990291580288c5602d4c017238977749d52b17391f0e45d9a29be644"
+        "version": "3ef6d54c0f6932ac89db3e6610f1027d8641d92d0ea27c89f7eda975c8536b0a",
+        "signature": "9e55d69c2879e4c1f6039d177c0daf79a72435ac51ec7d4f46fc72e8b0c503d6"
       },
       "../node_modules/@nestjs/core/adapters/http-adapter.d.ts": {
         "version": "71cc7da1ef9d96f44a214a43017535538b47988d4bc9dedbf7592d2f9fe10da9",
@@ -7793,6 +7813,52 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../src/schedule/schedule.entity.ts": [
+        "../node_modules/typeorm/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/schedule/schedule.service.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../src/schedule/schedule.entity.ts",
+        "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../node_modules/typeorm/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/schedule/schedule.controller.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../src/schedule/schedule.service.ts",
+        "../src/schedule/schedule.entity.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/schedule/schedule.module.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../src/schedule/schedule.service.ts",
+        "../src/schedule/schedule.controller.ts",
+        "../src/schedule/schedule.entity.ts",
+        "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/core/middleware/frontend.middleware.ts": [
+        "../node_modules/@types/node/path.d.ts",
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@types/express/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../src/app.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../src/core/core.module.ts",
@@ -7805,6 +7871,8 @@
         "../src/pass/pass.module.ts",
         "../src/prices/prices.module.ts",
         "../src/balance/balance.module.ts",
+        "../src/schedule/schedule.module.ts",
+        "../src/core/middleware/frontend.middleware.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -13191,6 +13259,21 @@
         "../src/balance/balance.service.ts",
         "../src/balance/balance.ts"
       ],
+      "../src/schedule/schedule.service.ts": [
+        "../node_modules/typeorm/index.d.ts",
+        "../src/schedule/schedule.entity.ts"
+      ],
+      "../src/schedule/schedule.controller.ts": [
+        "../src/schedule/schedule.service.ts",
+        "../src/schedule/schedule.entity.ts"
+      ],
+      "../src/core/middleware/frontend.middleware.ts": [
+        "../node_modules/@types/express/index.d.ts",
+        "../node_modules/@nestjs/common/index.d.ts"
+      ],
+      "../src/app.module.ts": [
+        "../node_modules/@nestjs/common/index.d.ts"
+      ],
       "../node_modules/@nestjs/core/adapters/http-adapter.d.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/common/interfaces/index.d.ts",
@@ -14281,7 +14364,6 @@
       "../src/company/company.controller.ts",
       "../src/company/company.module.ts",
       "../src/users/users.service.ts",
-      "../src/users/users.controller.ts",
       "../src/users/users.module.ts",
       "../src/invoice/invoicing-model.ts",
       "../src/invoice/invoicingClass-model.ts",
@@ -14346,6 +14428,7 @@
       "../node_modules/@types/express/index.d.ts",
       "../src/invoice/invoice.controller.ts",
       "../src/expenses/resumeExpense.ts",
+      "../src/expenses/expenses.service.ts",
       "../src/expenses/expenses.controller.ts",
       "../src/expenses/expenses.module.ts",
       "../src/invoice/invoice.module.ts",
@@ -14362,6 +14445,11 @@
       "../src/balance/balance.service.ts",
       "../src/balance/balance.controller.ts",
       "../src/balance/balance.module.ts",
+      "../src/schedule/schedule.entity.ts",
+      "../src/schedule/schedule.service.ts",
+      "../src/schedule/schedule.controller.ts",
+      "../src/schedule/schedule.module.ts",
+      "../src/core/middleware/frontend.middleware.ts",
       "../src/app.module.ts",
       "../node_modules/@nestjs/core/adapters/http-adapter.d.ts",
       "../node_modules/@nestjs/core/adapters/index.d.ts",
@@ -14440,7 +14528,7 @@
       "../node_modules/@types/webpack/index.d.ts",
       "../node_modules/@types/yargs-parser/index.d.ts",
       "../node_modules/@types/yargs/index.d.ts",
-      "../src/expenses/expenses.service.ts"
+      "../src/users/users.controller.ts"
     ]
   },
   "version": "3.8.3"

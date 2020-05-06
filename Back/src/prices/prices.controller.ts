@@ -2,7 +2,7 @@ import { Controller, ParseIntPipe, Get, Param, Post, Body } from '@nestjs/common
 import { PricesService } from './prices.service';
 import { Prices } from './prices.entity';
 
-@Controller('prices')
+@Controller('api/prices')
 export class PricesController {
     constructor(private readonly priceService:PricesService){
 

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Client } from './cliente';
 import { Pay } from '../detail-client/add-pay/pay-model';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ export class ClientesService {
   public urlClient:string;
 
   constructor(private http:HttpClient){ 
-    this.urlClient ="http://localhost:3000/clientes"
+    this.urlClient = environment.baseUrl+  '/clientes';
 
   }
   findAll():Observable<Object[]>{

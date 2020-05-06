@@ -40,7 +40,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], PricesController.prototype, "save", null);
 PricesController = __decorate([
-    common_1.Controller('prices'),
+    common_1.Controller('api/prices'),
     __metadata("design:paramtypes", [prices_service_1.PricesService])
 ], PricesController);
 exports.PricesController = PricesController;

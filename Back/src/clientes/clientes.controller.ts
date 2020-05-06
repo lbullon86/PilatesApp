@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 import { Pass } from 'src/pass/pass.entity';
 import { getDefaultWatermarks } from 'istanbul-lib-report';
 
-@Controller('clientes')
+@Controller('api/clientes')
 export class ClientesController {
   constructor(private readonly clientesService: ClientesService) {}
   @Get()

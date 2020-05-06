@@ -6,7 +6,6 @@ import { ResumeExpense } from './resumeExpense';
 import { InvoiceService } from 'src/invoice/invoice.service';
 import { isNull } from 'util';
 
-
 @Injectable()
 export class ExpensesService {
   constructor(
@@ -94,17 +93,62 @@ export class ExpensesService {
     var allMonths: ResumeExpense[];
     allMonths = [];
     while (count < 13) {
-      var expense = await this.getSumAllExpensesOneMonth(yearSelected,count);
+      var expense = await this.getSumAllExpensesOneMonth(yearSelected, count);
       expense.month = count;
       expense = this.getIsNull(expense);
       allMonths.push(expense);
       count++;
-      console.log(expense)
+      console.log(expense);
     }
     return allMonths;
   }
 
   //QUARTER
+
+  async getQuartersByMonths( year: number,quarter: number,) {
+    var QueryResult;
+    var allMonths: ResumeExpense[]=[];
+
+    switch (quarter) {
+      case 1:
+        for (let index = 1; index < 4; index++) {
+          QueryResult = await this.getSumAllExpensesOneMonth(year, index);
+          QueryResult.month = index;
+          allMonths.push(QueryResult);
+        }
+
+        break;
+      case 2:
+        for (let index = 3; index < 7; index++) {
+          QueryResult =  await this.getSumAllExpensesOneMonth(year, index);
+          QueryResult.month = index;
+          allMonths.push(QueryResult);
+        }
+
+        break;
+
+      case 3:
+        for (let index = 6; index < 10; index++) {
+          QueryResult = await this.getSumAllExpensesOneMonth(year, index);
+          QueryResult.month = index;
+          allMonths.push(QueryResult);
+        }
+
+        break;
+      case 4:
+        for (let index = 10; index < 13; index++) {
+          QueryResult =  await this.getSumAllExpensesOneMonth(year, index);
+          QueryResult.month = index;
+          allMonths.push(QueryResult);
+
+        }
+
+        break;
+      default:
+        break;
+    }
+    return allMonths
+  }
 
   async getSumAllExpensesOneQuarter(quarter: number, yearSelected: number) {
     var QueryeResult;
@@ -180,6 +224,92 @@ export class ExpensesService {
     }
   }
 
+  async getQuartersByConcept(quarter: number, yearSelected: number) {
+    var QueryeResult;
+    switch (quarter) {
+      case 1:
+        QueryeResult = await this.repositoryExpense
+          .createQueryBuilder('expenses')
+          .select('sum(expenses.quantity)', 'quantity')
+          .addSelect('expenses.concept', 'concept')
+          .addSelect('sum(expenses.iva)', 'iva')
+          .where(
+            'month(expenses.date) BETWEEN :monthBegin AND :monthEnd and year(expenses.date) =:year',
+            {
+              monthBegin: 1,
+              monthEnd: 3,
+              year: yearSelected,
+            },
+          )
+          .groupBy('expenses.concept')
+          .orderBy('quantity', 'DESC')
+          .getRawMany();
+
+        return QueryeResult;
+
+      case 2:
+        QueryeResult = await this.repositoryExpense
+          .createQueryBuilder('expenses')
+          .select('sum(expenses.quantity)', 'quantity')
+          .addSelect('expenses.concept', 'concept')
+          .addSelect('sum(expenses.iva)', 'iva')
+          .where(
+            'month(expenses.date) BETWEEN :monthBegin AND :monthEnd and year(expenses.date) =:year',
+            {
+              monthBegin: 4,
+              monthEnd: 6,
+              year: yearSelected,
+            },
+          )
+          .groupBy('expenses.concept')
+          .orderBy('quantity', 'DESC')
+          .getRawMany();
+        return QueryeResult;
+
+      case 3:
+        QueryeResult = await this.repositoryExpense
+          .createQueryBuilder('expenses')
+          .select('sum(expenses.quantity)', 'quantity')
+          .addSelect('expenses.concept', 'concept')
+          .addSelect('sum(expenses.iva)', 'iva')
+          .where(
+            'month(expenses.date) BETWEEN :monthBegin  AND :monthEnd and year(expenses.date) =:year',
+            {
+              monthBegin: 7,
+              monthEnd: 9,
+              year: yearSelected,
+            },
+          )
+          .groupBy('expenses.concept')
+          .orderBy('quantity', 'DESC')
+          .getRawMany();
+
+        return QueryeResult;
+
+      case 4:
+        QueryeResult = await this.repositoryExpense
+          .createQueryBuilder('expenses')
+          .select('sum(expenses.quantity)', 'quantity')
+          .addSelect('expenses.concept', 'concept')
+          .addSelect('sum(expenses.iva)', 'iva')
+          .where(
+            'month(expenses.date) BETWEEN :monthBegin AND :monthEnd and year(expenses.date) =:year',
+            {
+              monthBegin: 10,
+              monthEnd: 12,
+              year: yearSelected,
+            },
+          )
+          .groupBy('expenses.concept')
+          .orderBy('quantity', 'DESC')
+          .getRawMany();
+
+        return QueryeResult;
+      default:
+        break;
+    }
+  }
+
   //YEAR
 
   async getSumAllExpensesYear(yearSelect: number) {
@@ -191,30 +321,43 @@ export class ExpensesService {
         monthSelected: yearSelect,
       })
       .getRawOne();
-      
+
     return QueryeResult;
   }
-  
 
-  getIsNull(number:any){
+  getIsNull(number: any) {
     for (const key in number) {
       if (isNull(number[key])) {
         number[key] = 0;
-        }   
-     }
-    return number
+      }
+    }
+    return number;
   }
-
-
 
   //GLOBAL
 
   async getSumAllExpenses() {
-        const QueryeResult = await this.repositoryExpense
+    const QueryeResult = await this.repositoryExpense
       .createQueryBuilder('expenses')
       .select('sum(expenses.quantity)', 'sum')
       .addSelect('sum(expenses.iva)', 'sumIva')
       .getRawOne();
+
+    return QueryeResult;
+  }
+
+  async getSumAllExpensesByConcept(yearSelected: number) {
+    const QueryeResult = await this.repositoryExpense
+      .createQueryBuilder('expenses')
+      .select('sum(expenses.quantity)', 'quantity')
+      .addSelect('expenses.concept', 'concept')
+      .addSelect('sum(expenses.iva)', 'iva')
+      .where('year(expenses.date)=:year', {
+        year: yearSelected,
+      })
+      .groupBy('expenses.concept')
+      .orderBy('quantity', 'DESC')
+      .getRawMany();
 
     return QueryeResult;
   }
@@ -230,7 +373,7 @@ export class ExpensesService {
       const QueryeResult = await this.repositoryExpense
         .createQueryBuilder('expenses')
         .select('sum(expenses.quantity)', 'sum')
-        .addSelect('sum(expenses.iva)', 'sumIva')     
+        .addSelect('sum(expenses.iva)', 'sumIva')
         .where(
           'month(expenses.date) between :monthBegin AND :monthEnd and year(expenses.date) =:year',
           {

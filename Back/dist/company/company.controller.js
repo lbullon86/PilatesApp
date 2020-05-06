@@ -40,7 +40,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CompanyController.prototype, "save", null);
 CompanyController = __decorate([
-    common_1.Controller('company'),
+    common_1.Controller('api/company'),
     __metadata("design:paramtypes", [company_service_1.CompanyService])
 ], CompanyController);
 exports.CompanyController = CompanyController;

@@ -31,14 +31,16 @@ export class InvoicesComponent implements OnInit {
   
   parseDate(date:Date)
   {
-    return this.datepipe.transform(date, 'dd-mm-yyyy');
-      
+    return this.datepipe.transform(date, 'dd-mm-yyyy');      
   }
 
 
 
-  ngOnInit() {
-    
+  ngOnInit() {    
+    this.getInvoices()
+  }
+
+  getInvoices(){
     this.invoices = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.idClient = +params.get("id");

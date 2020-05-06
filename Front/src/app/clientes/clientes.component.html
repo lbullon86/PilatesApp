@@ -1,6 +1,6 @@
-<app-diario>
-</app-diario>
 <div class="fluid" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap.xs="0">
+    <app-diario fxLayout="row">
+    </app-diario>
     <mat-form-field class="filtro">
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Filtrar...">

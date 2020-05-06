@@ -4,6 +4,7 @@ import { Invoicing } from '../invoicing/invoicing-model';
 import { InvoicingClass } from '../invoicing/invoicingClass-model';
 
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +12,7 @@ export class ResumeIncomesService {
   urlInvoicing:string
   constructor(private http:HttpClient) {
 
-    this.urlInvoicing= "http://localhost:3000/invoices";
+    this.urlInvoicing= environment.baseUrl+"/invoices";
    }
 
    getQuarterInvoicing(){

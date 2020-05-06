@@ -11,10 +11,13 @@ export declare class ExpensesService {
     getSumAllExpensesOneMonth(yearSelected: number, monthSelect: number): Promise<any>;
     getOneMonthsByConcept(yearSelected: number, month: number): Promise<any[]>;
     getSumAllMonthsOneYear(yearSelected: number): Promise<ResumeExpense[]>;
+    getQuartersByMonths(year: number, quarter: number): Promise<ResumeExpense[]>;
     getSumAllExpensesOneQuarter(quarter: number, yearSelected: number): Promise<any>;
+    getQuartersByConcept(quarter: number, yearSelected: number): Promise<any>;
     getSumAllExpensesYear(yearSelect: number): Promise<any>;
     getIsNull(number: any): any;
     getSumAllExpenses(): Promise<any>;
+    getSumAllExpensesByConcept(yearSelected: number): Promise<any[]>;
     getSumAllQuartersOneYear(yearSelected: number): Promise<ResumeExpense[]>;
     getOne(id: number): Promise<Expense>;
     updateExpense(expense: Expense): Promise<UpdateResult>;

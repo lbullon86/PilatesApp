@@ -93,7 +93,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ClientesController.prototype, "update", null);
 ClientesController = __decorate([
-    common_1.Controller('clientes'),
+    common_1.Controller('api/clientes'),
     __metadata("design:paramtypes", [clientes_service_1.ClientesService])
 ], ClientesController);
 exports.ClientesController = ClientesController;

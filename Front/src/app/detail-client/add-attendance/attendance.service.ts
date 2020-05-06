@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Pass } from './pass.model';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AttendanceService {
   urlPass:string;
   constructor(private http:HttpClient) {
-    this.urlPass = "http://localhost:3000/pass"
+    this.urlPass = environment.baseUrl+"/pass"
    }
 
    getPassActiveOneClient(id:number):Observable<Pass>{

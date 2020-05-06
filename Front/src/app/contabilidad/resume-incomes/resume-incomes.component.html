@@ -1,7 +1,5 @@
 <div fxFlex="65">
-    <h3>{{monthSelected }}{{year}}</h3>
     <ng-container *ngIf="parameter; else elseChart">
-
         <ngx-charts-advanced-pie-chart [scheme]="colorScheme" [results]="dataClass">
         </ngx-charts-advanced-pie-chart>
     </ng-container>

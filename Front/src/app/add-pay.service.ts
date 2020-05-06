@@ -5,6 +5,7 @@ import { Price } from './detail-client/add-pay/price-model';
 import { Pay } from './detail-client/add-pay/pay-model';
 import { Pass } from './detail-client/add-attendance/pass.model';
 import { Client } from './clientes/cliente';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class AddPayService {
   public url:string;
 
   constructor(private http:HttpClient){ 
-    this.urlPrice ="http://localhost:3000/prices";
-    this.urlClients ="http://localhost:3000/clientes"
+    this.urlPrice =environment.baseUrl+"/prices";
+    this.urlClients = environment.baseUrl+ "/clientes"
 
   }
 

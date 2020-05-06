@@ -43,8 +43,17 @@ let ExpensesController = class ExpensesController {
     getSumExpensesOneQuarter(id, year) {
         return this.expensesService.getSumAllExpensesOneQuarter(id, year);
     }
+    getSumExpensesOneQuarterByConcept(id, year) {
+        return this.expensesService.getQuartersByConcept(id, year);
+    }
     getSumExpensesQuarter(year) {
         return this.expensesService.getSumAllQuartersOneYear(year);
+    }
+    getQuartersByMonths(id, year) {
+        return this.expensesService.getQuartersByMonths(year, id);
+    }
+    getSumAllExpensesByConcept(year) {
+        return this.expensesService.getSumAllExpensesByConcept(year);
     }
     getSumAllMonthsOneYear(year) {
         return this.expensesService.getSumAllMonthsOneYear(year);
@@ -111,12 +120,33 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ExpensesController.prototype, "getSumExpensesOneQuarter", null);
 __decorate([
+    common_1.Get(':id/OnequarterByConcept/:year'),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)), __param(1, common_1.Param('year', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", void 0)
+], ExpensesController.prototype, "getSumExpensesOneQuarterByConcept", null);
+__decorate([
     common_1.Get('/quarter/:year'),
     __param(0, common_1.Param('year', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], ExpensesController.prototype, "getSumExpensesQuarter", null);
+__decorate([
+    common_1.Get('/quartersByMonth/:id/:year'),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)), __param(1, common_1.Param('year', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", void 0)
+], ExpensesController.prototype, "getQuartersByMonths", null);
+__decorate([
+    common_1.Get('yearConcept/:year'),
+    __param(0, common_1.Param('year', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], ExpensesController.prototype, "getSumAllExpensesByConcept", null);
 __decorate([
     common_1.Get('/months/:year'),
     __param(0, common_1.Param('year', common_1.ParseIntPipe)),
@@ -139,7 +169,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ExpensesController.prototype, "delete", null);
 ExpensesController = __decorate([
-    common_1.Controller('expenses'),
+    common_1.Controller('api/expenses'),
     __metadata("design:paramtypes", [expenses_service_1.ExpensesService])
 ], ExpensesController);
 exports.ExpensesController = ExpensesController;

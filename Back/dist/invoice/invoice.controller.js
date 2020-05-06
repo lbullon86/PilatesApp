@@ -211,7 +211,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], InvoiceController.prototype, "getInvoicingYearByPaymentMethod", null);
 InvoiceController = __decorate([
-    common_1.Controller('invoices'),
+    common_1.Controller('api/invoices'),
     __metadata("design:paramtypes", [invoice_service_1.InvoiceService])
 ], InvoiceController);
 exports.InvoiceController = InvoiceController;

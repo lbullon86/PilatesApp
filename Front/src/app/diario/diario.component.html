@@ -1,1 +1,7 @@
-<p>diario works!</p>
+<div *ngFor="let activity of schedule">
+    <mat-card fxFlex="10">
+        <mat-card-title>{{activity.activity}}</mat-card-title>
+        <mat-card-subtitle>{{activity.hour}}</mat-card-subtitle>
+        <img mat-card-avatar class="avatar" src='../../assets/{{activity.activity}}.png'>
+    </mat-card>
+</div>

@@ -2,7 +2,7 @@ import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { BalanceService } from './balance.service';
 import { Balance } from './balance';
 
-@Controller('balance')
+@Controller('api/balance')
 export class BalanceController {
     constructor (private readonly balanceService:BalanceService){}
 

@@ -59,7 +59,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BalanceController.prototype, "getBalanceOneMonth", null);
 BalanceController = __decorate([
-    common_1.Controller('balance'),
+    common_1.Controller('api/balance'),
     __metadata("design:paramtypes", [balance_service_1.BalanceService])
 ], BalanceController);
 exports.BalanceController = BalanceController;

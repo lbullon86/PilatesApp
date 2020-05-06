@@ -14,7 +14,7 @@ import { from } from 'rxjs';
 import { Invoicing } from './invoicing-model';
 import { get } from 'http';
 
-@Controller('invoices')
+@Controller('api/invoices')
 export class InvoiceController {
   constructor(private readonly invoiceService: InvoiceService) {}
   @Post()

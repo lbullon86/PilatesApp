@@ -11,7 +11,10 @@ export declare class ExpensesController {
     getSumExpensesDay(date: Date): Promise<any>;
     getSumExpensesPeriod(date: Date, date2: Date): Promise<any>;
     getSumExpensesOneQuarter(id: number, year: number): Promise<any>;
+    getSumExpensesOneQuarterByConcept(id: number, year: number): Promise<any>;
     getSumExpensesQuarter(year: number): Promise<import("./resumeExpense").ResumeExpense[]>;
+    getQuartersByMonths(id: number, year: number): Promise<import("./resumeExpense").ResumeExpense[]>;
+    getSumAllExpensesByConcept(year: number): Promise<any[]>;
     getSumAllMonthsOneYear(year: number): Promise<import("./resumeExpense").ResumeExpense[]>;
     save(expense: Expense): Promise<Expense>;
     delete(id: number): Promise<import("typeorm").DeleteResult>;

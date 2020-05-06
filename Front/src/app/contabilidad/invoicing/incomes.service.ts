@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Invoicing } from './invoicing-model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Invoicing } from './invoicing-model';
 export class IncomesService {
   urlIncomes:string;
   constructor(private http:HttpClient) {
-    this.urlIncomes = "http://localhost:3000/invoices"
+    this.urlIncomes = environment.baseUrl+"/invoices"
    }
 
    getInvoicing():Observable<Invoicing>{
