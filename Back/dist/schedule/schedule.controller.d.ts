@@ -7,4 +7,5 @@ export declare class ScheduleController {
     save(schedule: Schedule): Promise<Schedule>;
     getWeeek(): Promise<any[]>;
     getOneDay(day: number): Promise<Schedule[]>;
+    update(id: number, activity: Schedule): Promise<any>;
 }

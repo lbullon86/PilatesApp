@@ -1934,7 +1934,7 @@
         "signature": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f"
       },
       "../src/database.config.ts": {
-        "version": "3c3dbe9de542a4376eb563030a7313985e7e2c5d07a933fe6dbc14858cb87da2",
+        "version": "4a641109ea4327681782509fa4244b7430aacd45f21e000cf82e3465bd1f8c6f",
         "signature": "8f96f6f6136ef08eef623ff9c80c506016e99f9a67c285f5fb693996901a2496"
       },
       "../src/core/database/database.module.ts": {
@@ -2082,8 +2082,8 @@
         "signature": "3213f30e32fe93074fabe6800b065d04204b54bcf9ba8c9f7ad529f6ed53402e"
       },
       "../src/invoice/invoice.service.ts": {
-        "version": "e43642e6979485b5fd175b1dd960500c822d873656d0417bf1512c8d1f6d48f7",
-        "signature": "9128e61f822050fa7586ff73d60fa50e69510fafdcf4ed21b7d6cd40bd484399"
+        "version": "8b58aeb420e55e1830d02df6003c87a25089133e15c11bc8a076d21e04590889",
+        "signature": "44074dcd66a8867c4af785bc92f1fe432b8af61b3f2d45913a8e2333d1a6402e"
       },
       "../src/pass/pass.service.ts": {
         "version": "16b4c2f183bcedc5a51bbf10c076cbec9e8e7b1cee57fbee2756ac36e2551176",
@@ -2398,19 +2398,19 @@
         "signature": "45769176a1de7c2fede1c39fb06e529c545252c9aea3deb8204370b6f024d459"
       },
       "../src/schedule/schedule.service.ts": {
-        "version": "1ad8755072b68c9d6aa98f1cc1c2ab9377cb85ea4e7cf012aac0dcb1edb62f5f",
-        "signature": "f072f30caee60745d727e4530f3977b64e9b1fd8cc8e50bf5f9907a4462d4a57"
+        "version": "be4559003e59d153c127276fd0ba41e9d0ea70bca913796dbbed5a91182131ec",
+        "signature": "bb06cf8c7e978dca5e3cc661b1c0617fdd9ad9d0f1441b27c6f502b051e996b5"
       },
       "../src/schedule/schedule.controller.ts": {
-        "version": "6e20e1d2e727106eadd1e09cb065031bab39feb3cbe488655df606f1b17164eb",
-        "signature": "09d9e8d4da7f69cd4695fa38fbbef5bae3981754fe0f4adca423879168b904c1"
+        "version": "82074c1818f475630993fed3eaaae179364796201f1016ece888df4ceb04430a",
+        "signature": "2f4d6a0c94a41fa9665661fb69a7370778c1394fc3032dda1e3f7ceda288e129"
       },
       "../src/schedule/schedule.module.ts": {
         "version": "0d9972f0c4164e0233b55bbe1284cc8f9df96cfe204180f5ef4e41037e7c4bea",
         "signature": "a5d4200c28b3c02471abbf5cf29153aef7e4d401edfd4d7c8c4fe5fc7aba04cd"
       },
       "../src/core/middleware/frontend.middleware.ts": {
-        "version": "867389658c371f1c232d0f37716a7ff52f3313dab99ca56efee75eb69e25ffed",
+        "version": "aafd86b2e9a8da4ec1ab02a345c16caf84aef0793faf67581fd7e0d55fd55f6b",
         "signature": "7e024fb9f97ec8d9cae1aa0270a60589e38dc94ac0a05eced20b60b0ad8af0bd"
       },
       "../src/app.module.ts": {
@@ -12567,6 +12567,12 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../src/database.config.ts": [
+        "../node_modules/typeorm/index.d.ts"
+      ],
+      "../src/core/database/database.module.ts": [
+        "../node_modules/typeorm/index.d.ts"
+      ],
       "../node_modules/class-validator/validation/ValidationError.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -12736,20 +12742,20 @@
         "../src/prices/prices.entity.ts"
       ],
       "../src/company/company.service.ts": [
-        "../node_modules/typeorm/index.d.ts",
-        "../src/company/company.entity.ts"
+        "../src/company/company.entity.ts",
+        "../node_modules/typeorm/index.d.ts"
       ],
       "../src/company/company.controller.ts": [
         "../src/company/company.service.ts",
         "../src/company/company.entity.ts"
       ],
       "../src/users/users.service.ts": [
-        "../node_modules/typeorm/index.d.ts",
-        "../src/users/users.entity.ts"
+        "../src/users/users.entity.ts",
+        "../node_modules/typeorm/index.d.ts"
       ],
       "../src/users/users.controller.ts": [
-        "../src/users/users.service.ts",
-        "../src/users/users.entity.ts"
+        "../src/users/users.entity.ts",
+        "../src/users/users.service.ts"
       ],
       "../src/invoice/invoice.service.ts": [
         "../node_modules/typeorm/index.d.ts",
@@ -12758,17 +12764,17 @@
         "../src/invoice/invoicingClass-model.ts"
       ],
       "../src/pass/pass.service.ts": [
-        "../node_modules/typeorm/index.d.ts",
         "../src/pass/pass.entity.ts",
+        "../node_modules/typeorm/index.d.ts",
         "../src/invoice/invoice.entity.ts"
       ],
       "../src/clientes/clientes.service.ts": [
         "../node_modules/typeorm/index.d.ts",
         "../src/clientes/clientes.entity.ts",
-        "../src/invoice/invoice.service.ts",
-        "../src/pass/pass.service.ts",
         "../src/invoice/invoice.entity.ts",
-        "../src/pass/pass.entity.ts"
+        "../src/invoice/invoice.service.ts",
+        "../src/pass/pass.entity.ts",
+        "../src/pass/pass.service.ts"
       ],
       "../node_modules/@types/istanbul-lib-coverage/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
@@ -13212,21 +13218,21 @@
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../src/invoice/invoice.controller.ts": [
-        "../src/invoice/invoicingClass-model.ts",
         "../src/invoice/invoice.service.ts",
         "../src/invoice/invoice.entity.ts",
-        "../src/invoice/invoicing-model.ts"
+        "../src/invoice/invoicing-model.ts",
+        "../src/invoice/invoicingClass-model.ts"
       ],
       "../src/expenses/expenses.service.ts": [
-        "../node_modules/typeorm/index.d.ts",
         "../src/expenses/expense.entity.ts",
+        "../node_modules/typeorm/index.d.ts",
         "../src/expenses/resumeExpense.ts"
       ],
       "../src/expenses/expenses.controller.ts": [
-        "../src/expenses/resumeExpense.ts",
-        "../node_modules/typeorm/index.d.ts",
         "../src/expenses/expenses.service.ts",
-        "../src/expenses/expense.entity.ts"
+        "../src/expenses/expense.entity.ts",
+        "../src/expenses/resumeExpense.ts",
+        "../node_modules/typeorm/index.d.ts"
       ],
       "../src/pass/pass.controller.ts": [
         "../src/pass/pass.service.ts",
@@ -13241,17 +13247,17 @@
         "../src/payrolls/payroll.entity.ts"
       ],
       "../src/prices/prices.service.ts": [
-        "../node_modules/typeorm/repository/Repository.d.ts",
-        "../src/prices/prices.entity.ts"
+        "../src/prices/prices.entity.ts",
+        "../node_modules/typeorm/repository/Repository.d.ts"
       ],
       "../src/prices/prices.controller.ts": [
         "../src/prices/prices.service.ts",
         "../src/prices/prices.entity.ts"
       ],
       "../src/balance/balance.service.ts": [
-        "../src/invoice/invoice.service.ts",
-        "../src/expenses/expenses.service.ts",
         "../src/balance/balance.ts",
+        "../src/expenses/expenses.service.ts",
+        "../src/invoice/invoice.service.ts",
         "../src/invoice/invoicing-model.ts",
         "../src/expenses/resumeExpense.ts"
       ],
@@ -13268,8 +13274,8 @@
         "../src/schedule/schedule.entity.ts"
       ],
       "../src/core/middleware/frontend.middleware.ts": [
-        "../node_modules/@types/express/index.d.ts",
-        "../node_modules/@nestjs/common/index.d.ts"
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@types/express/index.d.ts"
       ],
       "../src/app.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts"
@@ -14331,6 +14337,7 @@
       "../node_modules/@nestjs/typeorm/dist/typeorm.module.d.ts",
       "../node_modules/@nestjs/typeorm/dist/index.d.ts",
       "../node_modules/@nestjs/typeorm/index.d.ts",
+      "../src/database.config.ts",
       "../src/core/database/database.module.ts",
       "../src/core/core.module.ts",
       "../node_modules/class-validator/validation/ValidationError.d.ts",
@@ -14367,7 +14374,6 @@
       "../src/users/users.module.ts",
       "../src/invoice/invoicing-model.ts",
       "../src/invoice/invoicingClass-model.ts",
-      "../src/invoice/invoice.service.ts",
       "../src/pass/pass.service.ts",
       "../src/clientes/clientes.service.ts",
       "../node_modules/@types/istanbul-lib-coverage/index.d.ts",
@@ -14528,7 +14534,7 @@
       "../node_modules/@types/webpack/index.d.ts",
       "../node_modules/@types/yargs-parser/index.d.ts",
       "../node_modules/@types/yargs/index.d.ts",
-      "../src/database.config.ts"
+      "../src/invoice/invoice.service.ts"
     ]
   },
   "version": "3.8.3"

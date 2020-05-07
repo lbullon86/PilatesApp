@@ -14,8 +14,8 @@ const config: ConnectionOptions = {
   type: 'mysql',
   host: 'localhost',
   port: 3306,
-  username: 'newuser',
-  password: 'password',
+  username: 'root',
+  password: 'shiloh1959',
   database: 'app',
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
 

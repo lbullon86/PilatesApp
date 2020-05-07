@@ -1,7 +1,11 @@
-<div *ngFor="let activity of schedule">
-    <mat-card fxFlex="10">
-        <mat-card-title>{{activity.activity}}</mat-card-title>
-        <mat-card-subtitle>{{activity.hour}}</mat-card-subtitle>
-        <img mat-card-avatar class="avatar" src='../../assets/{{activity.activity}}.png'>
+<div fxLayout="row">
+    <mat-card fxFlex="12" *ngFor="let activity of schedule" style="border:solid 1px black">
+        <mat-card-title fxLayoutAlign="center">{{activity.hour}}</mat-card-title>
+        <mat-card-subtitle fxLayoutAlign="center">{{activity.activity}}</mat-card-subtitle>
+        <img mat-card-avatar fxLayoutAlign="center" class="avatar" src='../../assets/{{activity.activity}}.png'>
+    </mat-card>
+    <mat-card fxFlex="12" style="border:solid 1px black">
+        <mat-icon mat-card-avatar>add_circle_outline
+        </mat-icon>
     </mat-card>
 </div>

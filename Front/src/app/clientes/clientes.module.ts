@@ -13,6 +13,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { DiarioModule } from '../diario/diario.module';
 
 
@@ -21,7 +22,7 @@ import { DiarioModule } from '../diario/diario.module';
   imports: [
     CommonModule, HttpClientModule, MatFormFieldModule, MatTableModule, FormsModule,
     MatSlideToggleModule, MatDatepickerModule, MatInputModule, MatButtonModule,
-    AppRoutingModule, MatGridListModule,DiarioModule, MatPaginatorModule
+    AppRoutingModule, MatGridListModule,DiarioModule, MatPaginatorModule, FlexLayoutModule
   ],
   entryComponents: [ InsertClientComponent],
 

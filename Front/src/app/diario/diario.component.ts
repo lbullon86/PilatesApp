@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DiarioService } from './diario.service';
 import { Schedule } from './schedule-model';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-diario',
@@ -10,10 +9,12 @@ import { Observable } from 'rxjs';
 })
 export class DiarioComponent implements OnInit {
   schedule:Schedule[];
+  date:Date
   constructor(
-    private serviceSchedule:DiarioService
+    private serviceSchedule:DiarioService,
   ) {
-    
+    this.date = new Date()
+
    }
 
   ngOnInit() {
@@ -21,7 +22,7 @@ export class DiarioComponent implements OnInit {
   }
 
   async getDay(){
-    await this.serviceSchedule.getDay(0).subscribe(day => this.schedule = day)
+    await this.serviceSchedule.getDay(this.date.getDay()).subscribe(day => this.schedule = day)
     
   }
 

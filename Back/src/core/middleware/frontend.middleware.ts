@@ -15,7 +15,7 @@ const allowedExt = [
   '.svg'
 ];
 ​
-const resolvePath = (file: string) => path.resolve(`/home/ubuntu/PilatesApp/Front/${file}`);
+const resolvePath = (file: string) => path.resolve(`/home/ubuntu/PilatesApp/Front/dist/AppMaite/${file}`);
 ​
 @Injectable()
 export class FrontendMiddleware implements NestMiddleware {

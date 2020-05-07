@@ -17,4 +17,12 @@ export class DiarioService {
    getDay(day:number){
      return this.http.get(`${this.url}/${day}`) as Observable <Schedule[]>
    }
+
+   getWeek(){
+     return this.http.get(`${this.url}/week`) as Observable <Schedule[][]>
+   }
+
+   update(activity:Schedule){
+     return this.http.put(`${this.url}/${activity.id}`,activity) as Observable <Schedule>
+   }
 }

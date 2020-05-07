@@ -1,5 +1,5 @@
 import { Schedule } from './schedule.entity';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 export declare class ScheduleService {
     private readonly repositorySchedule;
     constructor(repositorySchedule: Repository<Schedule>);
@@ -7,4 +7,5 @@ export declare class ScheduleService {
     save(schedule: Schedule): Promise<Schedule>;
     getOneDay(daySelected: number): Promise<Schedule[]>;
     getWeek(): Promise<any[]>;
+    updateActivity(activity: Schedule): Promise<UpdateResult>;
 }

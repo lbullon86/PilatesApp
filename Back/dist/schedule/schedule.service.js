@@ -28,10 +28,12 @@ let ScheduleService = class ScheduleService {
     }
     async getOneDay(daySelected) {
         var allDay = [];
-        allDay = await this.repositorySchedule.createQueryBuilder('schedule')
+        allDay = await this.repositorySchedule
+            .createQueryBuilder('schedule')
             .select('schedule.day', 'day')
             .addSelect('schedule.hour', 'hour')
             .addSelect('schedule.activity', 'activity')
+            .addSelect('schedule.id', 'id')
             .where('schedule.day =:day', { day: daySelected })
             .orderBy('schedule.hour')
             .getRawMany();
@@ -40,10 +42,14 @@ let ScheduleService = class ScheduleService {
     async getWeek() {
         const allDays = [];
         for (let index = 0; index < 5; index++) {
-            console.log(this.getOneDay(index));
-            await allDays.push(this.getOneDay(index));
+            var oneDay = [];
+            oneDay = await this.getOneDay(index);
+            allDays.push(oneDay);
         }
         return allDays;
+    }
+    updateActivity(activity) {
+        return this.repositorySchedule.update(activity.activity, activity);
     }
 };
 ScheduleService = __decorate([

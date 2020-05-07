@@ -12,9 +12,9 @@ import { DetailClientComponent } from './detail-client.component';
 import { UpdateClientComponent } from './update-client/update-client.component';
 import { AddPayComponent } from './add-pay/add-pay.component';
 import { AddAttendanceComponent } from './add-attendance/add-attendance.component';
-import { DiarioModule } from '../diario/diario.module';
 import { FormsModule } from '@angular/forms';
 import { InvoicesComponent } from '../invoices/invoices.component';
+import { DiarioModule } from '../diario/diario.module';
 
 
 

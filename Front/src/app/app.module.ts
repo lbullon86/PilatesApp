@@ -16,6 +16,8 @@ import { DatePipe } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout' ;
 import { ContabilidadModule } from './contabilidad/contabilidad.module';
 import { HeaderComponent } from './header/header.component';
+import { ScheduleModule } from './schedule/schedule.module';
+import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
 
 
 
@@ -23,7 +25,7 @@ import { HeaderComponent } from './header/header.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-       
+    UpdateScheduleComponent,
        
   ],
 
@@ -42,12 +44,8 @@ import { HeaderComponent } from './header/header.component';
     ContabilidadModule,
     DetailClientModule,
     FlexLayoutModule,
+    ScheduleModule,
     
-    
-    
-    
-
-
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

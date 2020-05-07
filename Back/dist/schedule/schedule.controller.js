@@ -31,6 +31,9 @@ let ScheduleController = class ScheduleController {
     getOneDay(day) {
         return this.scheduleService.getOneDay(day);
     }
+    async update(id, activity) {
+        return this.scheduleService.updateActivity(activity);
+    }
 };
 __decorate([
     common_1.Get(),
@@ -58,6 +61,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], ScheduleController.prototype, "getOneDay", null);
+__decorate([
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)),
+    __param(1, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, schedule_entity_1.Schedule]),
+    __metadata("design:returntype", Promise)
+], ScheduleController.prototype, "update", null);
 ScheduleController = __decorate([
     common_1.Controller('api/schedule'),
     __metadata("design:paramtypes", [schedule_service_1.ScheduleService])

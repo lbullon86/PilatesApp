@@ -27,5 +27,12 @@ export class ScheduleController {
 
     }
 
+    async update(
+        @Param('id', ParseIntPipe) id: number,
+        @Body() activity: Schedule,
+      ): Promise<any> {
+        return this.scheduleService.updateActivity(activity);
+      }
+
   
 }

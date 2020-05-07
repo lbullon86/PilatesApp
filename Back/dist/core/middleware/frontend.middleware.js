@@ -19,7 +19,7 @@ const allowedExt = [
     '.ttf',
     '.svg'
 ];
-const resolvePath = (file) => path.resolve(`/home/ubuntu/PilatesApp/Front/${file}`);
+const resolvePath = (file) => path.resolve(`/home/ubuntu/PilatesApp/Front/dist/AppMaite/${file}`);
 let FrontendMiddleware = class FrontendMiddleware {
     use(req, res, next) {
         {

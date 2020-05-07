@@ -1,0 +1,18 @@
+<div fxLayout="row">
+    <div fxFlex="75" style="border:solid 1px red">
+        <div fxLayout="row">
+            <div *ngFor="let day of week; let i=index" fxFlex="20">
+                {{i}}
+                <div *ngFor="let activity of day" fxLayout="column">
+                    <app-activity-entry [activity]="activity" (click)="modalUpdate(activity)"></app-activity-entry>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div fxFlex="25" style="border:solid 1px black">
+
+    </div>
+</div>

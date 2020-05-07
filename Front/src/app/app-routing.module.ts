@@ -5,7 +5,7 @@ import {ClientesComponent} from '../app/clientes/clientes.component';
 import { AppComponent } from './app.component';
 import { CompanyComponent} from './company/company.component';
 import { DetailClientComponent } from './detail-client/detail-client.component';
-import { DiarioComponent } from './diario/diario.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 
 const routes: Routes = [
@@ -14,8 +14,8 @@ const routes: Routes = [
   {path: 'company', component:CompanyComponent},
   {path: '.', component:AppComponent},
   {path: 'detailClient/:id', component:DetailClientComponent},
-  {path: 'diario', component:DiarioComponent},
-  {path: '', pathMatch: 'full', redirectTo: 'diario'},
+  {path: 'home', component:ScheduleComponent},
+  {path: '', pathMatch: 'full', redirectTo: 'home'},
 
 
   

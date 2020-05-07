@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ResumeIncomesService } from "./resume-incomes.service";
 import { InvoicingClass } from "../invoicing/invoicingClass-model";
-import { Invoicing } from '../invoicing/invoicing-model';
+import { Invoicing } from "../invoicing/invoicing-model";
 
 @Component({
   selector: "app-resume-incomes",
@@ -13,7 +13,7 @@ export class ResumeIncomesComponent implements OnInit {
   invoicingClass: InvoicingClass;
   invoicinPayment: Invoicing;
   dataClass = [];
-  dataPayment =[]
+  dataPayment = [];
   colorScheme = {
     domain: ["#5AA454", "#A10A28", "#C7B42C", "#AAAAAA"]
   };
@@ -68,27 +68,47 @@ export class ResumeIncomesComponent implements OnInit {
       );
   }
 
-  getIncomingYearByPayment(){
-    this.serviceInvoicing.getInvoicingPayment(this.year)
-    .subscribe(invoicing=> ((this.invoicinPayment = invoicing), this.getDataByMethodPayment())
-     ); 
-  }
-
-  getIncomingMonthByPayment(){
-    this.serviceInvoicing.getInvoicingOneMonthByPayment(this.year,this.monthSelected)
-    .subscribe(invoicing=> ((this.invoicinPayment = invoicing), this.getDataByMethodPayment()))
-  }
-
-  getIncomingQuarterByPayment(){
+  getIncomingYearByPayment() {
     this.serviceInvoicing
-    .getInvoicingQuarterPayment(this.year, this.getMonthsOfQuarter(this.quarter)[0],this.getMonthsOfQuarter(this.quarter)[1])
-    .subscribe(invoicing=> 
-      ((this.invoicinPayment = invoicing), this.getDataByMethodPayment()))
+      .getInvoicingPayment(this.year)
+      .subscribe(
+        invoicing => (
+          (this.invoicinPayment = invoicing), this.getDataByMethodPayment()
+        )
+      );
+  }
+
+  getIncomingMonthByPayment() {
+    this.serviceInvoicing
+      .getInvoicingOneMonthByPayment(this.year, this.monthSelected)
+      .subscribe(
+        invoicing => (
+          (this.invoicinPayment = invoicing), this.getDataByMethodPayment()
+        )
+      );
+  }
+
+  getIncomingQuarterByPayment() {
+    this.serviceInvoicing
+      .getInvoicingQuarterPayment(
+        this.year,
+        this.getMonthsOfQuarter(this.quarter)[0],
+        this.getMonthsOfQuarter(this.quarter)[1]
+      )
+      .subscribe(
+        invoicing => (
+          (this.invoicinPayment = invoicing), this.getDataByMethodPayment()
+        )
+      );
   }
 
   getIncomingQuarterByClass() {
     this.serviceInvoicing
-      .getInvoicingClassQuarter(this.year, this.getMonthsOfQuarter(this.quarter)[0],this.getMonthsOfQuarter(this.quarter)[1])
+      .getInvoicingClassQuarter(
+        this.year,
+        this.getMonthsOfQuarter(this.quarter)[0],
+        this.getMonthsOfQuarter(this.quarter)[1]
+      )
       .subscribe(
         invoicing => (
           (this.invoicingClass = invoicing[this.quarter - 1]),
@@ -126,26 +146,24 @@ export class ResumeIncomesComponent implements OnInit {
     ];
   }
 
-  getDataByMethodPayment(){
+  getDataByMethodPayment() {
     this.dataPayment = [
       {
-        name:"Efectivo",
-        value:this.invoicinPayment.sumCash
+        name: "Efectivo",
+        value: this.invoicinPayment.sumCash
       },
       {
-        name:"Bizum",
-        value:this.invoicinPayment.sumBizum
+        name: "Bizum",
+        value: this.invoicinPayment.sumBizum
       },
       {
-        name:"Tpv",
-        value:this.invoicinPayment.sumTpv
+        name: "Tpv",
+        value: this.invoicinPayment.sumTpv
       },
       {
-        name:"Transferencia",
-        value:this.invoicinPayment.sumTransfer
+        name: "Transferencia",
+        value: this.invoicinPayment.sumTransfer
       }
-
-    ]
-
+    ];
   }
 }
