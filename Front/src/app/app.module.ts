@@ -18,6 +18,7 @@ import { ContabilidadModule } from './contabilidad/contabilidad.module';
 import { HeaderComponent } from './header/header.component';
 import { ScheduleModule } from './schedule/schedule.module';
 import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
+import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 
 
 
@@ -25,7 +26,7 @@ import { UpdateScheduleComponent } from './update-schedule/update-schedule.compo
   declarations: [
     AppComponent,
     HeaderComponent,
-    UpdateScheduleComponent,
+    InvoicesListComponent,
        
   ],
 

@@ -1,0 +1,52 @@
+<h1 style="text-align: center">
+    Nueva Actividad</h1>
+<mat-grid-list cols="2" rows="5" rowHeight="3:1">
+    <mat-grid-tile conslpan="1">
+        <mat-form-field class="example-full-width">
+            <mat-label>Tipo de Clase</mat-label>
+            <mat-select [(ngModel)]="activity.name">
+                <mat-option *ngFor="let activity of activities" value="{{activity}}">
+                    {{activity}}
+
+                </mat-option>
+            </mat-select>
+
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile conslpan="1">
+        <mat-form-field class="example-full-width">
+            <mat-label>Día de la semana</mat-label>
+            <mat-select [(ngModel)]="activity.day">
+                <mat-option *ngFor="let day of days;let i=index" value="{{i}}">
+                    {{day}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile conslpan="1">
+        <mat-form-field class="example-full-width">
+            <mat-label>Hora</mat-label>
+            <input matInput placeholder="Introduce hora" type="number" min="7" max="22" [(ngModel)]="hour">
+
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile conslpan="1">
+        <mat-form-field class="example-full-width">
+            <mat-label>Minutos</mat-label>
+            <select matNativeControl required [(ngModel)]="minutes">
+                <option value="00">00</option>
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="45">45</option>
+            </select>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1">
+        <button mat-raised-button color="primary" (click)="saveActivity()">Añadir</button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <button mat-button (click)="close()">No Thanks</button>
+    </mat-grid-tile>

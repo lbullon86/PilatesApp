@@ -19,7 +19,7 @@ __decorate([
 __decorate([
     typeorm_1.Column({ nullable: false }),
     __metadata("design:type", String)
-], Schedule.prototype, "activity", void 0);
+], Schedule.prototype, "name", void 0);
 __decorate([
     typeorm_1.Column({ nullable: false }),
     __metadata("design:type", Number)

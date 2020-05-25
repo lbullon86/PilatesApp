@@ -7,7 +7,7 @@ export class Schedule{
     @PrimaryGeneratedColumn()
     id:number
     @Column({nullable:false})
-    activity:string
+    name:string
     @Column({nullable:false})
     day:number
     @Column({type:"time",nullable:false})

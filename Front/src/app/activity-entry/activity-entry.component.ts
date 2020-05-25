@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Schedule } from "../diario/schedule-model";
+import { Activity } from '../schedule/add-activity/activity-model';
 
 @Component({
   selector: "app-activity-entry",
@@ -7,7 +7,7 @@ import { Schedule } from "../diario/schedule-model";
   styleUrls: ["./activity-entry.component.css"]
 })
 export class ActivityEntryComponent implements OnInit {
-  @Input() activity: Schedule;
+  @Input() activity: Activity;
   constructor() {}
 
   ngOnInit(): void {}

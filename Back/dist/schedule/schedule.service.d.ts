@@ -8,4 +8,5 @@ export declare class ScheduleService {
     getOneDay(daySelected: number): Promise<Schedule[]>;
     getWeek(): Promise<any[]>;
     updateActivity(activity: Schedule): Promise<UpdateResult>;
+    deleteActivity(idActivity: number): Promise<import("typeorm").DeleteResult>;
 }

@@ -24,7 +24,7 @@ export class ScheduleService {
       .createQueryBuilder('schedule')
       .select('schedule.day', 'day')
       .addSelect('schedule.hour', 'hour')
-      .addSelect('schedule.activity', 'activity')
+      .addSelect('schedule.name', 'name')
       .addSelect('schedule.id','id')
       .where('schedule.day =:day', { day: daySelected })
       .orderBy('schedule.hour')
@@ -43,6 +43,10 @@ export class ScheduleService {
   }
 
   updateActivity(activity:Schedule):Promise <UpdateResult>{
-      return this.repositorySchedule.update(activity.activity,activity)
+      return this.repositorySchedule.update(activity.name,activity)
+  }
+
+  deleteActivity(idActivity: number) {
+    return this.repositorySchedule.delete(idActivity);
   }
 }

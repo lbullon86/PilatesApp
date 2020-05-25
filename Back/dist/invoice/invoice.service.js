@@ -29,7 +29,6 @@ let InvoiceService = InvoiceService_1 = class InvoiceService {
         return this.repositoryInvoice.find();
     }
     save(invoice) {
-        console.log(invoice);
         return this.repositoryInvoice.save(invoice);
     }
     getInvoiceOneClient(id) {
@@ -72,9 +71,9 @@ let InvoiceService = InvoiceService_1 = class InvoiceService {
             .where('year(invoice.dateInvoice)=:yearSelected', { yearSelected: year })
             .getRawOne();
         invoicing.sum = queryResultSum.sum;
-        invoicing.sumIva = (await invoicing.sum) - invoicing.sum / 1.21;
-        invoicing.sumIrpf = (await (invoicing.sum / 1.21)) * 0.2;
-        invoicing.sumTax = await Math.round(invoicing.sumIva + invoicing.sumIrpf);
+        invoicing.sumIva = invoicing.sum - invoicing.sum / 1.21;
+        invoicing.sumIrpf = (invoicing.sum / 1.21) * 0.2;
+        invoicing.sumTax = Math.round(invoicing.sumIva + invoicing.sumIrpf);
         return invoicing;
     }
     async getInvoicingOneMonth(year, month) {
@@ -85,9 +84,9 @@ let InvoiceService = InvoiceService_1 = class InvoiceService {
             .where('year(invoice.dateInvoice)=:yearSelected and month(invoice.dateInvoice) =:monthSelected', { yearSelected: year, monthSelected: month })
             .getRawOne();
         invoicing.sum = queryResultSum.sum;
-        invoicing.sumIva = (await invoicing.sum) - invoicing.sum / 1.21;
-        invoicing.sumIrpf = (await (invoicing.sum / 1.21)) * 0.2;
-        invoicing.sumTax = await Math.round(invoicing.sumIva + invoicing.sumIrpf);
+        invoicing.sumIva = invoicing.sum - invoicing.sum / 1.21;
+        invoicing.sumIrpf = (invoicing.sum / 1.21) * 0.2;
+        invoicing.sumTax = Math.round(invoicing.sumIva + invoicing.sumIrpf);
         return invoicing;
     }
     async getInvoicingOneYearAllMonths(year) {
@@ -149,12 +148,7 @@ let InvoiceService = InvoiceService_1 = class InvoiceService {
         return invoicing;
     }
     getPasses() {
-        return this.repositoryInvoice
-            .createQueryBuilder('invoice')
-            .select('invoice')
-            .from(invoice_entity_1.Invoice, 'invoice')
-            .where('invoice.concept = B8 ')
-            .getRawMany();
+        return this.repositoryInvoice.find({ concept: 'B8' });
     }
     async getInvoicingOnePeriod(dateInvoice1, dateInvoice2) {
         let invoicing = new invoicing_model_1.Invoicing();
@@ -216,29 +210,22 @@ let InvoiceService = InvoiceService_1 = class InvoiceService {
             concept: typeClass,
         })
             .getRawOne()
-            .then(value => parseInt(value.sum, 10));
+            .then(value => (util_1.isNull(value.sum) ? 0 : parseInt(value.sum, 10)));
     }
     async getInvoicingMonthByAllClass(year, month) {
-        var invoicing = new invoicingClass_model_1.InvoicingClass();
-        const queryResultB8 = await this.getInvoicingMonthByOneClass(year, month, 'B8');
-        const queryResultB16 = await this.getInvoicingMonthByOneClass(year, month, 'B16');
-        const queryResultMT1 = await this.getInvoicingMonthByOneClass(year, month, 'MT1');
-        const queryResultMT2 = await this.getInvoicingMonthByOneClass(year, month, 'MT2');
-        const queryResultR1 = await this.getInvoicingMonthByOneClass(year, month, 'R1');
-        const queryResultR2 = await this.getInvoicingMonthByOneClass(year, month, 'R2');
-        const queryResultTB1 = await this.getInvoicingMonthByOneClass(year, month, 'TB1');
-        const queryResultTB2 = await this.getInvoicingMonthByOneClass(year, month, 'TB2');
-        invoicing.B16 = queryResultB16;
-        invoicing.B8 = queryResultB8;
-        invoicing.reformer1 = queryResultR1;
-        invoicing.reformer2 = queryResultR2;
-        invoicing.mat1 = queryResultMT1;
-        invoicing.mat2 = queryResultMT2;
-        invoicing.totalBarre1 = queryResultTB1;
-        invoicing.totalBarre2 = queryResultTB2;
-        invoicing = this.getIsNull(invoicing);
-        this.logger.log(JSON.stringify(invoicing));
-        return invoicing;
+        return await this.repositoryInvoice
+            .createQueryBuilder('invoice')
+            .select('SUM(invoice.quantity)', 'sum')
+            .addSelect('invoice.concept', 'concept')
+            .where('year(invoice.dateInvoice) = :year', { year })
+            .andWhere('month(invoice.dateInvoice) = :month', { month })
+            .groupBy('invoice.concept')
+            .getRawMany()
+            .then(value => this.mapToInvoicing(value));
+    }
+    mapToInvoicing(value) {
+        const invoicing = value.reduce((acc, entry) => (Object.assign(Object.assign({}, acc), { [entry.concept]: parseInt(entry.sum || 0, 10) })), {});
+        return new invoicingClass_model_1.InvoicingClass(invoicing);
     }
     getIsNull(number) {
         for (const key in number) {

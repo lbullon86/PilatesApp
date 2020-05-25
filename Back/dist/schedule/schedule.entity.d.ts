@@ -1,6 +1,6 @@
 export declare class Schedule {
     id: number;
-    activity: string;
+    name: string;
     day: number;
     hour: Date;
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Schedule } from './schedule-model';
+import { Activity } from '../schedule/add-activity/activity-model';
 import { environment } from 'src/environments/environment';
 ;
 
@@ -15,14 +15,25 @@ export class DiarioService {
    }
 
    getDay(day:number){
-     return this.http.get(`${this.url}/${day}`) as Observable <Schedule[]>
+     return this.http.get(`${this.url}/${day}`) as Observable <Activity[]>
    }
 
    getWeek(){
-     return this.http.get(`${this.url}/week`) as Observable <Schedule[][]>
+     return this.http.get(`${this.url}/week`) as Observable <Activity[][]>
    }
 
-   update(activity:Schedule){
-     return this.http.put(`${this.url}/${activity.id}`,activity) as Observable <Schedule>
+   update(activity:Activity){
+     return this.http.put(`${this.url}/${activity.id}`,activity) as Observable <Activity>
+   }
+
+   save(activity:Activity):Observable<Activity>{
+     alert(activity.name)
+     return this.http.post<Activity>(this.url,activity); 
+
+   }
+
+   delete(id:number){
+     return this.http.delete(`${this.url}/${id}/delete`)
+
    }
 }

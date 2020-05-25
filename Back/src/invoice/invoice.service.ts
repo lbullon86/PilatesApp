@@ -8,8 +8,7 @@ import { isNull } from 'util';
 
 @Injectable()
 export class InvoiceService {
-  //
-  private readonly logger=new Logger(InvoiceService.name)
+  private readonly logger = new Logger(InvoiceService.name);
   constructor(
     @InjectRepository(Invoice)
     private readonly repositoryInvoice: Repository<Invoice>,
@@ -20,7 +19,6 @@ export class InvoiceService {
   }
 
   save(invoice: Invoice): Promise<Invoice> {
-    console.log(invoice);
     return this.repositoryInvoice.save(invoice);
   }
 
@@ -69,9 +67,9 @@ export class InvoiceService {
       .where('year(invoice.dateInvoice)=:yearSelected', { yearSelected: year })
       .getRawOne();
     invoicing.sum = queryResultSum.sum;
-    invoicing.sumIva = (await invoicing.sum) - invoicing.sum / 1.21;
-    invoicing.sumIrpf = (await (invoicing.sum / 1.21)) * 0.2;
-    invoicing.sumTax = await Math.round(invoicing.sumIva + invoicing.sumIrpf);
+    invoicing.sumIva = invoicing.sum - invoicing.sum / 1.21;
+    invoicing.sumIrpf = (invoicing.sum / 1.21) * 0.2;
+    invoicing.sumTax = Math.round(invoicing.sumIva + invoicing.sumIrpf);
 
     return invoicing;
   }
@@ -87,9 +85,9 @@ export class InvoiceService {
       )
       .getRawOne();
     invoicing.sum = queryResultSum.sum;
-    invoicing.sumIva = (await invoicing.sum) - invoicing.sum / 1.21;
-    invoicing.sumIrpf = (await (invoicing.sum / 1.21)) * 0.2;
-    invoicing.sumTax = await Math.round(invoicing.sumIva + invoicing.sumIrpf);
+    invoicing.sumIva = invoicing.sum - invoicing.sum / 1.21;
+    invoicing.sumIrpf = (invoicing.sum / 1.21) * 0.2;
+    invoicing.sumTax = Math.round(invoicing.sumIva + invoicing.sumIrpf);
 
     return invoicing;
   }
@@ -182,12 +180,7 @@ export class InvoiceService {
   }
 
   getPasses(): Promise<Invoice[]> {
-    return this.repositoryInvoice
-      .createQueryBuilder('invoice')
-      .select('invoice')
-      .from(Invoice, 'invoice')
-      .where('invoice.concept = B8 ')
-      .getRawMany();
+    return this.repositoryInvoice.find({ concept: 'B8' });
   }
 
   async getInvoicingOnePeriod(
@@ -258,7 +251,11 @@ export class InvoiceService {
   //INVOICING BY MONTHS
   //BY TYPECLASS
 
-  getInvoicingMonthByOneClass(year: number, month: number, typeClass: string) :Promise<number> {
+  getInvoicingMonthByOneClass(
+    year: number,
+    month: number,
+    typeClass: string,
+  ): Promise<number> {
     return this.repositoryInvoice
       .createQueryBuilder('invoice')
       .select('SUM(invoice.quantity)', 'sum')
@@ -271,63 +268,33 @@ export class InvoiceService {
         },
       )
       .getRawOne()
-      .then(value => parseInt(value.sum, 10));
+      .then(value => (isNull(value.sum) ? 0 : parseInt(value.sum, 10)));
   }
 
   async getInvoicingMonthByAllClass(year: number, month: number) {
-    var invoicing: InvoicingClass = new InvoicingClass();
-    const queryResultB8 = await this.getInvoicingMonthByOneClass(
-      year,
-      month,
-      'B8',
-    );
-    const queryResultB16 = await this.getInvoicingMonthByOneClass(
-      year,
-      month,
-      'B16',
-    );
-    const queryResultMT1 = await this.getInvoicingMonthByOneClass(
-      year,
-      month,
-      'MT1',
-    );
-    const queryResultMT2 = await this.getInvoicingMonthByOneClass(
-      year,
-      month,
-      'MT2',
-    );
-    const queryResultR1 = await this.getInvoicingMonthByOneClass(
-      year,
-      month,
-      'R1',
-    );
-    const queryResultR2 = await this.getInvoicingMonthByOneClass(
-      year,
-      month,
-      'R2',
-    );
-    const queryResultTB1 = await this.getInvoicingMonthByOneClass(
-      year,
-      month,
-      'TB1',
-    );
-    const queryResultTB2 = await this.getInvoicingMonthByOneClass(
-      year,
-      month,
-      'TB2',
-    );
+    return await this.repositoryInvoice
+      .createQueryBuilder('invoice')
+      .select('SUM(invoice.quantity)', 'sum')
+      .addSelect('invoice.concept', 'concept')
+      .where('year(invoice.dateInvoice) = :year', { year })
+      .andWhere('month(invoice.dateInvoice) = :month', { month })
+      .groupBy('invoice.concept')
+      .getRawMany()
+      .then(value => this.mapToInvoicing(value));
+  }
 
-    invoicing.B16 = queryResultB16;
-    invoicing.B8 = queryResultB8;
-    invoicing.reformer1 = queryResultR1;
-    invoicing.reformer2 = queryResultR2;
-    invoicing.mat1 = queryResultMT1;
-    invoicing.mat2 = queryResultMT2;
-    invoicing.totalBarre1 = queryResultTB1;
-    invoicing.totalBarre2 = queryResultTB2;
-    invoicing = this.getIsNull(invoicing);
-      this.logger.log(JSON.stringify(invoicing))
-    return invoicing;
+  private mapToInvoicing(value: any): InvoicingClass {
+    const invoicing = value.reduce(
+      //acc es un acumulador de lo cual se inicializa vacío y se le añadiendo  el siguiente.
+      //arranca y pilla el primer concept y le pone su correspondiente.
+      (acc, entry) => ({
+        ...acc,
+        [entry.concept]: parseInt(entry.sum || 0, 10),
+      }),
+      //Valor inicial del reduce
+      {},
+    )
+    return new InvoicingClass(invoicing);    
   }
 
   getIsNull(number: any) {
@@ -471,7 +438,7 @@ export class InvoiceService {
         },
       )
       .getRawOne()
-      .then(value=> parseInt(value.sum,10));
+      .then(value => parseInt(value.sum, 10));
   }
 
   async getInvoicingOneQuarterByAllClass(
@@ -666,7 +633,10 @@ export class InvoiceService {
 
   //BY CLASS
 
-  getInvoicingOneYearByOneClass(year: number, concept: string) :Promise<number> {
+  getInvoicingOneYearByOneClass(
+    year: number,
+    concept: string,
+  ): Promise<number> {
     return this.repositoryInvoice
       .createQueryBuilder('invoice')
       .select('SUM(invoice.quantity)', 'sum')
@@ -675,10 +645,10 @@ export class InvoiceService {
         concept: concept,
       })
       .getRawOne()
-      .then(value=>parseInt(value.sum,10));
+      .then(value => parseInt(value.sum, 10));
   }
 
-  async getInvoicingOneYearByClass(year: number) :Promise<InvoicingClass> {
+  async getInvoicingOneYearByClass(year: number): Promise<InvoicingClass> {
     var invoicing: InvoicingClass = new InvoicingClass();
 
     const queryResultB8 = await this.getInvoicingOneYearByOneClass(year, 'B8');
@@ -705,14 +675,14 @@ export class InvoiceService {
       'TB2',
     );
 
-    invoicing.B16 = queryResultB16
-    invoicing.B8 = queryResultB8
-    invoicing.reformer1 = queryResultR1
-    invoicing.reformer2 = queryResultR2
-    invoicing.mat1 = queryResultMT1
-    invoicing.mat2 = queryResultMT2
-    invoicing.totalBarre1 = queryResultTB1
-    invoicing.totalBarre2 = queryResultTB2
+    invoicing.B16 = queryResultB16;
+    invoicing.B8 = queryResultB8;
+    invoicing.reformer1 = queryResultR1;
+    invoicing.reformer2 = queryResultR2;
+    invoicing.mat1 = queryResultMT1;
+    invoicing.mat2 = queryResultMT2;
+    invoicing.totalBarre1 = queryResultTB1;
+    invoicing.totalBarre2 = queryResultTB2;
     invoicing = this.getIsNull(invoicing);
     return invoicing;
   }

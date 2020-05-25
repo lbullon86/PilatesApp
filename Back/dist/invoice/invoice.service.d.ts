@@ -21,6 +21,7 @@ export declare class InvoiceService {
     getInvoicingQuarter(): Promise<Invoicing[]>;
     getInvoicingMonthByOneClass(year: number, month: number, typeClass: string): Promise<number>;
     getInvoicingMonthByAllClass(year: number, month: number): Promise<InvoicingClass>;
+    private mapToInvoicing;
     getIsNull(number: any): any;
     getInvoicingMonthsByClass(year: number): Promise<any[]>;
     sortingInvoicingClass(invoicingMonths: any[]): any[];

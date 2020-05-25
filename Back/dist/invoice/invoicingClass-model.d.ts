@@ -8,4 +8,5 @@ export declare class InvoicingClass {
     B8: number;
     B16: number;
     month: number;
+    constructor(value?: any);
 }

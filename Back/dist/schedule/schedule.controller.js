@@ -34,6 +34,9 @@ let ScheduleController = class ScheduleController {
     async update(id, activity) {
         return this.scheduleService.updateActivity(activity);
     }
+    deleteActivity(id) {
+        return this.scheduleService.deleteActivity(id);
+    }
 };
 __decorate([
     common_1.Get(),
@@ -68,6 +71,13 @@ __decorate([
     __metadata("design:paramtypes", [Number, schedule_entity_1.Schedule]),
     __metadata("design:returntype", Promise)
 ], ScheduleController.prototype, "update", null);
+__decorate([
+    common_1.Delete("/:id/delete"),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], ScheduleController.prototype, "deleteActivity", null);
 ScheduleController = __decorate([
     common_1.Controller('api/schedule'),
     __metadata("design:paramtypes", [schedule_service_1.ScheduleService])

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, ParseIntPipe, Delete } from '@nestjs/common';
 import { ScheduleService } from './schedule.service';
 import { Schedule } from './schedule.entity';
 
@@ -34,5 +34,10 @@ export class ScheduleController {
         return this.scheduleService.updateActivity(activity);
       }
 
+
+    @Delete("/:id/delete")
+    deleteActivity(@Param('id', ParseIntPipe) id:number){
+        return this.scheduleService.deleteActivity(id)
+    }
   
 }
