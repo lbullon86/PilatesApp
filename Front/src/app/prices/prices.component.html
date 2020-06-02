@@ -1,0 +1,54 @@
+<mat-grid-list cols="2" rows="5" rowHeight="2.5:1">
+    <h1>Precios</h1>
+    <mat-grid-tile colspan="2">
+        <table mat-table [dataSource]="prices | async" class="mat-elevation-z8">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE</th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>CANTIDAD</th>
+                <td mat-cell *matCellDef="let element"> {{element.price}}€ </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+    </mat-grid-tile>
+
+    <div *ngIf="themeAdd;else template">
+        <mat-grid-tile colspan="1">
+            <div class="example-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput [(ngModel)]="price.name">
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+            <div class="example-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Precio</mat-label>
+                    <input matInput type="nnumber" [(ngModel)]="price.price">
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+
+    
+        <mat-grid-tile colspan="1">
+            <button (click)="addPrice()" mat-raised-button color="primary">Añadir</button>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1">
+            <button mat-button (click)="closeWindow()">Cerrar</button>
+        </mat-grid-tile>
+    </div>
+    <ng-template #template>
+        <mat-grid-tile colspan="2">
+
+            <button (click)="selectAdd()">Añadir</button>
+        </mat-grid-tile>
+    </ng-template>
+
+
+</mat-grid-list>

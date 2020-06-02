@@ -69,10 +69,12 @@ getPasses(client:Clients):Promise<Pass>{
     .from(Invoice, "invoice").where("(invoice.concept = B8  AND invoice.client.idClient = client.idClient").getRawOne();
 }
 
-getDefaulters(){
-
-    const qb = this.invoiceService.getDefaulters();
-    return this.repositoryClients.createQueryBuilder("client").select("client").where("activeClient = 1 AND idClient in("+ qb.getQuery() +")").getOne();  
+async getDefaulters(){
+    const qb =this.invoiceService.getDefaulters();
+    const defaulters = this.repositoryClients
+    .createQueryBuilder("client").select("client")
+    .where("activeClient = 1 and idClient  in (:clientes)", {clientes:qb}).getMany();  
+    return defaulters
 }
 
 }

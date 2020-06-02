@@ -1,7 +1,7 @@
 <div fxLayout="row" class="fluid">
     <div fxFlex="65">
         <ng-container *ngIf="controller; else elseTemplateController">
-            <button (click)="addPay()">Añadir gasto</button>
+            <button (click)="addPay()" mat-raised-button color="primary">Añadir gasto</button>
             <mat-form-field class="filtro">
                 <mat-label>Filter</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Filtrar...">
@@ -72,11 +72,10 @@
                                 Mensual
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-
                         <mat-form-field>
                             <mat-label>Mes</mat-label>
                             <mat-select [(ngModel)]="monthSelected">
-                                <mat-option *ngFor="let month of months" [value]="monthSelected">
+                                <mat-option *ngFor="let month of months" [value]="month">
                                     {{month}}
                                 </mat-option>
                             </mat-select>
@@ -132,7 +131,7 @@
                         <mat-form-field>
                             <mat-label>Mes</mat-label>
                             <mat-select [(ngModel)]="monthSelected">
-                                <mat-option *ngFor="let month of months" [value]="monthSelected">
+                                <mat-option *ngFor="let month of months" [value]="month">
                                     {{month}}
                                 </mat-option>
                             </mat-select>

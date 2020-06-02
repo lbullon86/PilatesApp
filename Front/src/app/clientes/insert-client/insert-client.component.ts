@@ -29,7 +29,6 @@ export class InsertClientComponent {
     }
 
     addUser(){
-      console.log(this.client)
       return this.clientService.save(this.client).subscribe(clients => this.dialogRef.close(this.dialogRef) )
     }
 

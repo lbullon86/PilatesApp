@@ -19,7 +19,7 @@ import { InsertClientComponent } from './insert-client/insert-client.component';
 export class ClientesComponent implements OnInit {
   clients:Observable<MatTableDataSource<any>>;
   clientsData:MatTableDataSource<any>;
-  displayedColumns: string[] = ['dniClient','nameClient', 'surnameClient','idClient' ];  
+  displayedColumns: string[] = ['nameClient', 'surnameClient'];  
   public client:Client;
 
   
@@ -44,7 +44,7 @@ export class ClientesComponent implements OnInit {
   openDialog():void{
     const dialogRef = this.dialog.open(InsertClientComponent, {
       width: '450px',
-      height:'450px'    
+      height:'500px'    
            
     })
     dialogRef.afterClosed().subscribe(clientes => this.clients = this.clientService.findAll().pipe(map(data => new MatTableDataSource(data))) )

@@ -104,8 +104,8 @@ let InvoiceService = InvoiceService_1 = class InvoiceService {
         const today = new Date();
         const invoices = this.repositoryInvoice
             .createQueryBuilder('invoice')
-            .select('invoice.clientIdClient')
-            .where('date(invoice.startDate) <=:date AND date(invoice.expirationDate) >=:date', { date: today });
+            .select('invoice.clientIdClient as idClient')
+            .where('date(invoice.startDate) <=:date AND date(invoice.expirationDate) >=:date', { date: today }).getRawOne();
         return invoices;
     }
     async getInvoicingOneDay(date) {

@@ -105,15 +105,15 @@ export class InvoiceService {
     return this.sortingInvoicingClass(invoicingMonths);
   }
 
-  getDefaulters() {
+  getDefaulters():Promise<[]>{
     const today = new Date();
     const invoices = this.repositoryInvoice
       .createQueryBuilder('invoice')
-      .select('invoice.clientIdClient')
+      .select('invoice.clientIdClient as idClient')
       .where(
         'date(invoice.startDate) <=:date AND date(invoice.expirationDate) >=:date',
         { date: today },
-      );
+      ).getRawOne(); 
     return invoices;
   }
 

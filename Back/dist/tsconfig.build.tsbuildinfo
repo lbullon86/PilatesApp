@@ -2082,16 +2082,16 @@
         "signature": "7f5ac046f3374af1d444b5d475298f8d6e3b48e3f303dc0f637916d2100b6457"
       },
       "../src/invoice/invoice.service.ts": {
-        "version": "21ca8959d1784c6355be0bee2ed89f7f58e819f76cf686431a2ddf8cc942caa0",
-        "signature": "22fd13917ee018de013aeb437d162ef3b99d9f457d0765df9c5cf3f930c985b9"
+        "version": "26fdd5bf13e456fc7882534173a36074a86e86cf15ccd7735863ee1592a6fdff",
+        "signature": "55bc9c81cb7840bcd178dd362c69cd03bdbf762f14257f8a6c787c161be7985a"
       },
       "../src/pass/pass.service.ts": {
         "version": "16b4c2f183bcedc5a51bbf10c076cbec9e8e7b1cee57fbee2756ac36e2551176",
         "signature": "2702aeffc105c057ea04ce51af612a7a9cac0b7ec4626f5f619eeda64e62a052"
       },
       "../src/clientes/clientes.service.ts": {
-        "version": "2653eeeda88c2b6895fa8c35e09e7e6392149c055d9fe1d1da432a3793f64026",
-        "signature": "1976d699f46b3fbd46120d2be2e52036af2b82ec974fba9233eeea01f7f9efed"
+        "version": "65bf2ffce4b77af1585daa4907b13ea4ce0af21d8701ba3a2f0051d1a85da744",
+        "signature": "e23a3e0c2fd714349301d86cb915c3470c72e68ee655505ff0ea898627fc6e6e"
       },
       "../node_modules/@types/istanbul-lib-coverage/index.d.ts": {
         "version": "9e951ec338c4232d611552a1be7b4ecec79a8c2307a893ce39701316fe2374bd",
@@ -2103,7 +2103,7 @@
       },
       "../src/clientes/clientes.controller.ts": {
         "version": "f4d1ae29d163c1f8e49f91a4c5b0dba0ad3723a0e73a61be557018648755e94e",
-        "signature": "ad216dfae61ac573e7c4d1787de47b4392d67252d4f230d5203b7c2594f388ba"
+        "signature": "24dd41fe20e60cb5b016e0f8c134447e6de06addad1fa04c4982f200b9302544"
       },
       "../node_modules/@types/node/globals.d.ts": {
         "version": "1236b98326630298e0b9cd30ccecd77560ac925140b753f1b1a0ffc6e7b51ad4",
@@ -2318,8 +2318,8 @@
         "signature": "ead1ed9dd4874f4907a506a31e4fe9c4e079b42816f6b7ea5016a6d5ddf2fde3"
       },
       "../src/invoice/invoice.controller.ts": {
-        "version": "29c20ace45815703fab4a1c7e7c5e3e94ea4a241696ba2500c5803f2253b23fb",
-        "signature": "657acc5e529bca60e6f43708e7818bf1d527a1be45a22d112217197d4d872868"
+        "version": "1c19d721a32ae4cd600e624411ac59a78042030ae93d68f40c5753fe9cbb2040",
+        "signature": "ff4d6965a72e2b47ae2c8bb7f6ba1d7c92455cc14c3e1e6b0d12469b7bf09fe3"
       },
       "../src/expenses/resumeExpense.ts": {
         "version": "d3b5cf5193fe0fdc057fc02810d08cc9a29025b8d5a28c6940e76136ad028b98",
@@ -12771,10 +12771,10 @@
       "../src/clientes/clientes.service.ts": [
         "../node_modules/typeorm/index.d.ts",
         "../src/clientes/clientes.entity.ts",
-        "../src/invoice/invoice.entity.ts",
         "../src/invoice/invoice.service.ts",
-        "../src/pass/pass.entity.ts",
-        "../src/pass/pass.service.ts"
+        "../src/pass/pass.service.ts",
+        "../src/invoice/invoice.entity.ts",
+        "../src/pass/pass.entity.ts"
       ],
       "../node_modules/@types/istanbul-lib-coverage/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
@@ -14375,8 +14375,8 @@
       "../src/users/users.module.ts",
       "../src/invoice/invoicing-model.ts",
       "../src/invoice/invoicingClass-model.ts",
+      "../src/invoice/invoice.service.ts",
       "../src/pass/pass.service.ts",
-      "../src/clientes/clientes.service.ts",
       "../node_modules/@types/istanbul-lib-coverage/index.d.ts",
       "../node_modules/@types/istanbul-lib-report/index.d.ts",
       "../src/clientes/clientes.controller.ts",
@@ -14452,7 +14452,12 @@
       "../src/balance/balance.service.ts",
       "../src/balance/balance.controller.ts",
       "../src/balance/balance.module.ts",
+      "../src/schedule/schedule.entity.ts",
+      "../src/schedule/schedule.service.ts",
+      "../src/schedule/schedule.controller.ts",
+      "../src/schedule/schedule.module.ts",
       "../src/core/middleware/frontend.middleware.ts",
+      "../src/app.module.ts",
       "../node_modules/@nestjs/core/adapters/http-adapter.d.ts",
       "../node_modules/@nestjs/core/adapters/index.d.ts",
       "../node_modules/@nestjs/core/injector/module-token-factory.d.ts",
@@ -14529,7 +14534,8 @@
       "../node_modules/@types/webpack-sources/index.d.ts",
       "../node_modules/@types/webpack/index.d.ts",
       "../node_modules/@types/yargs-parser/index.d.ts",
-      "../node_modules/@types/yargs/index.d.ts"
+      "../node_modules/@types/yargs/index.d.ts",
+      "../src/clientes/clientes.service.ts"
     ]
   },
   "version": "3.8.3"

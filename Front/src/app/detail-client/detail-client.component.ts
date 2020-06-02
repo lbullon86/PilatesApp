@@ -47,7 +47,7 @@ export class DetailClientComponent implements OnInit {
   addPay(): void {
     let dialogRef = this.dialog.open(AddPayComponent, {
       width: "450px",
-      height: "450px",
+      height: "500px",
       data: {id:this.idClient}
     });
     dialogRef.afterClosed().subscribe()    
@@ -56,7 +56,7 @@ export class DetailClientComponent implements OnInit {
   updateClient(): void {
     let dialogRef = this.dialog.open(UpdateClientComponent, {
       width: "450px",
-      height: "450px",
+      height: "500px",
       data: {id:this.idClient}
       
 
@@ -73,7 +73,7 @@ export class DetailClientComponent implements OnInit {
   addAttendance(): void {
     let dialogRef = this.dialog.open(AddAttendanceComponent, {
       width: "450px",
-      height: "450px",
+      height: "500px",
       data: {id:this.idClient}
 
     });

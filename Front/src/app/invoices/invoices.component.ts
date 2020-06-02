@@ -31,10 +31,8 @@ export class InvoicesComponent implements OnInit {
   
   parseDate(date:Date)
   {
-    return this.datepipe.transform(date, 'dd-mm-yyyy');      
+    return this.datepipe.transform(date, 'dd-MM-yyyy');      
   }
-
-
 
   ngOnInit() {    
     this.getInvoices()

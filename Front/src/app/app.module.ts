@@ -19,14 +19,21 @@ import { HeaderComponent } from './header/header.component';
 import { ScheduleModule } from './schedule/schedule.module';
 import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
+import { BoxComponent } from './box/box.component';
+import { UsersComponent } from './users/users.component';
+import { PricesComponent } from './prices/prices.component';
+import { InfoComponent } from './info/info.component';
+import { UsersModule } from './users/users.module';
+import { PricesModule } from './prices/prices.module';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     InvoicesListComponent,
+    HeaderComponent
+ 
        
   ],
 
@@ -46,6 +53,8 @@ import { InvoicesListComponent } from './invoices-list/invoices-list.component';
     DetailClientModule,
     FlexLayoutModule,
     ScheduleModule,
+    UsersModule,
+    PricesModule,
     
   ],
   providers: [DatePipe],

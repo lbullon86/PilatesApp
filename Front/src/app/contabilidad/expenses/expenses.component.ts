@@ -49,15 +49,14 @@ export class ExpensesComponent implements OnInit {
   ) {
     this.expenseList = [];
     this.date = new Date();
-    this.monthSelected = this.date.getMonth() + 1;
     this.yearSelected = this.date.getFullYear()
-  }
+    }
 
   ngOnInit() {
     this.expensesObservable = this.refreshExpenses();
   }
 
-   getMonth() {
+  getMonth() {
      this.expenseService
       .getOneMonthByConcept(this.date.getFullYear(), this.monthSelected)
       .subscribe(expense => (this.data = expense.map(e => ({name: e.concept, value: e.quantity}))));
@@ -87,8 +86,6 @@ export class ExpensesComponent implements OnInit {
     }
 
 
-
-  
     getYearByConcept(){
       this.expenseService.getYearByConcept(this.yearSelected)
       .subscribe(expense => (this.data = expense.map(e => ({name: e.concept, value: e.sum}))));
@@ -123,6 +120,6 @@ export class ExpensesComponent implements OnInit {
   }
 
   parseDate(date: Date) {
-    return this.datePipe.transform(date, "dd-mm-yyyy");
+    return this.datePipe.transform(date, "dd-MM-yyyy");
   }
 }

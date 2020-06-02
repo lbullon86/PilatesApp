@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "AppMaite"
+  "defaultProject": "AppMaite",
+  "cli": {
+    "analytics": "2de7c198-7433-41de-976d-82d9afc99926"
+  }
 }

@@ -36,6 +36,14 @@ export class InvoiceController {
   return result;
   }
 
+  @Get('/default')
+  getDefaulters(){
+    return this.invoiceService.getDefaulters()
+  }
+
+
+
+
   @Get('/passes')
   getPasses(){
     return this.invoiceService.getPasses();
@@ -116,6 +124,7 @@ export class InvoiceController {
   getInvoicingYearByPaymentMethod(@Param('year' , ParseIntPipe) year:number){
     return this.invoiceService.getInvoicingOneYearByMethodPayment(year);
   }
+
 
 
 }

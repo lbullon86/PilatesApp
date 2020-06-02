@@ -22,7 +22,7 @@ import { DiarioModule } from '../diario/diario.module';
   declarations: [DetailClientComponent, UpdateClientComponent, AddPayComponent, AddAttendanceComponent,InvoicesComponent],
   imports: [
     CommonModule,AppRoutingModule,DiarioModule,MatDatepickerModule,MatInputModule,MatFormFieldModule,MatInputModule,
-    MatGridListModule, MatSelectModule, FormsModule, MatSlideToggleModule, MatTableModule
+    MatGridListModule, MatSelectModule, FormsModule, MatSlideToggleModule, MatTableModule,FormsModule
   ],
   entryComponents:[UpdateClientComponent,AddPayComponent,AddAttendanceComponent, InvoicesComponent]
 })

@@ -1,11 +1,11 @@
 <div fxFlex="65">
     <ng-container *ngIf="parameter; else elseChart">
-        <ngx-charts-advanced-pie-chart [scheme]="colorScheme" [results]="dataClass">
+        <ngx-charts-advanced-pie-chart class ="grafica" [scheme]="colorScheme" [results]="dataClass">
         </ngx-charts-advanced-pie-chart>
     </ng-container>
     <ng-template #elseChart>
 
-        <ngx-charts-advanced-pie-chart [scheme]="colorScheme" [results]="dataPayment">
+        <ngx-charts-advanced-pie-chart class ="grafica" [scheme]="colorScheme" [results]="dataPayment">
         </ngx-charts-advanced-pie-chart>
     </ng-template>
 

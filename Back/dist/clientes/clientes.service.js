@@ -69,9 +69,12 @@ let ClientesService = class ClientesService {
         return this.repositoryClients.createQueryBuilder("client").select("pass")
             .from(invoice_entity_1.Invoice, "invoice").where("(invoice.concept = B8  AND invoice.client.idClient = client.idClient").getRawOne();
     }
-    getDefaulters() {
+    async getDefaulters() {
         const qb = this.invoiceService.getDefaulters();
-        return this.repositoryClients.createQueryBuilder("client").select("client").where("activeClient = 1 AND idClient in(" + qb.getQuery() + ")").getOne();
+        const defaulters = this.repositoryClients
+            .createQueryBuilder("client").select("client")
+            .where("activeClient = 1 and idClient  in (:clientes)", { clientes: qb }).getMany();
+        return defaulters;
     }
 };
 ClientesService = __decorate([

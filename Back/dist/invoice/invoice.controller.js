@@ -32,6 +32,9 @@ let InvoiceController = class InvoiceController {
         const result = this.invoiceService.getInvoicingOnePeriod(from, to);
         return result;
     }
+    getDefaulters() {
+        return this.invoiceService.getDefaulters();
+    }
     getPasses() {
         return this.invoiceService.getPasses();
     }
@@ -106,6 +109,12 @@ __decorate([
     __metadata("design:paramtypes", [Date, Date]),
     __metadata("design:returntype", void 0)
 ], InvoiceController.prototype, "getInvoicingOnePeriod", null);
+__decorate([
+    common_1.Get('/default'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], InvoiceController.prototype, "getDefaulters", null);
 __decorate([
     common_1.Get('/passes'),
     __metadata("design:type", Function),

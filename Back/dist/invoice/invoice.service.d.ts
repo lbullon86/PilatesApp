@@ -14,7 +14,7 @@ export declare class InvoiceService {
     getInvoicingYear(year: number): Promise<Invoicing>;
     getInvoicingOneMonth(year: number, month: number): Promise<Invoicing>;
     getInvoicingOneYearAllMonths(year: number): Promise<any[]>;
-    getDefaulters(): import("typeorm").SelectQueryBuilder<Invoice>;
+    getDefaulters(): Promise<[]>;
     getInvoicingOneDay(date: Date): Promise<Invoicing>;
     getPasses(): Promise<Invoice[]>;
     getInvoicingOnePeriod(dateInvoice1: Date, dateInvoice2: Date): Promise<Invoicing>;

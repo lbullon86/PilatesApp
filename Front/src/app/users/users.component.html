@@ -1,0 +1,64 @@
+<mat-grid-list cols="2" rows="5" rowHeight="2.5:1">
+    <h1>Usuarios</h1>
+    <mat-grid-tile colspan="2">
+        <table mat-table [dataSource]="users | async" class="mat-elevation-z8">
+            <ng-container matColumnDef="nameUser">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE </th>
+                <td mat-cell *matCellDef="let element"> {{element.nameUser}} </td>
+            </ng-container>
+            <ng-container matColumnDef="rolUser">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ROL </th>
+                <td mat-cell *matCellDef="let element"> {{element.rolUser}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+    </mat-grid-tile>
+
+    <div *ngIf="themeAdd;else template">
+        <mat-grid-tile colspan="1">
+            <div class="example-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput [(ngModel)]="user.nameUser">
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+            <div class="example-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput type="password" [(ngModel)]="user.passUser">
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2" class="rol">
+            <div class="example-container">
+                <mat-form-field>
+                    <mat-label>Rol</mat-label>
+                    <select matNativeControl required [(ngModel)]="user.rolUser">
+                        <option value="0">Administración</option>
+                        <option value="1">Usuario</option>
+                    </select>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1">
+            <button (click)="addUser()" mat-raised-button color="primary">Añadir</button>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1">
+            <button mat-button (click)="closeWindow()">Cerrar</button>
+        </mat-grid-tile>
+    </div>
+    <ng-template #template>
+        <mat-grid-tile colspan="2">
+
+            <button (click)="selectAdd()">Añadir</button>
+        </mat-grid-tile>
+    </ng-template>
+
+
+</mat-grid-list>

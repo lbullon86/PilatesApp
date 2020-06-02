@@ -8,6 +8,7 @@ export declare class InvoiceController {
     getFacturacion(): Promise<Invoicing>;
     getInvoicingOneDay(date: Date): Promise<Invoicing>;
     getInvoicingOnePeriod(from: Date, to: Date): Promise<Invoicing>;
+    getDefaulters(): Promise<[]>;
     getPasses(): Promise<Invoice[]>;
     getInvoicingQuarte(): Promise<Invoicing[]>;
     getInvoicingClass(year: number): Promise<import("./invoicingClass-model").InvoicingClass>;
